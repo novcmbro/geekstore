@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components"
-import { theme } from "./theme"
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
  v2.0 | 20110126
@@ -60,14 +59,64 @@ export const GlobalStyles = createGlobalStyle`
   ${ResetStyles}
 
   :root {
-    color: ${theme.colors.gray.dark};
-    font-family: ${theme.font.family};
+    background-color: ${({ theme }) => theme.colors.gray.light};
+    color: ${({ theme }) => theme.colors.gray.dark};
+    font-family: ${({ theme }) => theme.font.family};
     font-optical-sizing: auto;
     font-size: 1rem;
-    font-weight: ${theme.font.weight.regular};
+    font-weight: ${({ theme }) => theme.font.weight.regular};
+  }
+
+  :focus-visible {
+    outline: 0.15rem solid ${({ theme }) => theme.colors.blue.medium};
   }
   
   * {
     box-sizing: border-box;
+  }
+
+  a {
+    color: ${({ theme }) => theme.colors.blue.medium};
+    font-weight: ${({ theme }) => theme.font.weight.bold};
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  textarea {
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  form,
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: ${({ theme }) => theme.spacings.base};
+  }
+
+  .sr-only {
+    border-width: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
   }
 `

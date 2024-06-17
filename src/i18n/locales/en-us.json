@@ -1,3 +1,22 @@
 {
-  "translation": {}
+  "translation": {
+    "logo": "GeekStore logo",
+    "search": {
+      "form": {
+        "label": "Search product",
+        "placeholder": "What you want to find?",
+        "button": "Search"
+      },
+      "icon": "Magnifying glass icon",
+      "open": {
+        "action": "Open search bar",
+        "alert": "Search bar is open"
+      },
+      "close": {
+        "action": "Close search bar",
+        "alert": "Search bar is closed",
+        "icon": "X icon"
+      }
+    }
+  }
 }

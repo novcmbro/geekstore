@@ -1,3 +1,22 @@
 {
-  "translation": {}
+  "translation": {
+    "logo": "Logotipo GeekStore",
+    "search": {
+      "form": {
+        "label": "Pesquisar produto",
+        "placeholder": "O que deseja encontrar?",
+        "button": "Pesquisar"
+      },
+      "icon": "Ícone de lupa",
+      "open": {
+        "action": "Abrir barra de busca",
+        "alert": "Barra de busca está aberta"
+      },
+      "close": {
+        "action": "Fechar barra de busca",
+        "alert": "Barra de busca está fechada",
+        "icon": "Ícone de X"
+      }
+    }
+  }
 }
