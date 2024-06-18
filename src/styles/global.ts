@@ -46,23 +46,4 @@ export const GlobalStyles = createGlobalStyle`
   textarea {
     width: 100%;
   }
-
-  .container {
-    width: 100%;
-    max-width: 75rem;
-    margin: 0 auto;
-    padding: ${({ theme }) => theme.spacings.base};
-  }
-
-  .sr-only {
-    border-width: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-  }
 `

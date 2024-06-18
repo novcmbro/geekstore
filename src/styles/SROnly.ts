@@ -1,0 +1,13 @@
+import styled from "styled-components"
+
+export const StyledSROnly = styled.div`
+  border-width: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+`

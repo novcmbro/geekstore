@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import classNames from "classnames"
-import { StyledButton, StyledHeader } from "../styles"
+import { StyledButton, StyledContainer, StyledHeader, StyledSROnly } from "../styles"
 import { Logo } from "./Logo"
 
 export const Header = () => {
@@ -27,12 +27,12 @@ export const Header = () => {
 
   return (
     <StyledHeader>
-      <nav className={classNames("container", { "search-bar-open": isSearchBarOpen })}>
+      <StyledContainer as="nav" {...isSearchBarOpen ? { className: "search-bar-open" } : null}>
         <Logo />
         <form aria-labelledby="search-field-label">
-          <label id="search-field-label" htmlFor="search-field" className="sr-only">
+          <StyledSROnly as="label" id="search-field-label" htmlFor="search-field">
             {t("search.form.label")}
-          </label>
+          </StyledSROnly>
           <input id="search-field" name="search" type="text" placeholder={t("search.form.placeholder")} />
           <button type="submit" aria-label={t("search.form.button")}>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label={t("search.icon")} role="presentation">
@@ -55,11 +55,11 @@ export const Header = () => {
           )}
         </button>
         {shouldRenderSearchBarAlert ? (
-          <p className="sr-only" role="alert">
+          <StyledSROnly as="p" role="alert">
             {t(`search.${isSearchBarOpen ? "open" : "close"}.alert`)}
-          </p>
+          </StyledSROnly>
         ) : null}
-      </nav>
+      </StyledContainer>
     </StyledHeader>
   )
 }
