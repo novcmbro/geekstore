@@ -63,7 +63,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.gray.dark};
     font-family: ${({ theme }) => theme.font.family};
     font-optical-sizing: auto;
-    font-size: 1rem;
+    font-size: ${({ theme }) => theme.font.size.base};
     font-weight: ${({ theme }) => theme.font.weight.regular};
   }
 

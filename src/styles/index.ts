@@ -1,3 +1,5 @@
 export * from "./theme"
 export * from "./global"
+export * from "./Button"
+export * from "./Logo"
 export * from "./Header"

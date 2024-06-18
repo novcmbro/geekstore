@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 import classNames from "classnames"
-import { StyledHeader } from "../styles"
+import { StyledButton, StyledHeader } from "../styles"
 import { Logo } from "./Logo"
 
 export const Header = () => {
@@ -39,6 +40,9 @@ export const Header = () => {
             </svg>
           </button>
         </form>
+        <StyledButton as={Link} to="/" role="button" $outlined className="nav-button">
+          Route
+        </StyledButton>
         <button className="toggle-search-bar" onClick={toggleSearchBar} aria-label={t(`search.${!isSearchBarOpen ? "open" : "close"}.action`)}>
           {!isSearchBarOpen ? (
             <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label={t("search.icon")} role="presentation">

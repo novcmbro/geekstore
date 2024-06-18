@@ -9,11 +9,15 @@ export const theme = {
     blue: {
       light: "#5595E9",
       medium: "#2A7AE4",
-      transparent: "#2A7AE422"
+      transparent: "#2A7AE420"
     }
   },
   font: {
     family: "'Raleway', serif",
+    size: {
+      sm: "0.875rem",
+      base: "1rem"
+    },
     weight: {
       regular: 400,
       medium: 500,
