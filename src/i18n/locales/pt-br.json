@@ -17,6 +17,18 @@
         "alert": "Barra de busca está fechada",
         "icon": "Ícone de X"
       }
-    }
+    },
+    "nav-links": {
+      "about-us": "Quem somos nós",
+      "privacy-policy": "Política de privacidade",
+      "loyalty-program": "Programa fidelidade",
+      "our-stores": "Nossas lojas",
+      "franchise-opportunities": "Quero ser franqueado",
+      "advertise-here": "Anuncie aqui"
+    },
+    "contact-us": {
+      "title": "Fale conosco"
+    },
+    "credits": "Desenvolvido por"
   }
 }

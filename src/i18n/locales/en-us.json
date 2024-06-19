@@ -17,6 +17,18 @@
         "alert": "Search bar is closed",
         "icon": "X icon"
       }
-    }
+    },
+    "nav-links": {
+      "about-us": "About us",
+      "privacy-policy": "Privacy policy",
+      "loyalty-program": "Loyalty program",
+      "our-stores": "Our stores",
+      "franchise-opportunities": "Franchise opportunities",
+      "advertise-here": "Advertise here"
+    },
+    "contact-us": {
+      "title": "Contact us"
+    },
+    "credits": "Developed by"
   }
 }

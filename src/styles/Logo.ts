@@ -9,5 +9,6 @@ export const StyledLogo = styled(Link)`
   img {
     display: block;
     width: 100%;
+    max-width: fit-content;
   }
 `
