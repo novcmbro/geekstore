@@ -20,19 +20,4 @@ export const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-
-  input,
-  textarea {
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-  }
-
-  form,
-  input,
-  textarea {
-    width: 100%;
-  }
 `
