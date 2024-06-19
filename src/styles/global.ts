@@ -21,13 +21,6 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  a {
-    color: ${({ theme }) => theme.colors.blue.medium};
-    font-weight: ${({ theme }) => theme.font.weight.bold};
-    text-decoration: none;
-  }
-
-  button,
   input,
   textarea {
     border: none;
@@ -35,10 +28,6 @@ export const GlobalStyles = createGlobalStyle`
     color: inherit;
     font-family: inherit;
     font-size: inherit;
-  }
-
-  button {
-    cursor: pointer;
   }
 
   form,

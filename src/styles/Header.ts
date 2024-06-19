@@ -1,11 +1,10 @@
 import styled from "styled-components"
-import { StyledContainer } from "./Container"
 import { StyledLogo } from "./Logo"
 
 export const StyledHeader = styled.header<{ $isSearchBarOpen?: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
 
-  ${StyledContainer} {
+  nav {
     display: flex;
     align-items: center;
     gap: ${({ theme }) => theme.spacings.lg};
@@ -53,50 +52,57 @@ export const StyledHeader = styled.header<{ $isSearchBarOpen?: boolean }>`
     }
   }
 
-  a.nav-button {
+  a.nav-link {
     margin-left: auto;
   }
 
-  button.toggle-search-bar {
+  button.search-bar-toggler {
     display: none;
   }
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    ${StyledContainer} {
+    nav {
       gap: ${({ theme }) => `${theme.spacings.xs} 0`};
-
-      ${({ theme, $isSearchBarOpen }) => $isSearchBarOpen ? `
-        flex-direction: column;
-        padding-top: ${theme.spacings.xs};
-        padding-bottom: ${theme.spacings.xs};
-    
-        form {
-          max-width: none;
-        }
-    
-        a.nav-button {
-          display: none;
-        }
-      ` : `
-        padding-right: 0;
-
-        form {
-          display: none;
-        }
-      `}
     }
 
-    ${StyledLogo} {
-      margin-right: ${({ theme }) => theme.spacings.base};
-    }
-
-    button.toggle-search-bar {
+    button.search-bar-toggler {
       display: initial;
       padding: ${({ theme }) => `${theme.spacings.sm} ${theme.spacings.base}`};
 
       svg {
         display: block;
       }
+    }
+
+    ${({ theme, $isSearchBarOpen }) =>
+      $isSearchBarOpen ? `
+        nav {
+          flex-direction: column;
+          padding-top: ${theme.spacings.xs};
+          padding-bottom: ${theme.spacings.xs};
+        }
+      
+        form {
+          max-width: none;
+        }
+    
+        a.nav-link {
+          display: none;
+        }
+      `
+      : `
+        nav {
+          padding-right: 0;
+        }
+
+        ${StyledLogo} {
+          margin-right: ${theme.spacings.base};
+        }
+
+        form {
+          display: none;
+        }
+      `
     }
   }
 `
