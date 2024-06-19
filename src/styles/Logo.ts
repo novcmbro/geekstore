@@ -4,7 +4,7 @@ import styled from "styled-components"
 export const StyledLogo = styled(Link)`
   width: 100%;
   max-width: fit-content;
-  min-width: 8rem;
+  min-width: 6rem;
 
   img {
     display: block;

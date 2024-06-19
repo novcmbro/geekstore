@@ -65,6 +65,10 @@ export const StyledHeader = styled.header<{ $isSearchBarOpen?: boolean }>`
       gap: ${({ theme }) => `${theme.spacings.xs} 0`};
     }
 
+    a.nav-link {
+      font-size: ${({ theme }) => theme.font.size.sm}
+    }
+
     button.search-bar-toggler {
       display: initial;
       padding: ${({ theme }) => `${theme.spacings.sm} ${theme.spacings.base}`};
