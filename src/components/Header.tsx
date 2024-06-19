@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
-import classNames from "classnames"
+import { useTranslation } from "react-i18next"
 import { StyledButton, StyledContainer, StyledHeader, StyledSROnly } from "../styles"
 import { Logo } from "./Logo"
 
@@ -26,8 +25,8 @@ export const Header = () => {
   }
 
   return (
-    <StyledHeader>
-      <StyledContainer as="nav" {...isSearchBarOpen ? { className: "search-bar-open" } : null}>
+    <StyledHeader $isSearchBarOpen={isSearchBarOpen}>
+      <StyledContainer as="nav">
         <Logo />
         <form aria-labelledby="search-field-label">
           <StyledSROnly as="label" id="search-field-label" htmlFor="search-field">

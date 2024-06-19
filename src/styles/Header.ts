@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import { StyledContainer } from "./Container"
 import { StyledLogo } from "./Logo"
 
-export const StyledHeader = styled.header`
+export const StyledHeader = styled.header<{ $isSearchBarOpen?: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
 
-  .container {
+  ${StyledContainer} {
     display: flex;
     align-items: center;
     gap: ${({ theme }) => theme.spacings.lg};
@@ -60,22 +61,14 @@ export const StyledHeader = styled.header`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
-    .container {
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    ${StyledContainer} {
       gap: ${({ theme }) => `${theme.spacings.xs} 0`};
 
-      &:not(.search-bar-open) {
-        padding-right: 0;
-  
-        form {
-          display: none;
-        }
-      }
-
-      &.search-bar-open {
+      ${({ theme, $isSearchBarOpen }) => $isSearchBarOpen ? `
         flex-direction: column;
-        padding-top: ${({ theme }) => theme.spacings.xs};
-        padding-bottom: ${({ theme }) => theme.spacings.xs};
+        padding-top: ${theme.spacings.xs};
+        padding-bottom: ${theme.spacings.xs};
     
         form {
           max-width: none;
@@ -84,7 +77,13 @@ export const StyledHeader = styled.header`
         a.nav-button {
           display: none;
         }
-      }
+      ` : `
+        padding-right: 0;
+
+        form {
+          display: none;
+        }
+      `}
     }
 
     ${StyledLogo} {

@@ -32,5 +32,10 @@ export const theme = {
     md: "1.5rem",
     lg: "2rem",
     xl: "2.5rem"
+  },
+  breakpoints: {
+    mobile: "480px",
+    tablet: "768px",
+    desktop: "1024px",
   }
 }
