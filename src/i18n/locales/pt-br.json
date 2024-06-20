@@ -39,7 +39,7 @@
       "message": "Mensagem",
       "write-your-message": "Escreva sua mensagem",
       "submit": "Enviar mensagem",
-      "success": "Sua mensagem foi enviada com sucesso! Nós agradecemos a você, {{ name }}, por nos contatar. Nós iremos lhe responder em breve."
+      "success": "Sua mensagem foi enviada com sucesso! Agradecemos a você, {{ name }}, por nos contatar. Nós iremos lhe responder em breve."
     },
     "popup": {
       "success": "Sucesso",
