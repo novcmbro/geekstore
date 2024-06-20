@@ -25,10 +25,6 @@
   transition: color var(--transition-duration);
 }
 
-.footer .language-list {
-  text-align: center;
-}
-
 .footer .language-list::before {
   --globe-icon-size: 1.25rem;
   content: "";
@@ -102,6 +98,10 @@
 
   .footer .contact-us-form {
     max-width: none;
+  }
+
+  .footer .language-list {
+    text-align: center;
   }
 }
 
