@@ -1,4 +1,5 @@
 export * from "./i18n"
 export * from "./Field"
+export * from "./Popup"
 export * from "./NavLinks"
 export * from "./ContactUs"

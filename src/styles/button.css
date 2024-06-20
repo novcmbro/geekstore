@@ -7,6 +7,19 @@ button {
   cursor: pointer;
 }
 
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs) var(--spacing-base);
+}
+
+.button-container .button-filled,
+.button-container .button-outlined {
+  flex-grow: 1;
+  width: auto;
+  max-width: none;
+}
+
 .button-filled,
 .button-outlined {
   width: 100%;

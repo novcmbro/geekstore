@@ -69,10 +69,6 @@
   flex-grow: 1;
 }
 
-.footer .contact-us-form .typography-title {
-  margin-bottom: var(--spacing-sm);
-}
-
 .footer .credits {
   background-color: var(--white);
   font-weight: var(--font-medium);
@@ -81,7 +77,6 @@
 
 .footer .credits-year {
   display: block;
-  margin-top: var(--spacing-xs);
 }
 
 @media screen and (max-width: 420px) {

@@ -71,7 +71,7 @@ textarea {
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   width: var(--alert-icon-size);
   height: var(--alert-icon-size);
   margin-right: var(--spacing-xs);

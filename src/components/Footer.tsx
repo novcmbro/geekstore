@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
+import { usePopup } from "../contexts"
 import { ContactUs, NavLinks } from "../types"
 import { Logo } from "./Logo"
 import { Field } from "./Field"
@@ -10,13 +11,14 @@ import "../styles/footer.css"
 
 export const Footer = () => {
   const { t, i18n: { changeLanguage, language } } = useTranslation()
-  const { handleSubmit, control } = useForm<ContactUs>({
+  const { handleSubmit, control, getValues } = useForm<ContactUs>({
     defaultValues: {
       name: "",
       message: ""
     },
     mode: "onBlur"
   })
+  const { openPopup } = usePopup()
 
   const navLinks: NavLinks = [
     {
@@ -58,7 +60,7 @@ export const Footer = () => {
             ))}
           </ul>
         </nav>
-        <form onSubmit={handleSubmit((data) => console.log(data))} className="contact-us-form" aria-labelledby="contact-us-title">
+        <form onSubmit={handleSubmit(() => openPopup({ type: "success", message: t("contact-us.success", { name: getValues("name") }) }))} className="contact-us-form" aria-labelledby="contact-us-title">
           <h2 id="contact-us-title" className="typography-title">{t("contact-us.title")}</h2>
           <Field
             control={control}

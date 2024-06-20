@@ -38,7 +38,14 @@
       "name": "Name",
       "message": "Message",
       "write-your-message": "Write your message",
-      "submit": "Send message"
+      "submit": "Send message",
+      "success": "Your message was sent successfully! We thank you, {{ name }}, for contacting us. We will respond you soon."
+    },
+    "popup": {
+      "success": "Success",
+      "error": "Error",
+      "warning": "Warning",
+      "cancel": "Cancel"
     },
     "credits": "Developed by"
   }

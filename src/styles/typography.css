@@ -1,11 +1,18 @@
-.typography-title {
+p {
+  line-height: 1.25rem;
+}
+
+.typography-title,
+.typography-title-md,
+.typography-title-lg {
   font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-xs);
 }
 
 .typography-title-md {
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
 }
 
 .typography-title-lg {
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
 }
