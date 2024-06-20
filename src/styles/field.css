@@ -1,0 +1,46 @@
+input {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+}
+
+.field-container {
+  position: relative;
+}
+
+.field-container:not(:first-of-type) {
+  margin-top: var(--spacing-sm);
+}
+
+.field-label {
+  position: absolute;
+  top: var(--spacing-base);
+  left: var(--spacing-sm);
+  color: var(--medium-gray);
+}
+
+.field {
+  --border-bottom-size: 0.125rem;
+  background-color: var(--white);
+  border-bottom: var(--border-bottom-size) solid var(--medium-gray);
+  border-radius: 0.25rem;
+  padding: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+  padding-bottom: calc(var(--spacing-xs) - var(--border-bottom-size));
+}
+
+.field:focus-visible {
+  outline: none;
+  border-bottom-color: var(--medium-blue);
+  transition: border-bottom-color var(--transition-duration);
+}
+
+.field:focus-visible + .field-label,
+.field:not(:placeholder-shown) + .field-label {
+  font-size: var(--font-xs);
+  top: var(--spacing-xs);
+  transition: font-size var(--transition-duration), top var(--transition-duration);
+}

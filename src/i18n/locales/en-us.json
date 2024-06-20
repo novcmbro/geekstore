@@ -18,7 +18,8 @@
         "icon": "X icon"
       }
     },
-    "nav-links": {
+    "routes": {
+      "home": "Home",
       "about-us": "About us",
       "privacy-policy": "Privacy policy",
       "loyalty-program": "Loyalty program",

@@ -1,0 +1,53 @@
+button {
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.button-filled,
+.button-outlined {
+  width: 100%;
+  max-width: 12rem;
+  padding: var(--spacing-base);
+  transition: background-color var(--transition-duration);
+}
+
+a.button-filled,
+a.button-outlined {
+  text-align: center;
+}
+
+.button-filled {
+  background-color: var(--medium-blue);
+  color: var(--white);
+  font-weight: var(--font-semibold);
+}
+
+.button-filled:hover,
+.button-filled:focus-visible {
+  background-color: var(--light-blue);
+}
+
+.button-outlined {
+  background-color: transparent;
+  color: var(--medium-blue);
+}
+
+.button-outlined:not(:focus-visible) {
+  --outline-size: 0.0625rem;
+  outline: var(--outline-size) solid currentColor;
+  outline-offset: calc(var(--outline-size) * -1);
+}
+
+.button-outlined:hover,
+.button-outlined:focus-visible {
+  background-color: var(--transparent-blue);
+}
+
+.button-full-width {
+  width: 100%;
+  max-width: none;
+}

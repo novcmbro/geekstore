@@ -1,0 +1,27 @@
+.logo {
+  display: block;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  min-width: 6.25rem;
+}
+
+.logo-text-highlight {
+  fill: var(--medium-blue);
+}
+
+.logo-text {
+  fill: var(--dark-gray);
+}
+
+.logo-image {
+  vertical-align: middle;
+  width: 100%;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}

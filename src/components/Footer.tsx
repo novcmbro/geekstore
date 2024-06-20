@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { StyledContainer, StyledFooter, StyledForm, StyledLink } from "../styles"
 import { NavLinks } from "../types"
 import { Logo } from "./Logo"
+import { Field } from "./Field"
+import "../styles/footer.css"
 
 export const Footer = () => {
   const { t } = useTranslation()
@@ -10,54 +11,58 @@ export const Footer = () => {
   const navLinks: NavLinks = [
     {
       route: "/",
-      translation: t("nav-links.about-us")
+      translation: t("routes.about-us")
     },
     {
       route: "/",
-      translation: t("nav-links.privacy-policy")
+      translation: t("routes.privacy-policy")
     },
     {
       route: "/",
-      translation: t("nav-links.loyalty-program")
+      translation: t("routes.loyalty-program")
     },
     {
       route: "/",
-      translation: t("nav-links.our-stores")
+      translation: t("routes.our-stores")
     },
     {
       route: "/",
-      translation: t("nav-links.franchise-opportunities")
+      translation: t("routes.franchise-opportunities")
     },
     {
       route: "/",
-      translation: t("nav-links.advertise-here")
+      translation: t("routes.advertise-here")
     },
   ]
 
   return (
-    <StyledFooter>
-      <StyledContainer>
-        <nav>
+    <footer className="footer">
+      <div className="container nav-container">
+        <nav className="nav-links">
           <Logo />
-          <ul>
+          <ul className="nav-links-list">
             {navLinks.map((navLink, i) => (
-              <li key={i}>
-                <StyledLink as={Link} to={navLink.route}>{navLink.translation}</StyledLink>
+              <li key={i} className="nav-links-list-item">
+                <Link to={navLink.route} className="nav-links-link">{navLink.translation}</Link>
               </li>
             ))}
           </ul>
         </nav>
-        <StyledForm aria-labelledby="contact-us-title">
-          <h2 id="contact-us-title">{t("contact-us.title")}</h2>
-        </StyledForm>
-      </StyledContainer>
-      <div className="credits">
-        <StyledContainer as="p">
-          {t("credits") + " "}
-          <StyledLink href="https://github.com/novcmbro" target="_blank" rel="noopener noreferrer" aria-label="GitHub">Novcmbro</StyledLink>
-          <span className="year">{new Date().getFullYear()}</span>
-        </StyledContainer>
+        <form className="contact-us-form" aria-labelledby="contact-us-title">
+          <h2 id="contact-us-title" className="typography-title">{t("contact-us.title")}</h2>
+          <Field />
+          <Field />
+        </form>
       </div>
-    </StyledFooter>
+      <div className="credits">
+        <p className="container">
+          {t("credits") + " "}
+          <a href="https://github.com/novcmbro" target="_blank" rel="noopener noreferrer" className="external-link" aria-label="GitHub">
+            Novcmbro
+          </a>
+          <span className="credits-year">{new Date().getFullYear()}</span>
+        </p>
+      </div>
+    </footer>
   )
 }

@@ -1,0 +1,11 @@
+.typography-title {
+  font-weight: var(--font-bold);
+}
+
+.typography-title-md {
+  font-size: var(--font-lg);
+}
+
+.typography-title-lg {
+  font-size: var(--font-xl);
+}

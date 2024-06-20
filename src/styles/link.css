@@ -1,0 +1,25 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.route-link {
+  color: var(--medium-blue);
+  font-weight: var(--font-bold);
+}
+
+.route-link:hover,
+.route-link:focus-visible {
+  color: var(--light-blue);
+  transition: color var(--transition-duration);
+}
+
+.external-link {
+  font-weight: var(--font-semibold);
+}
+
+.external-link:hover,
+.external-link:focus-visible {
+  color: var(--medium-blue);
+  transition: color var(--transition-duration);
+}

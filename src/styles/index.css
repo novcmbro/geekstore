@@ -1,0 +1,46 @@
+:root {
+  /* Colors */
+  --white: #ffffff;
+  --light-gray: #F5F5F5;
+  --medium-gray: #A2A2A2;
+  --dark-gray: #464646;
+  --transparent-blue: #2A7AE420;
+  --light-blue: #5595E9;
+  --medium-blue: #2A7AE4;
+  /* Fonts */
+  --font: "Raleway", serif;
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-md: 1.375rem;
+  --font-lg: 2rem;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  /* Spacings */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-base: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.5rem;
+  /* Transition */
+  --transition-duration: 0.5s;
+
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  font-family: var(--font);
+  font-optical-sizing: auto;
+  font-size: var(--font-base);
+  font-weight: var(--font-regular);
+}
+
+:focus-visible {
+  outline: 0.125rem solid var(--medium-blue);
+}
+
+* {
+  box-sizing: border-box;
+}
