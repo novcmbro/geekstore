@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next"
 import { NavLinks } from "../types"
 import { Logo } from "./Logo"
 import { Field } from "./Field"
+import { languagesNames } from "../i18n"
 import "../styles/footer.css"
 
 export const Footer = () => {
-  const { t } = useTranslation()
+  const { t, i18n: { changeLanguage, language } } = useTranslation()
 
   const navLinks: NavLinks = [
     {
@@ -54,6 +55,15 @@ export const Footer = () => {
           <Field />
         </form>
       </div>
+      <ul className="container language-list">
+        {Object.entries(languagesNames).map(([languageCode, languageName]) =>
+          <li key={languageCode} className="language-list-item">
+            <button type="button" onClick={() => language !== languageCode ? changeLanguage(languageCode) : undefined} {...language === languageCode ? { className: "current-language-button" } : null}>
+              {languageName}
+            </button>
+          </li>
+        )}
+      </ul>
       <div className="credits">
         <p className="container">
           {t("credits") + " "}

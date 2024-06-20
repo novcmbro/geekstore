@@ -7,7 +7,7 @@ import ptBR from "./locales/pt-br.json"
 const localStorageLanguageKey = "novcmbro_geekstore_language"
 const localStorageLanguage = localStorage.getItem(localStorageLanguageKey)
 const navigatorLanguage = navigator.language.split("-")[0]
-!localStorageLanguage && localStorage.setItem(localStorageLanguageKey, navigatorLanguage)
+!localStorageLanguage ? localStorage.setItem(localStorageLanguageKey, navigatorLanguage) : undefined
 
 i18n.use(initReactI18next).init({
   resources: { en: enUS, pt: ptBR },
