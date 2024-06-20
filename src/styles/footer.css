@@ -5,7 +5,6 @@
 .footer .nav-container,
 .footer .nav-links {
   display: flex;
-  justify-content: space-between;
   gap: 0 var(--spacing-lg);
 }
 
