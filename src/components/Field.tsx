@@ -9,7 +9,7 @@ export const Field = ({ type, textarea, label, ...props }: FieldProps) => {
       {(!textarea || type) ? (
         <input {...field} id={field.name} type={type || "text"} className="field" placeholder="" autoComplete="off" aria-autocomplete="none" aria-describedby="field-error-message" aria-invalid={fieldState.invalid} />
       ) : (
-        <textarea {...field} id={field.name} cols={30} rows={4} className="field" placeholder="" autoComplete="off" aria-autocomplete="none" aria-describedby="field-error-message" aria-invalid={fieldState.invalid}></textarea>
+        <textarea {...field} id={field.name} cols={30} rows={2} className="field" placeholder="" autoComplete="off" aria-autocomplete="none" aria-describedby="field-error-message" aria-invalid={fieldState.invalid}></textarea>
       )}
       <label htmlFor={field.name} className="field-label">
         {label}
