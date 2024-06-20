@@ -25,6 +25,10 @@
   transition: color var(--transition-duration);
 }
 
+.footer .language-list {
+  padding-top: 0;
+}
+
 .footer .language-list::before {
   --globe-icon-size: 1.25rem;
   content: "";
@@ -106,6 +110,10 @@
 }
 
 @media screen and (min-width: 768px) {
+  .footer .nav-container {
+    padding-top: var(--spacing-xl);
+  }
+
   .footer .nav-links {
     flex-direction: row;
   }
@@ -116,5 +124,9 @@
 
   .footer .nav-links-list-item:first-of-type {
     margin-top: 0;
+  }
+
+  .footer .language-list {
+    padding-bottom: var(--spacing-xl);
   }
 }
