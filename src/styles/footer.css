@@ -46,8 +46,18 @@
 }
 
 .footer .language-list-item:not(:first-of-type)::before {
-  content: "|";
-  color: var(--medium-gray);
+  content: "";
+  background-color: var(--medium-gray);
+  display: inline-block;
+  vertical-align: bottom;
+  width: 0.0625rem;
+  height: 1.25rem;
+}
+
+.footer .language-button:hover:not(.current-language-button),
+.footer .language-button:focus-visible:not(.current-language-button) {
+  color: var(--medium-blue);
+  transition: color var(--transition-duration);
 }
 
 .footer .current-language-button {

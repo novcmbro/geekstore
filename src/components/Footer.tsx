@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import classNames from "classnames"
 import { NavLinks } from "../types"
 import { Logo } from "./Logo"
 import { Field } from "./Field"
@@ -58,7 +59,7 @@ export const Footer = () => {
       <ul className="container language-list">
         {Object.entries(languagesNames).map(([languageCode, languageName]) =>
           <li key={languageCode} className="language-list-item">
-            <button type="button" onClick={() => language !== languageCode ? changeLanguage(languageCode) : undefined} {...language === languageCode ? { className: "current-language-button" } : null}>
+            <button type="button" onClick={() => language !== languageCode ? changeLanguage(languageCode) : undefined} className={classNames("language-button", { "current-language-button": language === languageCode })}>
               {languageName}
             </button>
           </li>
