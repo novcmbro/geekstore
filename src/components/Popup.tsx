@@ -72,10 +72,10 @@ export const Popup = () => {
 
   return (
     isPopupOpen ? (
-      <div ref={popupRef} className="container popup-container">
+      <div ref={popupRef} className="container popup-container" role="dialog" aria-labelledby="popup-title" aria-describedby="popup-message" aria-modal="true" tabIndex={-1}>
         <div className="popup">
-          <h2 className="typography-title-lg">{t(`popup.${type}`)}</h2>
-          <p>{message}</p>
+          <h2 id="popup-title" className="typography-title-lg">{t(`popup.${type}`)}</h2>
+          <p id="popup-message">{message}</p>
           <div className="button-container">
             {okButton?.action ? (
               <button id="cancel" type="button" onClick={handlePopupButtonAction} className="button-outlined">

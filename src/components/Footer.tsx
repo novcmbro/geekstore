@@ -60,7 +60,7 @@ export const Footer = () => {
             ))}
           </ul>
         </nav>
-        <form onSubmit={handleSubmit(() => openPopup({ type: "success", message: t("contact-us.success", { name: getValues("name") }) }))} className="contact-us-form" aria-labelledby="contact-us-title">
+        <form onSubmit={handleSubmit(() => openPopup({ type: "success", message: t("contact-us.success", { name: getValues("name") }) }))} className="contact-us-form" aria-labelledby="contact-us-title" aria-haspopup="dialog" aria-controls="popup-container">
           <h2 id="contact-us-title" className="typography-title">{t("contact-us.title")}</h2>
           <Field
             control={control}
