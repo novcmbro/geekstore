@@ -27,8 +27,17 @@
       "franchise-opportunities": "Quero ser franqueado",
       "advertise-here": "Anuncie aqui"
     },
+    "form-errors": {
+      "required": "{{ name }} não pode estar vazio.",
+      "too-short": "{{ name }} deve ter no mínimo {{ charNumber }} caracteres.",
+      "too-long": "{{ name }} deve ter no máximo {{ charNumber }} caracteres."
+    },
     "contact-us": {
-      "title": "Fale conosco"
+      "title": "Fale conosco",
+      "name": "Nome",
+      "message": "Mensagem",
+      "write-your-message": "Escreva sua mensagem",
+      "submit": "Enviar mensagem"
     },
     "credits": "Desenvolvido por"
   }

@@ -27,8 +27,17 @@
       "franchise-opportunities": "Franchise opportunities",
       "advertise-here": "Advertise here"
     },
+    "form-errors": {
+      "required": "{{ name }} cannot be empty.",
+      "too-short": "{{ name }} must have min of {{ charNumber }} characters.",
+      "too-long": "{{ name }} must have max of {{ charNumber }} characters."
+    },
     "contact-us": {
-      "title": "Contact us"
+      "title": "Contact us",
+      "name": "Name",
+      "message": "Message",
+      "write-your-message": "Write your message",
+      "submit": "Send message"
     },
     "credits": "Developed by"
   }

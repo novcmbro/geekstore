@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useForm } from "react-hook-form"
 import classNames from "classnames"
-import { NavLinks } from "../types"
+import { ContactUs, NavLinks } from "../types"
 import { Logo } from "./Logo"
 import { Field } from "./Field"
 import { languagesNames } from "../i18n"
@@ -9,6 +10,13 @@ import "../styles/footer.css"
 
 export const Footer = () => {
   const { t, i18n: { changeLanguage, language } } = useTranslation()
+  const { handleSubmit, control } = useForm<ContactUs>({
+    defaultValues: {
+      name: "",
+      message: ""
+    },
+    mode: "onBlur"
+  })
 
   const navLinks: NavLinks = [
     {
@@ -50,10 +58,42 @@ export const Footer = () => {
             ))}
           </ul>
         </nav>
-        <form className="contact-us-form" aria-labelledby="contact-us-title">
+        <form onSubmit={handleSubmit((data) => console.log(data))} className="contact-us-form" aria-labelledby="contact-us-title">
           <h2 id="contact-us-title" className="typography-title">{t("contact-us.title")}</h2>
-          <Field />
-          <Field />
+          <Field
+            control={control}
+            name="name"
+            rules={{
+              required: t("form-errors.required", { name: t("contact-us.name") }),
+              minLength: {
+                value: 3,
+                message: t("form-errors.too-short", { name: t("contact-us.name"), charNumber: 3 })
+              },
+              maxLength: {
+                value: 100,
+                message: t("form-errors.too-long", { name: t("contact-us.name"), charNumber: 100 })
+              }
+            }}
+            label={t("contact-us.name")}
+          />
+          <Field
+            control={control}
+            name="message"
+            rules={{
+              required: t("form-errors.required", { name: t("contact-us.message") }),
+              minLength: {
+                value: 10,
+                message: t("form-errors.too-short", { name: t("contact-us.message"), charNumber: 10 })
+              },
+              maxLength: {
+                value: 1000,
+                message: t("form-errors.too-long", { name: t("contact-us.message"), charNumber: 1000 })
+              }
+            }}
+            label={t("contact-us.write-your-message")}
+            textarea
+          />
+          <button type="submit" className="button-filled">{t("contact-us.submit")}</button>
         </form>
       </div>
       <ul className="container language-list">
