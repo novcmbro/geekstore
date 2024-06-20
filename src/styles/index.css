@@ -45,3 +45,17 @@
 * {
   box-sizing: border-box;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+main.container {
+  padding-bottom: 3rem;
+}

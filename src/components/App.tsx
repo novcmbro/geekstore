@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import { PopupProvider } from "../contexts"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
@@ -15,11 +15,15 @@ import "../styles/field.css"
 import "../styles/popup.css"
 
 export const App = () => {
+  const { pathname } = useLocation()
+
   return (
     <PopupProvider>
       <>
         <Header />
-        <Outlet />
+        <main {...pathname !== "/" ? { className: "container" } : null}>
+          <Outlet />
+        </main>
         <Footer />
         <Popup />
       </>
