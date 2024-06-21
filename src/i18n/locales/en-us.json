@@ -21,6 +21,10 @@
     },
     "routes": {
       "home": "Home",
+      "not-found": "Page not found",
+      "not-found-description": "The page you are trying to access does not exist or is unavailable at the moment.",
+      "not-found-image": "404 number with a person emerging from the middle of the number 0, hand raised to their eyes as if searching for something in the distance.",
+      "back-home": "Back home",
       "about-us": "About us",
       "privacy-policy": "Privacy policy",
       "loyalty-program": "Loyalty program",

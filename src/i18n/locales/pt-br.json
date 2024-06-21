@@ -21,6 +21,10 @@
     },
     "routes": {
       "home": "Início",
+      "not-found": "Página não encontrada",
+      "not-found-description": "A página que você está tentando acessar não existe ou está indisponível no momento.",
+      "not-found-image": "Número 404 com uma pessoa emergindo do meio do número 0, mão erguida até os olhos como se procurasse por algo distante.",
+      "back-home": "Voltar para início",
       "about-us": "Quem somos nós",
       "privacy-policy": "Política de privacidade",
       "loyalty-program": "Programa fidelidade",

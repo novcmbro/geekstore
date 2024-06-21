@@ -30,6 +30,7 @@ button {
 
 a.button-filled,
 a.button-outlined {
+  display: inline-block;
   text-align: center;
 }
 

@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { App } from "../components"
+import { NotFound } from "./NotFound"
 
 const routes = createBrowserRouter([
   {
@@ -8,7 +9,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "*",
-        element: "Route not found"
+        element: <NotFound />
       }
     ]
   }

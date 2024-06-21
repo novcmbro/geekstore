@@ -1,0 +1,25 @@
+.route-not-found .not-found-image {
+  margin-bottom: var(--spacing-base);
+}
+
+.route-not-found .not-found-image .accent-color {
+  fill: var(--light-blue);
+}
+
+.route-not-found .not-found-image .skin-color {
+  fill: #ffaa71;
+}
+
+.route-not-found .not-found-image .hair-color {
+  fill: var(--dark-gray);
+}
+
+.route-not-found .button-filled {
+  margin-top: var(--spacing-lg);
+}
+
+@media screen and (max-width: 768px) {
+  .route-not-found {
+    text-align: center;
+  }
+}
