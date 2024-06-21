@@ -57,5 +57,7 @@ main {
 }
 
 main.container {
-  padding-bottom: 3rem;
+  --spacing-y: 4rem;
+  padding-top: var(--spacing-y);
+  padding-bottom: var(--spacing-y);
 }

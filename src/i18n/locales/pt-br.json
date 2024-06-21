@@ -35,7 +35,15 @@
     "form-errors": {
       "required": "{{ name }} não pode estar vazio.",
       "too-short": "{{ name }} deve ter no mínimo {{ charNumber }} caracteres.",
-      "too-long": "{{ name }} deve ter no máximo {{ charNumber }} caracteres."
+      "too-long": "{{ name }} deve ter no máximo {{ charNumber }} caracteres.",
+      "pattern": "{{ name }} inválido. Por favor, insira um formato válido de {{ name }}."
+    },
+    "login": {
+      "title": "Iniciar sessão",
+      "write-your-email": "Escreva seu email",
+      "password": "Senha",
+      "write-your-password": "Escreva sua senha",
+      "submit": "Entrar"
     },
     "contact-us": {
       "title": "Fale conosco",
