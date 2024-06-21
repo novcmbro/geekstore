@@ -1,5 +1,6 @@
 .header {
   background-color: var(--white);
+  box-shadow: 0 0 1rem rgb(0, 0, 0, 0.1);
   position: -webkit-sticky;
   position: sticky;
   top: 0;

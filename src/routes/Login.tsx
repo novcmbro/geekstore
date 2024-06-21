@@ -38,6 +38,7 @@ export const Login = () => {
       <Field
         control={control}
         name="password"
+        type="password"
         rules={{
           required: t("form-errors.required", { name: t("login.password") }),
           minLength: {
