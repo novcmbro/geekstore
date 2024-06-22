@@ -50,6 +50,24 @@
       "too-many-requests": "Too many unsuccessful login attempts. Please try again later.",
       "network-request-failed": "Unable to connect to the server. Please check your internet connection and try again."
     },
+    "products": {
+      "title": "All products",
+      "add-product": "Add product",
+      "edit-product": "Edit product",
+      "delete-product": "Delete product",
+      "loading": "Loading",
+      "failed-to-get": "Something went wrong while getting products list. Please try again later.",
+      "success-to-delete": "Product deleted successfully!",
+      "failed-to-delete": "Failed to delete product. Please try again.",
+      "empty": "There are no products to show.",
+      "initial": {
+        "costume": "{{ name }} Costume",
+        "shirt": "{{ name }} Shirt",
+        "figure": "{{ name }} Figure",
+        "controller": "{{ name }} Controller",
+        "mug": "{{ name }} Mug"
+      }
+    },
     "contact-us": {
       "title": "Contact us",
       "name": "Name",

@@ -50,6 +50,28 @@
       "too-many-requests": "Muitas tentativas de login malsucedidas. Por favor, tente novamente mais tarde.",
       "network-request-failed": "Não é possível conectar-se ao servidor. Por favor, verifique sua conexão com a internet e tente novamente."
     },
+    "products": {
+      "title": "Todos os produtos",
+      "add-product": "Adicionar produto",
+      "edit-product": "Editar produto",
+      "delete-product": "Deletar produto",
+      "loading": "Carregando",
+      "failed-to-get": "Algo deu errado ao obter a lista de produtos. Por favor, tente novamente mais tarde.",
+      "success-to-delete": "Produto deletado com sucesso!",
+      "failed-to-delete": "Falha ao deletar produto. Por favor, tente novamente.",
+      "empty": "Não há produtos para mostrar.",
+      "initial": {
+        "costume": "Fantasia {{ name }}",
+        "shirt": "Camisa {{ name }}",
+        "figure": "Boneco {{ name }}",
+        "controller": "Controle {{ name }}",
+        "mug": "Caneca {{ name }}",
+        "VR Glasses": "Óculos de Realidade Virtual",
+        "Vintage Radio": "Rádio Vintage",
+        "Atari Console Shirt": "Camisa Console Atari",
+        "Atari Logo Shirt": "Camisa Logo Atari"
+      }
+    },
     "contact-us": {
       "title": "Fale conosco",
       "name": "Nome",
