@@ -36,14 +36,19 @@
       "required": "{{ name }} cannot be empty.",
       "too-short": "{{ name }} must have min of {{ charNumber }} characters.",
       "too-long": "{{ name }} must have max of {{ charNumber }} characters.",
-      "pattern": "{{ name }} is invalid. Please, insert a valid {{ name }} format."
+      "pattern": "{{ name }} is invalid. Please insert a valid {{ name }} format."
     },
     "login": {
       "title": "Start session",
       "write-your-email": "Write your email",
       "password": "Password",
       "write-your-password": "Write your password",
-      "submit": "Login"
+      "submit": "Login",
+      "invalid-credential": "Email and/or password is wrong. Please try again.",
+      "user-not-found": "User not found. Please check email and password and try again.",
+      "user-disabled": "This account has been disabled. Please contact support for assistance.",
+      "too-many-requests": "Too many unsuccessful login attempts. Please try again later.",
+      "network-request-failed": "Unable to connect to the server. Please check your internet connection and try again."
     },
     "contact-us": {
       "title": "Contact us",

@@ -43,7 +43,12 @@
       "write-your-email": "Escreva seu email",
       "password": "Senha",
       "write-your-password": "Escreva sua senha",
-      "submit": "Entrar"
+      "submit": "Entrar",
+      "invalid-credential": "Email e/ou senha incorretos. Por favor, tente novamente.",
+      "user-not-found": "Usuário não encontrado. Por favor, verifique email e senha e tente novamente.",
+      "user-disabled": "Esta conta foi desativada. Por favor, entre em contato com o suporte para obter assistência.",
+      "too-many-requests": "Muitas tentativas de login malsucedidas. Por favor, tente novamente mais tarde.",
+      "network-request-failed": "Não é possível conectar-se ao servidor. Por favor, verifique sua conexão com a internet e tente novamente."
     },
     "contact-us": {
       "title": "Fale conosco",

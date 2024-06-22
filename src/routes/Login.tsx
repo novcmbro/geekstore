@@ -1,21 +1,51 @@
+import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { localLogin } from "../firebase"
 import { LoginData } from "../types"
 import { Field } from "../components"
 import "../styles/login.css"
 
 export const Login = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation()
-  const { handleSubmit, control } = useForm<LoginData>({
+  const { handleSubmit, control, setError } = useForm<LoginData>({
     defaultValues: {
       email: "",
       password: ""
     },
     mode: "onBlur"
   })
+
+  const login = (data: LoginData) => {
+    const auth = getAuth()
+    
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => localLogin.logAndGoHome(navigate))
+      .catch((error) => {
+        const errorCodes = [
+          "invalid-credential",
+          "user-not-found",
+          "user-disabled",
+          "too-many-requests",
+          "network-request-failed"
+        ]
+
+        for (let errorCode of errorCodes) {
+          if (error.code.includes(errorCode)) {
+            setError(
+              error.code.includes("password") ? "password" : "email",
+              { type: "value", message: t(`login.${errorCode}`) }
+            )
+            break
+          }
+        }
+      })
+  }
   
   return (
-    <form onSubmit={handleSubmit((data) => console.log(data))} className="login-form" aria-labelledby="login-title">
+    <form onSubmit={handleSubmit(login)} className="login-form" aria-labelledby="login-title">
       <h2 id="login-title" className="typography-title-md">{t("login.title")}</h2>
       <Field
         control={control}

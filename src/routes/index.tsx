@@ -1,4 +1,5 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
+import { localLogin } from "../firebase"
 import { App } from "../components"
 import { Login } from "./Login"
 import { NotFound } from "./NotFound"
@@ -10,7 +11,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <Login />
+        element: !localLogin.isAdminLogged ? <Login /> : <Navigate to="/" />
       },
       {
         path: "*",
