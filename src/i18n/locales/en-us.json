@@ -21,6 +21,8 @@
     },
     "routes": {
       "home": "Home",
+      "login": "Login",
+      "admin-menu": "Admin menu",
       "not-found": "Page not found",
       "not-found-description": "The page you are trying to access does not exist or is unavailable at the moment.",
       "not-found-image": "404 number with a person emerging from the middle of the number 0, hand raised to their eyes as if searching for something in the distance.",
@@ -49,6 +51,12 @@
       "user-disabled": "This account has been disabled. Please contact support for assistance.",
       "too-many-requests": "Too many unsuccessful login attempts. Please try again later.",
       "network-request-failed": "Unable to connect to the server. Please check your internet connection and try again."
+    },
+    "logout": {
+      "title": "Logout",
+      "confirmation": "Are you sure you want to logout? Please press ok to confirm or press cancel.",
+      "success": "You were logged out successfully.",
+      "error": "Something went wrong while trying to logout. Please try again."
     },
     "products": {
       "title": "All products",

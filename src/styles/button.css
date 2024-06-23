@@ -45,6 +45,15 @@ a.button-outlined {
   background-color: var(--light-blue);
 }
 
+.button-filled.button-danger {
+  background-color: var(--medium-red);
+}
+
+.button-filled.button-danger:hover,
+.button-filled.button-danger:focus-visible {
+  background-color: var(--dark-red);
+}
+
 .button-outlined {
   background-color: transparent;
   color: var(--medium-blue);
@@ -59,6 +68,15 @@ a.button-outlined {
 .button-outlined:hover,
 .button-outlined:focus-visible {
   background-color: var(--transparent-blue);
+}
+
+.button-outlined.button-danger {
+  color: var(--medium-red);
+}
+
+.button-outlined.button-danger:hover,
+.button-outlined.button-danger:focus-visible {
+  background-color: var(--transparent-red);
 }
 
 .button-full-width {

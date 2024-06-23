@@ -22,7 +22,7 @@ export const Login = () => {
     const auth = getAuth()
     
     signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => localLogin.logAndGoHome(navigate))
+      .then(() => localLogin.loginAndGoToProducts(navigate))
       .catch((error) => {
         const errorCodes = [
           "invalid-credential",

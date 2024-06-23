@@ -12,7 +12,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: !localLogin.isAdminLogged ? <Login /> : <Navigate to="/" />
+        element: !localLogin.isAdminLogged ? <Login /> : <Navigate to="/products" />
       },
       {
         path: "products",

@@ -86,11 +86,8 @@
 
   .header .search-bar-toggler-button {
     display: initial;
+    margin-left: auto;
     padding: var(--spacing-xs) var(--spacing-base);
-  }
-
-  .header .button-outlined {
-    margin: 0 auto;
   }
 
   .header.search-bar-is-open .container {

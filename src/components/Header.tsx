@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { getAuth, signOut } from "firebase/auth"
 import classNames from "classnames"
+import { usePopup } from "../contexts"
+import { localLogin } from "../firebase"
+import { NavButton } from "../types"
 import { Logo } from "./Logo"
 import "../styles/header.css"
 
 export const Header = () => {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
   const { t } = useTranslation()
+  const auth = getAuth()
+  const { openPopup } = usePopup()
+
   const [isSearchBarOpen, setIsSearchBarOpen] = useState<boolean>(false)
   const [shouldRenderSearchBarAlert, setShouldRenderSearchBarAlert] = useState<boolean>(false)
+
+  const initialNavButtonRoute: NavButton = {}
+  const [navButtonRoute, setNavButtonRoute] = useState(initialNavButtonRoute)
 
   useEffect(() => {
     if (shouldRenderSearchBarAlert) {
@@ -19,6 +31,51 @@ export const Header = () => {
       return () => clearTimeout(removeSearchBarAlert)
     }
   }, [shouldRenderSearchBarAlert])
+
+  useEffect(() => {
+    const handleNavButtonRoutes = () => {
+      if (pathname === "/") {
+        setNavButtonRoute({
+          name: !localLogin.isAdminLogged ? t("routes.login") : t("routes.admin-menu"),
+          to: !localLogin.isAdminLogged ? "/login" : "/products"
+        })
+        return
+      }
+  
+      if (pathname === "/products") {
+        setNavButtonRoute({
+          name: t("logout.title"),
+          action: () => openPopup({
+            type: "warning",
+            message: t("logout.confirmation"),
+            okButton: {
+              action: () => signOut(auth)
+                .then(() => {
+                  localLogin.logoutAndGoHome(navigate)
+                  openPopup({ type: "success", message: t("logout.success") })
+                })
+                .catch(() => openPopup({ type: "error", message: t("logout.error") }))
+            }
+          })
+        })
+        return
+      }
+  
+      if (pathname === "/add-product" || pathname.includes("/edit-product")) {
+        setNavButtonRoute({
+          name: t("routes.admin-menu"),
+          to: "/products"
+        })
+        return
+      }
+  
+      setNavButtonRoute(initialNavButtonRoute)
+    }
+
+    handleNavButtonRoutes()
+
+    return () => handleNavButtonRoutes()
+  }, [pathname])
 
   const toggleSearchBar = () => {
     setIsSearchBarOpen(!isSearchBarOpen)
@@ -40,9 +97,17 @@ export const Header = () => {
             </svg>
           </button>
         </form>
-        <Link to="/" className="button-outlined" role="button">
-          Route
-        </Link>
+        {navButtonRoute.name ? (
+          navButtonRoute.to ? (
+            <Link to={navButtonRoute.to} className="button-outlined" role="button">
+              {navButtonRoute.name}
+            </Link>
+          ) : (
+            <button onClick={navButtonRoute.action} className="button-outlined button-danger">
+              {navButtonRoute.name}
+            </button>
+          )
+        ) : null}
         <button type="button" onClick={toggleSearchBar} className="search-bar-toggler-button" aria-label={t(`search.${!isSearchBarOpen ? "open" : "close"}.action`)}>
           {!isSearchBarOpen ? (
             <svg width="24" height="25" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label={t("search.icon")} role="presentation">

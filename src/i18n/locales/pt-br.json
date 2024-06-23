@@ -21,6 +21,8 @@
     },
     "routes": {
       "home": "Início",
+      "login": "Entrar",
+      "admin-menu": "Menu administrador",
       "not-found": "Página não encontrada",
       "not-found-description": "A página que você está tentando acessar não existe ou está indisponível no momento.",
       "not-found-image": "Número 404 com uma pessoa emergindo do meio do número 0, mão erguida até os olhos como se procurasse por algo distante.",
@@ -49,6 +51,12 @@
       "user-disabled": "Esta conta foi desativada. Por favor, entre em contato com o suporte para obter assistência.",
       "too-many-requests": "Muitas tentativas de login malsucedidas. Por favor, tente novamente mais tarde.",
       "network-request-failed": "Não é possível conectar-se ao servidor. Por favor, verifique sua conexão com a internet e tente novamente."
+    },
+    "logout": {
+      "title": "Sair",
+      "confirmation": "Tem certeza que deseja sair? Por favor, pressione ok para confirmar ou pressione cancelar.",
+      "success": "Você foi desconectado com sucesso.",
+      "error": "Algo deu errado ao tentar sair. Por favor, tente novamente."
     },
     "products": {
       "title": "Todos os produtos",
