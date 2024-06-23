@@ -80,6 +80,15 @@
         "Vintage Radio": "Rádio Vintage",
         "Atari Console Shirt": "Camisa Console Atari",
         "Atari Logo Shirt": "Camisa Logo Atari"
+      },
+      "form": {
+        "image-url": "URL da imagem do produto",
+        "category": "Categoria do produto",
+        "category-error": "Categoria inválida. Esta deve conter apenas letras (a-z), números (0-9), hífens (-) e apóstrofos (').",
+        "name": "Nome do produto",
+        "price": "Preço do produto",
+        "price-error": "Preço do produto inválido. Não pode ser zero.",
+        "description": "Descrição do produto"
       }
     },
     "language": {

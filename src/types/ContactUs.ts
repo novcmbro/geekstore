@@ -1,4 +1,4 @@
 export type ContactUs = {
-  name: string
-  message: string
+  "contact-name": string
+  "contact-message": string
 }

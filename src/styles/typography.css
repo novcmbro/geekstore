@@ -6,13 +6,18 @@ p {
 .typography-title-md,
 .typography-title-lg {
   font-weight: var(--font-bold);
+}
+
+.typography-title {
   margin-bottom: var(--spacing-xs);
 }
 
 .typography-title-md {
   font-size: var(--font-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .typography-title-lg {
   font-size: var(--font-lg);
+  margin-bottom: var(--spacing-md);
 }

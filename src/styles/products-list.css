@@ -24,6 +24,10 @@
   margin-bottom: var(--spacing-base);
 }
 
+.products-list-header .typography-title-md {
+  margin-bottom: 0;
+}
+
 .products-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

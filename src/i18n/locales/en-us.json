@@ -76,6 +76,15 @@
         "figure": "{{ name }} Figure",
         "controller": "{{ name }} Controller",
         "mug": "{{ name }} Mug"
+      },
+      "form": {
+        "image-url": "Product image URL",
+        "category": "Product category",
+        "category-error": "Category is invalid. It must have only letters (a-z), numbers (0-9), hyphens (-) and apostrophes (').",
+        "name": "Product name",
+        "price": "Product price",
+        "price-error": "Product price is invalid. It cannot be zero.",
+        "description": "Product description"
       }
     },
     "language": {

@@ -1,0 +1,17 @@
+.product-form {
+  max-width: 35rem;
+  margin: 0 auto;
+}
+
+.product-image-preview {
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+  object-fit: cover;
+  background-color: var(--white);
+  border-radius: var(--field-shape);
+  width: 100%;
+  min-width: 8rem;
+  max-width: 12rem;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm);
+}

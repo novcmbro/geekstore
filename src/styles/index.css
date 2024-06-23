@@ -29,6 +29,8 @@
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 2.5rem;
+  /* Shapes */
+  --field-shape: 0.25rem;
   /* Transition */
   --transition-duration: 0.5s;
 

@@ -1,12 +1,14 @@
 export interface Product {
   docId?: string
   id: number
-  image?: string
+  image: string
   category: string
   name: string
   price: number
   description?: string
 }
+
+export type ProductToEdit = Omit<Product, "docId" | "id">
 
 export type ProductsContextValue = {
   isLoading: boolean

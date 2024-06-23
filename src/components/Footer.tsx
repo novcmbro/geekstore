@@ -14,8 +14,8 @@ export const Footer = () => {
   const { t, i18n: { changeLanguage, language } } = useTranslation()
   const { handleSubmit, control, getValues } = useForm<ContactUs>({
     defaultValues: {
-      name: "",
-      message: ""
+      "contact-name": "",
+      "contact-message": ""
     },
     mode: "onBlur"
   })
@@ -78,11 +78,11 @@ export const Footer = () => {
             ))}
           </ul>
         </nav>
-        <form onSubmit={handleSubmit(() => openPopup({ type: "success", message: t("contact-us.success", { name: getValues("name") }) }))} className="contact-us-form" aria-labelledby="contact-us-title" aria-haspopup="dialog" aria-controls="popup-container">
+        <form onSubmit={handleSubmit(() => openPopup({ type: "success", message: t("contact-us.success", { name: getValues("contact-name") }) }))} className="contact-us-form" aria-labelledby="contact-us-title" aria-haspopup="dialog" aria-controls="popup-container">
           <h2 id="contact-us-title" className="typography-title">{t("contact-us.title")}</h2>
           <Field
             control={control}
-            name="name"
+            name="contact-name"
             rules={{
               required: t("form-errors.required", { name: t("contact-us.name") }),
               minLength: {
@@ -98,7 +98,7 @@ export const Footer = () => {
           />
           <Field
             control={control}
-            name="message"
+            name="contact-message"
             rules={{
               required: t("form-errors.required", { name: t("contact-us.message") }),
               minLength: {
