@@ -11,5 +11,5 @@ export interface Product {
 export type ProductsContextValue = {
   isLoading: boolean
   productsList: Product[] | []
-  deleteProduct: (docId: Product["docId"]) => void
+  deleteProduct: (docId: Product["docId"], name: Product["name"]) => void
 }

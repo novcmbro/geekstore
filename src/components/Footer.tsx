@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
@@ -19,6 +20,23 @@ export const Footer = () => {
     mode: "onBlur"
   })
   const { openPopup } = usePopup()
+
+  const [languageName, setLanguageName] = useState<string>("")
+
+  useEffect(() => {
+    const unmountLanguageAlert = setTimeout(() => {
+      setLanguageName("")
+    }, 3000)
+  
+    return () => clearTimeout(unmountLanguageAlert)
+  }, [languageName])
+
+  const handleLanguageChange = (languageCode: string, languageName: string) => {
+    if (language !== languageCode) {
+      changeLanguage(languageCode)
+      setLanguageName(languageName)
+    }
+  }
 
   const navLinks: NavLinks = [
     {
@@ -101,12 +119,15 @@ export const Footer = () => {
       <ul className="container language-list">
         {Object.entries(languagesNames).map(([languageCode, languageName]) =>
           <li key={languageCode} className="language-list-item">
-            <button type="button" onClick={() => language !== languageCode && changeLanguage(languageCode)} className={classNames("language-button", { "current-language-button": language === languageCode })}>
+            <button type="button" onClick={() => handleLanguageChange(languageCode, languageName)} className={classNames("language-button", { "current-language-button": language === languageCode })} aria-label={t("language.change", { name: languageName })}>
               {languageName}
             </button>
           </li>
         )}
       </ul>
+      {languageName ? (
+        <p className="sr-only" role="alert">{t("language.change-success", { name: languageName })}</p>
+      ) : null}
       <div className="credits">
         <p className="container">
           {t("credits") + " "}

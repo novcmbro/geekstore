@@ -27,7 +27,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
     const getProducts = (userUid: string) => {
       const displayErrorPopup = () => {
         setIsLoading(false)
-        openPopup({ type: "error", message: t("products.failed-to-get") })
+        openPopup({ type: "error", message: t("products.get-error") })
       }
 
       getDocs(userProductsCollection(userUid))
@@ -63,16 +63,19 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
     return () => unsubscribe()
   }, [auth])
 
-  const deleteProduct: ProductsContextValue["deleteProduct"] = (docId) => {
+  const deleteProduct: ProductsContextValue["deleteProduct"] = (docId, name) => {
     const user = auth.currentUser
 
     if (user) {
-      deleteDoc(doc(userProductsCollection(user.uid), docId))
-        .then(() => {
-          setProductsList(productsList.filter(product => product.docId !== docId))
-          openPopup({ type: "success", message: t("products.success-to-delete") })
-        })
-        .catch(() => openPopup({ type: "error", message: t("products.failed-to-delete") }))
+      openPopup({ type: "warning", message: t("products.delete-confirmation", { name: name }), okButton: {
+        action: () => deleteDoc(doc(userProductsCollection(user.uid), docId))
+          .then(() => {
+            setProductsList(productsList.filter(product => product.docId !== docId))
+            openPopup({ type: "success", message: t("products.delete-success") })
+          })
+          .catch(() => openPopup({ type: "error", message: t("products.delete-error") })),
+        text: t("products.delete")
+      }})
     }
   }
 

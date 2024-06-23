@@ -23,6 +23,8 @@
       "home": "Home",
       "login": "Login",
       "admin-menu": "Admin menu",
+      "add-product": "Add product",
+      "edit-product": "Edit product",
       "not-found": "Page not found",
       "not-found-description": "The page you are trying to access does not exist or is unavailable at the moment.",
       "not-found-image": "404 number with a person emerging from the middle of the number 0, hand raised to their eyes as if searching for something in the distance.",
@@ -60,14 +62,14 @@
     },
     "products": {
       "title": "All products",
-      "add-product": "Add product",
-      "edit-product": "Edit product",
-      "delete-product": "Delete product",
       "loading": "Loading",
-      "failed-to-get": "Something went wrong while getting products list. Please try again later.",
-      "success-to-delete": "Product deleted successfully!",
-      "failed-to-delete": "Failed to delete product. Please try again.",
+      "get-error": "Something went wrong while getting products list. Please try again later.",
       "empty": "There are no products to show.",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete-confirmation": "Are you sure you want to delete '{{ name }}' product? This action cannot be undone.",
+      "delete-success": "Product deleted successfully!",
+      "delete-error": "Failed to delete product. Please try again.",
       "initial": {
         "costume": "{{ name }} Costume",
         "shirt": "{{ name }} Shirt",
@@ -75,6 +77,10 @@
         "controller": "{{ name }} Controller",
         "mug": "{{ name }} Mug"
       }
+    },
+    "language": {
+      "change": "Change language to {{ name }}",
+      "change-success": "Language changed to {{ name }}"
     },
     "contact-us": {
       "title": "Contact us",

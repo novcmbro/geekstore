@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
+import classNames from "classnames"
 import { usePopup } from "../contexts"
 
 export const Popup = () => {
@@ -82,7 +83,7 @@ export const Popup = () => {
                 {cancelButton?.text || t("popup.cancel")}
               </button>
             ) : null}
-            <button id="ok" type="button" onClick={handlePopupButtonAction} className="button-filled">
+            <button id="ok" type="button" onClick={handlePopupButtonAction} className={classNames("button-filled", { "button-danger": type === "warning" })}>
               {okButton?.text || "OK"}
             </button>
           </div>
