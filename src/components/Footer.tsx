@@ -101,7 +101,7 @@ export const Footer = () => {
       <ul className="container language-list">
         {Object.entries(languagesNames).map(([languageCode, languageName]) =>
           <li key={languageCode} className="language-list-item">
-            <button type="button" onClick={() => language !== languageCode ? changeLanguage(languageCode) : undefined} className={classNames("language-button", { "current-language-button": language === languageCode })}>
+            <button type="button" onClick={() => language !== languageCode && changeLanguage(languageCode)} className={classNames("language-button", { "current-language-button": language === languageCode })}>
               {languageName}
             </button>
           </li>
