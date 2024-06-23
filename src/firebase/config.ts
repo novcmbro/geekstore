@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app"
-import { getAnalytics } from "firebase/analytics"
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore"
 
 const firebaseConfig = {
@@ -13,7 +12,6 @@ const firebaseConfig = {
 }
 
 export const firebaseApp = () => initializeApp(firebaseConfig)
-export const firebaseAnalytics = () => getAnalytics(firebaseApp())
 export const firestore = initializeFirestore(firebaseApp(), {
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 })

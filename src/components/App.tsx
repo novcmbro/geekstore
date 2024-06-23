@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom"
-import { firebaseAnalytics, firebaseApp } from "../firebase"
+import { firebaseApp } from "../firebase"
 import { PopupProvider, ProductsProvider } from "../contexts"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
@@ -18,7 +18,6 @@ import "../styles/popup.css"
 export const App = () => {
   const { pathname } = useLocation()
   firebaseApp()
-  firebaseAnalytics()
 
   return (
     <PopupProvider>
