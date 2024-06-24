@@ -24,8 +24,6 @@ export const ProductForm = ({ onSubmit, control, watch }: ProductFormProps) => {
           pattern: {
             value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#= ]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//= ]*)/,
             message: t("form-errors.pattern", { name: t("products.form.image-url") })
-              .replace(/./g, (char) => char.toLowerCase())
-              .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase())
           }
         }}
         label={t("products.form.image-url")}
