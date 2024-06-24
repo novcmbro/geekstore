@@ -13,5 +13,6 @@ export type ProductToEdit = Omit<Product, "docId" | "id">
 export type ProductsContextValue = {
   isLoading: boolean
   productsList: Product[] | []
+  editProduct: (docId: Product["docId"], newData: ProductToEdit) => void
   deleteProduct: (docId: Product["docId"], name: Product["name"]) => void
 }

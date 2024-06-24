@@ -64,7 +64,7 @@ export const Popup = () => {
       okButton.action()
     }
 
-    if (isCancelButton && cancelButton?.action) {
+    if (isCancelButton && cancelButton && cancelButton?.action) {
       cancelButton.action()
     }
 
@@ -78,7 +78,7 @@ export const Popup = () => {
           <h2 id="popup-title" className="typography-title-lg">{t(`popup.${type}`)}</h2>
           <p id="popup-message">{message}</p>
           <div className="button-container">
-            {okButton?.action ? (
+            {okButton?.action && cancelButton !== false ? (
               <button id="cancel" type="button" onClick={handlePopupButtonAction} className="button-outlined">
                 {cancelButton?.text || t("popup.cancel")}
               </button>

@@ -1,20 +1,25 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
 import { firestore, initialProducts } from "../firebase"
-import { Product, ProductsContextValue } from "../types"
+import { Product, ProductToEdit, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
 
 const ProductsContext = createContext<ProductsContextValue>({
   isLoading: false,
   productsList: [],
+  editProduct: function (_docId: string | undefined, _newData: ProductToEdit): void {
+    throw new Error("Function not implemented.")
+  },
   deleteProduct: function (_docId: string | undefined): void {
     throw new Error("Function not implemented.")
   }
 })
 
 export const ProductsProvider = ({ children }: { children: React.ReactElement }) => {
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const { openPopup } = usePopup()
   const auth = getAuth()
@@ -63,6 +68,31 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
     return () => unsubscribe()
   }, [auth])
 
+  const editProduct: ProductsContextValue["editProduct"] = (docId, newData) => {
+    const user = auth.currentUser
+
+    if (user) {
+      updateDoc(doc(userProductsCollection(user.uid), docId), newData)
+        .then(() => {
+          openPopup({ type: "success", message: t("products.edit-success"), okButton: {
+              action: () => navigate("/products")
+            },
+            cancelButton: false
+          })
+
+          const listWithUpdatedProduct = productsList.map(product => {
+            if (product.docId === docId) {
+              return { ...product, ...newData }
+            }
+            return product
+          })
+
+          setProductsList(listWithUpdatedProduct)
+        })
+        .catch(() => openPopup({ type: "error", message: t("products.edit-error") }))
+    }
+  }
+
   const deleteProduct: ProductsContextValue["deleteProduct"] = (docId, name) => {
     const user = auth.currentUser
 
@@ -82,7 +112,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   productsList.sort((a, b) => b.id - a.id)
 
   return (
-    <ProductsContext.Provider value={{ isLoading, productsList, deleteProduct }}>
+    <ProductsContext.Provider value={{ isLoading, productsList, editProduct, deleteProduct }}>
       {children}
     </ProductsContext.Provider>
   )
