@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { useProducts } from "../contexts"
 import { Product, ProductToEdit } from "../types"
 import { ProductForm } from "../components"
+import { NotFound } from "./NotFound"
 
 export const EditProduct = () => {
   const { id } = useParams<{ id: string }>()
@@ -44,7 +45,11 @@ export const EditProduct = () => {
     isLoading ? (
       <p className="product-alert-message">{t("products.loading")}</p>
     ) : (
-      <ProductForm onSubmit={handleSubmit((data) => editProduct(productDocId, data))} control={control} watch={watch} />
+      productDocId ? (
+        <ProductForm onSubmit={handleSubmit((data) => editProduct(productDocId, data))} control={control} watch={watch} />
+      ) : (
+        <NotFound />
+      )
     )
   )
 }
