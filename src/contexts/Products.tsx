@@ -4,19 +4,10 @@ import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
 import { firestore, initialProducts } from "../firebase"
-import { Product, ProductToEdit, ProductsContextValue } from "../types"
+import { Product, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
 
-const ProductsContext = createContext<ProductsContextValue>({
-  isLoading: false,
-  productsList: [],
-  editProduct: function (_docId: string | undefined, _newData: ProductToEdit): void {
-    throw new Error("Function not implemented.")
-  },
-  deleteProduct: function (_docId: string | undefined): void {
-    throw new Error("Function not implemented.")
-  }
-})
+const ProductsContext = createContext({} as ProductsContextValue)
 
 export const ProductsProvider = ({ children }: { children: React.ReactElement }) => {
   const navigate = useNavigate()
@@ -68,11 +59,29 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
     return () => unsubscribe()
   }, [auth])
 
-  const editProduct: ProductsContextValue["editProduct"] = (docId, newData) => {
+  const editProduct: ProductsContextValue["editProduct"] = (currentProduct, newData) => {
+    let hasChanges: boolean = false
+
+    for (const key of Object.keys(newData) as (keyof typeof newData)[]) {
+      if (key === "price") {
+        newData.price = Number(newData.price)
+      }
+
+      if (currentProduct[key] != newData[key]) {
+        hasChanges = true
+        break
+      }
+    }
+
+    if (!hasChanges) {
+      openPopup({ type: "warning", message: t("products.edit-no-changes", { name: currentProduct.name }) })
+      return
+    }
+
     const user = auth.currentUser
 
     if (user) {
-      updateDoc(doc(userProductsCollection(user.uid), docId), newData)
+      updateDoc(doc(userProductsCollection(user.uid), currentProduct.docId), newData)
         .then(() => {
           openPopup({ type: "success", message: t("products.edit-success"), okButton: {
               action: () => navigate("/products")
@@ -81,7 +90,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
           })
 
           const listWithUpdatedProduct = productsList.map(product => {
-            if (product.docId === docId) {
+            if (product.docId === currentProduct.docId) {
               return { ...product, ...newData }
             }
             return product

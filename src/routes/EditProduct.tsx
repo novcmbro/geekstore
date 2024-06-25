@@ -12,8 +12,6 @@ export const EditProduct = () => {
   const { t } = useTranslation()
   const { isLoading, productsList, editProduct } = useProducts()
 
-  const [productDocId, setProductDocId] = useState<Product["docId"]>("")
-
   const { handleSubmit, control, watch, setValue } = useForm<ProductToEdit>({
     defaultValues: {
       image: "",
@@ -25,12 +23,14 @@ export const EditProduct = () => {
     mode: "onBlur"
   })
 
+  const [productToEdit, setProductToEdit] = useState({} as Product)
+
   useEffect(() => {
     if (productsList.length > 0) {
       for (const product of productsList) {
         if (product.id === parseInt(id!)) {
           const { docId, id, ...productData } = product
-          setProductDocId(docId)
+          setProductToEdit(product)
 
           for (const [key, value] of Object.entries(productData)) {
             setValue(key as keyof ProductToEdit, value)
@@ -45,8 +45,8 @@ export const EditProduct = () => {
     isLoading ? (
       <p className="product-alert-message">{t("products.loading")}</p>
     ) : (
-      productDocId ? (
-        <ProductForm onSubmit={handleSubmit((data) => editProduct(productDocId, data))} control={control} watch={watch} />
+      productToEdit.id ? (
+        <ProductForm onSubmit={handleSubmit((data) => editProduct(productToEdit, data))} control={control} watch={watch} />
       ) : (
         <NotFound />
       )
