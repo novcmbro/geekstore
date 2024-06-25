@@ -1,0 +1,33 @@
+.banner {
+  background-image: url("../img/banner.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: var(--white);
+  font-weight: var(--font-bold);
+}
+
+.banner::before {
+  content: "";
+  background-image: linear-gradient(0deg, #000000, transparent 75%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.banner .container {
+  position: relative;
+  z-index: 0;
+}
+
+.banner .typography-title-lg {
+  margin-top: 8vw;
+  margin-bottom: var(--spacing-base);
+}
+
+.banner .button-filled {
+  margin-top: var(--spacing-base);
+}

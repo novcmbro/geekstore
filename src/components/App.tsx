@@ -13,6 +13,7 @@ import "../styles/typography.css"
 import "../styles/link.css"
 import "../styles/button.css"
 import "../styles/popup.css"
+import "../styles/products-list.css"
 
 export const App = () => {
   const { pathname } = useLocation()

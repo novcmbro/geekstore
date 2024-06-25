@@ -10,6 +10,10 @@ export interface Product {
   description?: string
 }
 
+export type ProductsByCategory = {
+  [category: string]: Omit<Product, "docId">[]
+}
+
 export type ProductsContextValue = {
   isLoading: boolean
   productsList: Product[]

@@ -21,6 +21,8 @@
     },
     "routes": {
       "home": "Início",
+      "see-product": "Ver produto",
+      "see-all": "Ver tudo",
       "login": "Entrar",
       "admin-menu": "Menu administrador",
       "add-product": "Adicionar produto",
@@ -41,6 +43,11 @@
       "too-short": "{{ name }} deve ter no mínimo {{ charNumber }} caracteres.",
       "too-long": "{{ name }} deve ter no máximo {{ charNumber }} caracteres.",
       "pattern": "{{ name }} inválido. Por favor, insira um formato válido de {{ name }}."
+    },
+    "home-banner": {
+      "title": "Dezembro Promocional",
+      "description": "Produtos selecionados com 33% de desconto",
+      "button": "Ver {{ name }}"
     },
     "login": {
       "title": "Iniciar sessão",

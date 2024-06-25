@@ -21,6 +21,8 @@
     },
     "routes": {
       "home": "Home",
+      "see-product": "See product",
+      "see-all": "See all",
       "login": "Login",
       "admin-menu": "Admin menu",
       "add-product": "Add product",
@@ -41,6 +43,11 @@
       "too-short": "{{ name }} must have min of {{ charNumber }} characters.",
       "too-long": "{{ name }} must have max of {{ charNumber }} characters.",
       "pattern": "{{ name }} is invalid. Please insert a valid {{ name }} format."
+    },
+    "home-banner": {
+      "title": "Promotional December",
+      "description": "Selected products with 33% off",
+      "button": "See {{ name }}"
     },
     "login": {
       "title": "Start session",

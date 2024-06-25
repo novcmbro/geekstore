@@ -54,6 +54,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
         getProducts(user.uid)
       } else if (productsList !== initialProducts) {
         setProductsList(initialProducts)
+        setIsLoading(false)
       }
     })
 
