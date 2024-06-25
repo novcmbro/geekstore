@@ -24,6 +24,7 @@ export const EditProduct = () => {
   })
 
   const [productToEdit, setProductToEdit] = useState({} as Product)
+  const [productNotFound, setProductNotFound] = useState<boolean>(false)
 
   useEffect(() => {
     if (productsList.length > 0) {
@@ -37,6 +38,8 @@ export const EditProduct = () => {
           }
           break
         }
+
+        setProductNotFound(true)
       }
     }
   }, [productsList, setValue])
@@ -45,10 +48,10 @@ export const EditProduct = () => {
     isLoading ? (
       <p className="product-alert-message">{t("products.loading")}</p>
     ) : (
-      productToEdit.id ? (
-        <ProductForm onSubmit={handleSubmit((data) => editProduct(productToEdit, data))} control={control} watch={watch} />
-      ) : (
+      productNotFound ? (
         <NotFound />
+      ) : (
+        <ProductForm onSubmit={handleSubmit((data) => editProduct(productToEdit, data))} control={control} watch={watch} />
       )
     )
   )
