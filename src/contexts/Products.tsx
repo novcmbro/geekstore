@@ -12,9 +12,10 @@ const ProductsContext = createContext({} as ProductsContextValue)
 export const ProductsProvider = ({ children }: { children: React.ReactElement }) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { openPopup } = usePopup()
   const auth = getAuth()
+  const userUid = auth.currentUser?.uid
   const userProductsCollection = (userUid: string) => collection(firestore, `users/${userUid}/products`)
+  const { openPopup } = usePopup()
 
   const [isLoading, setIsLoading] = useState<ProductsContextValue["isLoading"]>(true)
   const [productsList, setProductsList] = useState<Product[]>([])
@@ -69,15 +70,11 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       }
     }
 
-    const user = auth.currentUser
-
-    if (user) {
-      setDoc(doc(userProductsCollection(user.uid)), newProduct)
+    if (userUid) {
+      setDoc(doc(userProductsCollection(userUid)), newProduct)
         .then(() => {
           setProductsList(prev => [newProduct, ...prev])
-          openPopup({ type: "success", message: t("products.add-success"), okButton: {
-            action: () => navigate("/products")
-          }, cancelButton: false })
+          openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
         })
         .catch(() => openPopup({ type: "error", message: t("products.add-error") }))
     }
@@ -102,16 +99,10 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       return
     }
 
-    const user = auth.currentUser
-
-    if (user) {
-      updateDoc(doc(userProductsCollection(user.uid), currentProduct.docId), newData)
+    if (userUid) {
+      updateDoc(doc(userProductsCollection(userUid), currentProduct.docId), newData)
         .then(() => {
-          openPopup({ type: "success", message: t("products.edit-success"), okButton: {
-              action: () => navigate("/products")
-            },
-            cancelButton: false
-          })
+          openPopup({ type: "success", message: t("products.edit-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
 
           const listWithUpdatedProduct = productsList.map(product => {
             if (product.docId === currentProduct.docId) {
@@ -127,18 +118,15 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   }
 
   const deleteProduct: ProductsContextValue["deleteProduct"] = (docId, name) => {
-    const user = auth.currentUser
-
-    if (user) {
-      openPopup({ type: "danger", message: t("products.delete-confirmation", { name: name }), okButton: {
-        action: () => deleteDoc(doc(userProductsCollection(user.uid), docId))
+    if (userUid) {
+      openPopup({ type: "danger", message: t("products.delete-confirmation", { name: name }), okButton: { action: () =>
+        deleteDoc(doc(userProductsCollection(userUid), docId))
           .then(() => {
             setProductsList(productsList.filter(product => product.docId !== docId))
             openPopup({ type: "success", message: t("products.delete-success") })
           })
-          .catch(() => openPopup({ type: "error", message: t("products.delete-error") })),
-        text: t("products.delete")
-      }})
+          .catch(() => openPopup({ type: "error", message: t("products.delete-error") }))
+      , text: t("products.delete")}})
     }
   }
 

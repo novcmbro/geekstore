@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { usePopup } from "../contexts"
-import { ContactUs, NavLinks } from "../types"
+import { languagesNames } from "../i18n"
+import { ContactUs } from "../types"
 import { Logo } from "./Logo"
 import { Field } from "./Field"
-import { languagesNames } from "../i18n"
 import "../styles/footer.css"
 
 export const Footer = () => {
@@ -38,32 +38,7 @@ export const Footer = () => {
     }
   }
 
-  const navLinks: NavLinks = [
-    {
-      route: "/",
-      translation: t("routes.about-us")
-    },
-    {
-      route: "/",
-      translation: t("routes.privacy-policy")
-    },
-    {
-      route: "/",
-      translation: t("routes.loyalty-program")
-    },
-    {
-      route: "/",
-      translation: t("routes.our-stores")
-    },
-    {
-      route: "/",
-      translation: t("routes.franchise-opportunities")
-    },
-    {
-      route: "/",
-      translation: t("routes.advertise-here")
-    },
-  ]
+  const navRoutes = ["about-us", "privacy-policy", "loyalty-program", "our-stores", "franchise-opportunities", "advertise-here"]
 
   return (
     <footer className="footer">
@@ -71,9 +46,9 @@ export const Footer = () => {
         <nav className="nav-links">
           <Logo />
           <ul className="nav-links-list">
-            {navLinks.map((navLink, i) => (
+            {navRoutes.map((route, i) => (
               <li key={i} className="nav-links-list-item">
-                <Link to={navLink.route} className="nav-links-link">{navLink.translation}</Link>
+                <Link to={`/${route}`} className="nav-links-link">{t(`routes.${route}`)}</Link>
               </li>
             ))}
           </ul>

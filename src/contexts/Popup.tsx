@@ -1,17 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { Popup, PopupContextValue } from "../types"
 
-const PopupContext = createContext<PopupContextValue>({
-  type: "success",
-  message: "",
-  isPopupOpen: false,
-  openPopup: function (): void {
-    throw new Error("Function not implemented.")
-  },
-  closePopup: function (): void {
-    throw new Error("Function not implemented.")
-  }
-})
+const PopupContext = createContext({} as PopupContextValue)
 
 export const PopupProvider = ({ children }: { children: React.ReactElement }) => {
   const initialPopup: Popup = { type: "success", message: "" }

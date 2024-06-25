@@ -12,7 +12,6 @@ import "../styles/sr-only.css"
 import "../styles/typography.css"
 import "../styles/link.css"
 import "../styles/button.css"
-import "../styles/field.css"
 import "../styles/popup.css"
 
 export const App = () => {

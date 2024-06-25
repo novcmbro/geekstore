@@ -65,6 +65,7 @@
       "loading": "Loading",
       "get-error": "Something went wrong while getting products list. Please try again later.",
       "empty": "There are no products to show.",
+      "product": "Product",
       "add-success": "Product added successfully!",
       "add-error": "Failed to add product. Please try again.",
       "edit": "Edit",
@@ -75,13 +76,6 @@
       "delete-confirmation": "Are you sure you want to delete '{{ name }}' product? This action cannot be undone.",
       "delete-success": "Product deleted successfully!",
       "delete-error": "Failed to delete product. Please try again.",
-      "initial": {
-        "costume": "{{ name }} Costume",
-        "shirt": "{{ name }} Shirt",
-        "figure": "{{ name }} Figure",
-        "controller": "{{ name }} Controller",
-        "mug": "{{ name }} Mug"
-      },
       "form": {
         "image-url": "Product image URL",
         "category": "Product category",

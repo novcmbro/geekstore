@@ -51,7 +51,8 @@ export const Header = () => {
             okButton: {
               action: () => signOut(auth)
                 .then(() => {
-                  localLogin.logoutAndGoHome(navigate)
+                  localLogin.logout()
+                  navigate("/")
                   openPopup({ type: "success", message: t("logout.success") })
                 })
                 .catch(() => openPopup({ type: "error", message: t("logout.error") }))

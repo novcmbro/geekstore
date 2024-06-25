@@ -22,15 +22,12 @@ export const Login = () => {
     const auth = getAuth()
     
     signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => localLogin.loginAndGoToProducts(navigate))
+      .then(() => {
+        localLogin.login()
+        navigate("/products")
+      })
       .catch((error) => {
-        const errorCodes = [
-          "invalid-credential",
-          "user-not-found",
-          "user-disabled",
-          "too-many-requests",
-          "network-request-failed"
-        ]
+        const errorCodes = ["invalid-credential", "user-not-found", "user-disabled", "too-many-requests", "network-request-failed"]
 
         for (let errorCode of errorCodes) {
           if (error.code.includes(errorCode)) {

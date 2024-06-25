@@ -3,8 +3,3 @@ export type NavButton = {
   to?: string
   action?: () => void
 }
-
-export type NavLinks = Array<{
-  route: string
-  translation: string
-}>

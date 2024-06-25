@@ -1,3 +1,5 @@
+import { ProductFormValues } from "./ProductForm"
+
 export interface Product {
   docId?: string
   id: number
@@ -8,11 +10,9 @@ export interface Product {
   description?: string
 }
 
-export type ProductFormValues = Omit<Product, "docId" | "id">
-
 export type ProductsContextValue = {
   isLoading: boolean
-  productsList: Product[] | []
+  productsList: Product[]
   addProduct: (data: ProductFormValues) => void
   editProduct: (currentProduct: Product, newData: ProductFormValues) => void
   deleteProduct: (docId: Product["docId"], name: Product["name"]) => void

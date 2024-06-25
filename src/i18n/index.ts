@@ -1,6 +1,5 @@
 import i18n, { t } from "i18next"
 import { initReactI18next } from "react-i18next"
-import { LanguagesNames } from "../types"
 import enUS from "./locales/en-us.json"
 import ptBR from "./locales/pt-br.json"
 
@@ -30,7 +29,7 @@ i18n.use(initReactI18next).init({
   })
 })
 
-export const languagesNames: LanguagesNames = {
+export const languagesNames = {
   en: "English",
   pt: "Português"
 }

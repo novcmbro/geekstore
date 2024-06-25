@@ -1,5 +1,6 @@
 import { useController } from "react-hook-form"
 import { FieldProps } from "../types"
+import "../styles/field.css"
 
 export const Field = ({ type, textarea, label, ...props }: FieldProps) => {
   const { field, fieldState } = useController(props)

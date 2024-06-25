@@ -16,7 +16,7 @@ export const ProductForm = ({ onSubmit, control, watch }: ProductFormProps) => {
     <form onSubmit={onSubmit} className="product-form" aria-labelledby="product-form-title">
       <h2 id="product-form-title" className="typography-title-lg">{title}</h2>
       {image ? (
-        <img src={watch("image")} alt={watch("name")} onError={e => e.currentTarget.src = DefaultImage} className="product-image-preview" role="img" />
+        <img src={watch("image")} alt={watch("name") || t("products.product")} onError={e => e.currentTarget.src = DefaultImage} className="product-image-preview" role="img" />
       ) : null}
       <Field
         control={control}
