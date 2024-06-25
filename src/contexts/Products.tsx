@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 import { firestore, initialProducts } from "../firebase"
 import { Product, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
@@ -58,6 +58,30 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
     return () => unsubscribe()
   }, [auth])
+
+  const addProduct: ProductsContextValue["addProduct"] = (data) => {
+    const newProductId = Math.max(...productsList.map(product => product.id)) + 1
+    const newProduct = { id: newProductId, ...data }
+
+    for (const key of Object.keys(data) as (keyof typeof data)[]) {
+      if (key === "price") {
+        data.price = Number(data.price)
+      }
+    }
+
+    const user = auth.currentUser
+
+    if (user) {
+      setDoc(doc(userProductsCollection(user.uid)), newProduct)
+        .then(() => {
+          setProductsList(prev => [newProduct, ...prev])
+          openPopup({ type: "success", message: t("products.add-success"), okButton: {
+            action: () => navigate("/products")
+          }, cancelButton: false })
+        })
+        .catch(() => openPopup({ type: "error", message: t("products.add-error") }))
+    }
+  }
 
   const editProduct: ProductsContextValue["editProduct"] = (currentProduct, newData) => {
     let hasChanges: boolean = false
@@ -121,7 +145,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   productsList.sort((a, b) => b.id - a.id)
 
   return (
-    <ProductsContext.Provider value={{ isLoading, productsList, editProduct, deleteProduct }}>
+    <ProductsContext.Provider value={{ isLoading, productsList, addProduct, editProduct, deleteProduct }}>
       {children}
     </ProductsContext.Provider>
   )

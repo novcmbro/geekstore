@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { useProducts } from "../contexts"
-import { Product, ProductToEdit } from "../types"
+import { Product, ProductFormValues } from "../types"
 import { ProductForm } from "../components"
 import { NotFound } from "./NotFound"
 
@@ -12,7 +12,7 @@ export const EditProduct = () => {
   const { t } = useTranslation()
   const { isLoading, productsList, editProduct } = useProducts()
 
-  const { handleSubmit, control, watch, setValue } = useForm<ProductToEdit>({
+  const { handleSubmit, control, watch, setValue } = useForm<ProductFormValues>({
     defaultValues: {
       image: "",
       category: "",
@@ -34,7 +34,7 @@ export const EditProduct = () => {
           setProductToEdit(product)
 
           for (const [key, value] of Object.entries(productData)) {
-            setValue(key as keyof ProductToEdit, value)
+            setValue(key as keyof ProductFormValues, value)
           }
           break
         }

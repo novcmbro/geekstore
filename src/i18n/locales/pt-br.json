@@ -64,6 +64,8 @@
       "title": "Todos os produtos",
       "loading": "Carregando",
       "get-error": "Algo deu errado ao obter a lista de produtos. Por favor, tente novamente mais tarde.",
+      "add-success": "Produto adicionado com sucesso!",
+      "add-error": "Falha ao adicionar produto. Por favor, tente novamente.",
       "empty": "Não há produtos para mostrar.",
       "edit": "Editar",
       "edit-no-changes": "Não foram feitas alterações no produto '{{ name }}', portanto, não há nada para editar.",

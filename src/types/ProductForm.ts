@@ -1,8 +1,8 @@
 import { UseFormWatch } from "react-hook-form"
-import { ProductToEdit } from "./Products"
+import { ProductFormValues } from "./Products"
 
 export type ProductFormProps = {
   onSubmit: React.FormEventHandler
   control: any
-  watch: UseFormWatch<ProductToEdit>
+  watch: UseFormWatch<ProductFormValues>
 }

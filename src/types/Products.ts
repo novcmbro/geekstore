@@ -8,11 +8,12 @@ export interface Product {
   description?: string
 }
 
-export type ProductToEdit = Omit<Product, "docId" | "id">
+export type ProductFormValues = Omit<Product, "docId" | "id">
 
 export type ProductsContextValue = {
   isLoading: boolean
   productsList: Product[] | []
-  editProduct: (currentProduct: Product, newData: ProductToEdit) => void
+  addProduct: (data: ProductFormValues) => void
+  editProduct: (currentProduct: Product, newData: ProductFormValues) => void
   deleteProduct: (docId: Product["docId"], name: Product["name"]) => void
 }

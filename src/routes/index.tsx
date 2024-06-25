@@ -4,6 +4,7 @@ import { App } from "../components"
 import { Login } from "./Login"
 import { Products } from "./Products"
 import { NotFound } from "./NotFound"
+import { AddProduct } from "./AddProduct"
 import { EditProduct } from "./EditProduct"
 
 const routes = createBrowserRouter([
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
       {
         path: "products",
         element: localLogin.isAdminLogged ? <Products /> : <Navigate to="/" />
+      },
+      {
+        path: "add-product",
+        element: localLogin.isAdminLogged ? <AddProduct /> : <Navigate to="/" />
       },
       {
         path: "edit-product/:id",

@@ -10,11 +10,14 @@ export const ProductForm = ({ onSubmit, control, watch }: ProductFormProps) => {
   const { t } = useTranslation()
 
   const title = t(`routes.${pathname.includes("add") ? "add" : "edit"}-product`)
+  const image = watch("image")
 
   return (
     <form onSubmit={onSubmit} className="product-form" aria-labelledby="product-form-title">
       <h2 id="product-form-title" className="typography-title-lg">{title}</h2>
-      <img src={watch("image")} alt={watch("name")} onError={e => e.currentTarget.src = DefaultImage} className="product-image-preview" role="img" />
+      {image ? (
+        <img src={watch("image")} alt={watch("name")} onError={e => e.currentTarget.src = DefaultImage} className="product-image-preview" role="img" />
+      ) : null}
       <Field
         control={control}
         name="image"
@@ -70,7 +73,7 @@ export const ProductForm = ({ onSubmit, control, watch }: ProductFormProps) => {
         rules={{
           required: t("form-errors.required", { name: t("products.form.price") }),
           validate: {
-            hasPrice: (value) => parseInt(value) !== 0 || t("products.form.price-error")
+            hasPrice: (value) => parseInt(value) != 0 || t("products.form.price-error")
           }
         }}
         label={t("products.form.price")}

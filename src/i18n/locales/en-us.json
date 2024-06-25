@@ -65,6 +65,8 @@
       "loading": "Loading",
       "get-error": "Something went wrong while getting products list. Please try again later.",
       "empty": "There are no products to show.",
+      "add-success": "Product added successfully!",
+      "add-error": "Failed to add product. Please try again.",
       "edit": "Edit",
       "edit-no-changes": "There are no changes made to '{{ name }}' product, so nothing to edit.",
       "edit-success": "Product edited successfully!",
