@@ -106,7 +106,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
     const user = auth.currentUser
 
     if (user) {
-      openPopup({ type: "warning", message: t("products.delete-confirmation", { name: name }), okButton: {
+      openPopup({ type: "danger", message: t("products.delete-confirmation", { name: name }), okButton: {
         action: () => deleteDoc(doc(userProductsCollection(user.uid), docId))
           .then(() => {
             setProductsList(productsList.filter(product => product.docId !== docId))

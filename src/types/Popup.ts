@@ -4,7 +4,7 @@ type PopupButtonProps = {
 }
 
 export type Popup = {
-  type: "success" | "error" | "warning"
+  type: "success" | "error" | "warning" | "danger"
   message: string
   okButton?: PopupButtonProps
   cancelButton?: PopupButtonProps | false
