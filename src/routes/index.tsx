@@ -23,15 +23,15 @@ const routes = createBrowserRouter([
       },
       {
         path: "products",
-        element: localLogin.isAdminLogged ? <Products /> : <Navigate to="/" />
+        element: localLogin.isAdminLogged ? <Products /> : <Navigate to="/login" />
       },
       {
         path: "add-product",
-        element: localLogin.isAdminLogged ? <AddProduct /> : <Navigate to="/" />
+        element: localLogin.isAdminLogged ? <AddProduct /> : <Navigate to="/login" />
       },
       {
         path: "edit-product/:id",
-        element: localLogin.isAdminLogged ? <EditProduct /> : <Navigate to="/" />
+        element: localLogin.isAdminLogged ? <EditProduct /> : <Navigate to="/login" />
       },
       {
         path: "*",
