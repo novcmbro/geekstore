@@ -89,7 +89,8 @@
         "category-error": "Categoria inválida. Esta deve conter apenas letras (a-z), números (0-9), hífens (-) e apóstrofos (').",
         "name": "Nome do produto",
         "price": "Preço do produto",
-        "price-error": "Preço do produto inválido. Não pode ser zero.",
+        "price-is-zero": "Preço do produto inválido. Não pode ser zero.",
+        "price-too-high": "O preço do produto é muito alto. Deve ser inferior a $99.999,99",
         "description": "Descrição do produto"
       }
     },

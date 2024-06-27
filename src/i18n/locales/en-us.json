@@ -89,7 +89,8 @@
         "category-error": "Category is invalid. It must have only letters (a-z), numbers (0-9), hyphens (-) and apostrophes (').",
         "name": "Product name",
         "price": "Product price",
-        "price-error": "Product price is invalid. It cannot be zero.",
+        "price-is-zero": "Product price is invalid. It cannot be zero.",
+        "price-too-high": "Product price is too high. It must be lower than $99,999.99",
         "description": "Product description"
       }
     },

@@ -73,7 +73,8 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
         rules={{
           required: t("form-errors.required", { name: t("products.form.price") }),
           validate: {
-            hasPrice: (value) => parseFloat(value) != 0 || t("products.form.price-error")
+            hasPrice: (value) => parseFloat(value) != 0 || t("products.form.price-is-zero"),
+            priceTooHigh: (value) => value.replace(/[,.]/g, "") < 10000000 || t("products.form.price-too-high")
           },
           onChange: (e) => {
             const { name, value } = e.target
