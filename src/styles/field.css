@@ -28,7 +28,7 @@ textarea {
   content: "$";
   position: absolute;
   left: var(--spacing-sm);
-  bottom: var(--spacing-xs);
+  top: var(--spacing-md);
   font-weight: var(--font-semibold);
 }
 
