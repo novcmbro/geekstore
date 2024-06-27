@@ -5,7 +5,7 @@ import { Field } from "./Field"
 import DefaultImage from "../img/default-image.svg"
 import "../styles/product-form.css"
 
-export const ProductForm = ({ onSubmit, control, watch }: ProductFormProps) => {
+export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormProps) => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
 
@@ -73,10 +73,31 @@ export const ProductForm = ({ onSubmit, control, watch }: ProductFormProps) => {
         rules={{
           required: t("form-errors.required", { name: t("products.form.price") }),
           validate: {
-            hasPrice: (value) => parseInt(value) != 0 || t("products.form.price-error")
+            hasPrice: (value) => parseFloat(value) != 0 || t("products.form.price-error")
+          },
+          onChange: (e) => {
+            const { name, value } = e.target
+            const rawValue = value.trim()
+            const convertToCurrency = (number: number) => number.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }).replace("$", "")
+
+            if (!rawValue) {
+              setValue(name, convertToCurrency(0))
+              return
+            }
+            
+            const numericValue = rawValue.replace(/[^\d]/g, "")
+            const formattedValue = convertToCurrency(parseInt(numericValue, 10) / 100)
+            
+            setValue(name, formattedValue)
           }
         }}
         label={t("products.form.price")}
+        price
       />
       <Field
         control={control}

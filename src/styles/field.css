@@ -24,6 +24,18 @@ textarea {
   margin-bottom: var(--spacing-sm);
 }
 
+.field-container.price::before {
+  content: "$";
+  position: absolute;
+  left: var(--spacing-sm);
+  bottom: var(--spacing-xs);
+  font-weight: var(--font-semibold);
+}
+
+.field-container.price .field {
+  padding-left: var(--spacing-lg);
+}
+
 .field-label {
   position: absolute;
   top: 0;

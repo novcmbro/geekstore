@@ -17,7 +17,7 @@ export const EditProduct = () => {
       image: "",
       category: "",
       name: "",
-      price: 0,
+      price: "0.00" as unknown as number,
       description: ""
     },
     mode: "onBlur"
@@ -27,6 +27,8 @@ export const EditProduct = () => {
   const [productNotFound, setProductNotFound] = useState<boolean>(false)
 
   useEffect(() => {
+    let foundProduct
+
     if (productsList.length > 0) {
       for (const product of productsList) {
         if (product.id === parseInt(id!)) {
@@ -36,13 +38,17 @@ export const EditProduct = () => {
           for (const [key, value] of Object.entries(productData)) {
             setValue(key as keyof ProductFormValues, value)
           }
+
+          foundProduct = true
           break
         }
-
-        setProductNotFound(true)
       }
     }
-  }, [productsList, setValue])
+
+    if (!foundProduct) {
+      setProductNotFound(true)
+    }
+  }, [id, productsList, setValue])
 
   return (
     isLoading ? (
@@ -51,7 +57,7 @@ export const EditProduct = () => {
       productNotFound ? (
         <NotFound />
       ) : (
-        <ProductForm onSubmit={handleSubmit((data) => editProduct(productToEdit, data))} control={control} watch={watch} />
+        <ProductForm onSubmit={handleSubmit((data) => editProduct(productToEdit, data))} control={control} watch={watch} setValue={setValue} />
       )
     )
   )
