@@ -71,6 +71,7 @@
 
 .products-list .product-name {
   font-weight: var(--font-medium);
+  line-height: 1.175rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
