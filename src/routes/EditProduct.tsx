@@ -24,11 +24,9 @@ export const EditProduct = () => {
   })
 
   const [productToEdit, setProductToEdit] = useState({} as Product)
-  const [productNotFound, setProductNotFound] = useState<boolean>(false)
+  const [productNotFound, setProductNotFound] = useState<boolean>(true)
 
   useEffect(() => {
-    let foundProduct
-
     if (productsList.length > 0) {
       for (const product of productsList) {
         if (product.id === parseInt(id!)) {
@@ -39,17 +37,13 @@ export const EditProduct = () => {
             setValue(key as keyof ProductFormValues, value)
           }
 
-          foundProduct = true
+          setProductNotFound(false)
           break
         }
       }
     }
-
-    if (!foundProduct) {
-      setProductNotFound(true)
-    }
   }, [id, productsList, setValue])
-
+  
   return (
     isLoading ? (
       <p className="product-alert-message">{t("products.loading")}</p>
