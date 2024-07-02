@@ -63,13 +63,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
   const addProduct: ProductsContextValue["addProduct"] = (data) => {
     const newProductId = Math.max(...productsList.map(product => product.id)) + 1
-
-    for (const key of Object.keys(data) as (keyof typeof data)[]) {
-      if (key === "price") {
-        data.price = Number(data.price)
-      }
-    }
-
+    data.price = Number(data.price)
     const newProduct = { id: newProductId, ...data }
 
     if (userUid) {
@@ -84,22 +78,20 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
   const editProduct: ProductsContextValue["editProduct"] = (currentProduct, newData) => {
     let hasChanges: boolean = false
-
+    
     for (const key of Object.keys(newData) as (keyof typeof newData)[]) {
-      if (key === "price") {
-        newData.price = Number(newData.price)
-      }
-
       if (currentProduct[key] != newData[key]) {
         hasChanges = true
         break
       }
     }
-
+    
     if (!hasChanges) {
       openPopup({ type: "warning", message: t("products.edit-no-changes", { name: currentProduct.name }) })
       return
     }
+
+    newData.price = Number(newData.price)
 
     if (userUid) {
       updateDoc(doc(userProductsCollection(userUid), currentProduct.docId), newData)

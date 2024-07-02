@@ -74,7 +74,7 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
           required: t("form-errors.required", { name: t("products.form.price") }),
           validate: {
             hasPrice: (value) => parseFloat(value) != 0 || t("products.form.price-is-zero"),
-            priceTooHigh: (value) => value.replace(/[,.]/g, "") < 10000000 || t("products.form.price-too-high")
+            priceTooHigh: (value) => value.toString().replace(/[,.]/g, "") < 10000000 || t("products.form.price-too-high")
           },
           onChange: (e) => {
             const { name, value } = e.target
@@ -92,9 +92,7 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
             }
             
             const numericValue = rawValue.replace(/[^\d]/g, "")
-            const formattedValue = convertToCurrency(parseInt(numericValue, 10) / 100)
-            
-            setValue(name, formattedValue)
+            setValue(name, convertToCurrency(parseInt(numericValue, 10) / 100))
           }
         }}
         label={t("products.form.price")}
