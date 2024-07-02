@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { addDoc, collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
 import { firestore, initialProducts } from "../firebase"
 import { Product, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
@@ -52,7 +52,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         getProducts(user.uid)
-      } else if (productsList !== initialProducts) {
+      } else {
         setProductsList(initialProducts)
         setIsLoading(false)
       }
@@ -63,7 +63,6 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
   const addProduct: ProductsContextValue["addProduct"] = (data) => {
     const newProductId = Math.max(...productsList.map(product => product.id)) + 1
-    const newProduct = { id: newProductId, ...data }
 
     for (const key of Object.keys(data) as (keyof typeof data)[]) {
       if (key === "price") {
@@ -71,10 +70,12 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       }
     }
 
+    const newProduct = { id: newProductId, ...data }
+
     if (userUid) {
-      setDoc(doc(userProductsCollection(userUid)), newProduct)
-        .then(() => {
-          setProductsList(prev => [newProduct, ...prev])
+      addDoc(userProductsCollection(userUid), newProduct)
+        .then((docRef) => {
+          setProductsList(prev => [{ docId: docRef.id, ...newProduct }, ...prev])
           openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
         })
         .catch(() => openPopup({ type: "error", message: t("products.add-error") }))
