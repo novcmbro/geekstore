@@ -42,7 +42,7 @@ export const Home = () => {
             <div key={i} className="product-category-row">
               <div className="products-list-header">
                 <h2 id="products-title" className="typography-title-md">{category}</h2>
-                {products.length > 6 ? (
+                {products.length > 4 ? (
                   <Link to={`/see-all/${category.toLowerCase().replace(" ", "-")}`} className="route-link">
                     {`${t("routes.see-all")} 🡪`}
                   </Link>
