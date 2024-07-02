@@ -1,5 +1,4 @@
-import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
-import { localLogin } from "../firebase"
+import { Navigate, RouteObject, RouterProvider, createBrowserRouter } from "react-router-dom"
 import { App } from "../components"
 import { Home } from "./Home"
 import { Login } from "./Login"
@@ -7,6 +6,14 @@ import { Products } from "./Products"
 import { NotFound } from "./NotFound"
 import { AddProduct } from "./AddProduct"
 import { EditProduct } from "./EditProduct"
+
+const PrivateRoute = ({ Element }: { Element: RouteObject["element"] }) => {
+  if (!localStorage.getItem("novcmbro_geekstore_auth")) {
+    return <Navigate to="/login" />
+  }
+
+  return Element
+}
 
 const routes = createBrowserRouter([
   {
@@ -19,19 +26,19 @@ const routes = createBrowserRouter([
       },
       {
         path: "login",
-        element: !localLogin.isAdminLogged ? <Login /> : <Navigate to="/products" />
+        element: !localStorage.getItem("novcmbro_geekstore_auth") ? <Login /> : <Navigate to="/products" />
       },
       {
         path: "products",
-        element: localLogin.isAdminLogged ? <Products /> : <Navigate to="/login" />
+        element: <PrivateRoute Element={<Products />} />
       },
       {
         path: "add-product",
-        element: localLogin.isAdminLogged ? <AddProduct /> : <Navigate to="/login" />
+        element: <PrivateRoute Element={<AddProduct />} />
       },
       {
         path: "edit-product/:id",
-        element: localLogin.isAdminLogged ? <EditProduct /> : <Navigate to="/login" />
+        element: <PrivateRoute Element={<EditProduct />} />
       },
       {
         path: "*",

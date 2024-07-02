@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next"
 import { getAuth, signOut } from "firebase/auth"
 import classNames from "classnames"
 import { usePopup } from "../contexts"
-import { localLogin } from "../firebase"
 import { NavButton } from "../types"
 import { Logo } from "./Logo"
 import "../styles/header.css"
@@ -15,6 +14,7 @@ export const Header = () => {
   const { t } = useTranslation()
   const auth = getAuth()
   const { openPopup } = usePopup()
+  const isUserLogged = !!localStorage.getItem("novcmbro_geekstore_auth")
 
   const [isSearchBarOpen, setIsSearchBarOpen] = useState<boolean>(false)
   const [shouldRenderSearchBarAlert, setShouldRenderSearchBarAlert] = useState<boolean>(false)
@@ -36,8 +36,8 @@ export const Header = () => {
     const handleNavButtonRoutes = () => {
       if (pathname === "/") {
         setNavButtonRoute({
-          name: !localLogin.isAdminLogged ? t("routes.login") : t("routes.admin-menu"),
-          to: !localLogin.isAdminLogged ? "/login" : "/products"
+          name: !isUserLogged ? t("routes.login") : t("routes.admin-menu"),
+          to: !isUserLogged ? "/login" : "/products"
         })
         return
       }
@@ -51,7 +51,7 @@ export const Header = () => {
             okButton: {
               action: () => signOut(auth)
                 .then(() => {
-                  localLogin.logout()
+                  localStorage.removeItem("novcmbro_geekstore_auth")
                   navigate("/")
                   openPopup({ type: "success", message: t("logout.success") })
                 })

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { localLogin } from "../firebase"
 import { LoginData } from "../types"
 import { Field } from "../components"
 import "../styles/login.css"
@@ -23,7 +22,7 @@ export const Login = () => {
     
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        localLogin.login()
+        localStorage.setItem("novcmbro_geekstore_auth", "true")
         navigate("/products")
       })
       .catch((error) => {
