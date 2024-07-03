@@ -2,8 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
-import { firestore, initialProducts } from "../firebase"
+import { addDoc, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
+import { initialProducts, userCollection } from "../firebase"
 import { Product, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
 
@@ -13,14 +13,14 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const navigate = useNavigate()
   const { t } = useTranslation()
   const auth = getAuth()
-  const userUid = auth.currentUser?.uid
-  const userProductsCollection = (userUid: string) => collection(firestore, `users/${userUid}/products`)
   const { openPopup } = usePopup()
   
   const [isLoading, setIsLoading] = useState<ProductsContextValue["isLoading"]>(true)
   const [productsList, setProductsList] = useState<Product[]>([])
-
+  
   const validateUserPermission = () => {
+    const userUid = auth.currentUser?.uid
+    
     if (userUid) {
       return true
     }
@@ -33,18 +33,18 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       setIsLoading(false)
     }
 
-    const getProductsList = (userUid: string) => {
+    const getProductsList = () => {
       const openErrorPopup = () => {
         setIsLoading(false)
         openPopup({ type: "error", message: t("products.get-error") })
       }
 
-      getDocs(userProductsCollection(userUid))
+      getDocs(userCollection("products"))
         .then(querySnapshot => {
           const products = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() })) as typeof productsList
 
           if (querySnapshot.empty) {
-            const addInitialProductsPromises = initialProducts.map(product => addDoc(userProductsCollection(userUid), product))
+            const addInitialProductsPromises = initialProducts.map(product => addDoc(userCollection("products"), product))
 
             Promise.all(addInitialProductsPromises)
               .then(() => updateProductsList(products))
@@ -58,7 +58,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        getProductsList(user.uid)
+        getProductsList()
         return
       }
       updateProductsList(initialProducts)
@@ -73,7 +73,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       data.price = Number(data.price)
       const newProduct = { id: newProductId, ...data }
   
-      addDoc(userProductsCollection(userUid!), newProduct)
+      addDoc(userCollection("products"), newProduct)
         .then((docRef) => {
           setProductsList(prev => [{ docId: docRef.id, ...newProduct }, ...prev])
           openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
@@ -100,7 +100,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       
       newData.price = Number(newData.price)
 
-      updateDoc(doc(userProductsCollection(userUid!), currentProduct.docId), newData)
+      updateDoc(doc(userCollection("products"), currentProduct.docId), newData)
         .then(() => {
           openPopup({ type: "success", message: t("products.edit-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
 
@@ -120,7 +120,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const deleteProduct: ProductsContextValue["deleteProduct"] = (docId, name) => {
     if (validateUserPermission()) {
       openPopup({ type: "danger", message: t("products.delete-confirmation", { name: name }), okButton: { action: () =>
-        deleteDoc(doc(userProductsCollection(userUid!), docId))
+        deleteDoc(doc(userCollection("products"), docId))
           .then(() => {
             setProductsList(productsList.filter(product => product.docId !== docId))
             openPopup({ type: "success", message: t("products.delete-success") })
