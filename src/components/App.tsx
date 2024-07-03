@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom"
 import { firebaseApp } from "../firebase"
-import { PopupProvider, ProductsProvider } from "../contexts"
+import { Contexts } from "../contexts"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
 import { Popup } from "./Popup"
@@ -20,17 +20,15 @@ export const App = () => {
   firebaseApp()
 
   return (
-    <PopupProvider>
-      <ProductsProvider>
-        <>
-          <Header />
-          <main {...pathname !== "/" ? { className: "container" } : null}>
-            <Outlet />
-          </main>
-          <Footer />
-          <Popup />
-        </>
-      </ProductsProvider>
-    </PopupProvider>
+    <Contexts>
+      <>
+        <Header />
+        <main {...pathname !== "/" ? { className: "container" } : null}>
+          <Outlet />
+        </main>
+        <Footer />
+        <Popup />
+      </>
+    </Contexts>
   )
 }
