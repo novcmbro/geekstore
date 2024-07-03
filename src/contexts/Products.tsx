@@ -16,58 +16,64 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const userUid = auth.currentUser?.uid
   const userProductsCollection = (userUid: string) => collection(firestore, `users/${userUid}/products`)
   const { openPopup } = usePopup()
-
+  
   const [isLoading, setIsLoading] = useState<ProductsContextValue["isLoading"]>(true)
   const [productsList, setProductsList] = useState<Product[]>([])
 
+  const validateUserPermission = () => {
+    if (userUid) {
+      return true
+    }
+    openPopup({ type: "error", message: t("products.no-permission") })
+  }
+
   useEffect(() => {
-    const getProducts = (userUid: string) => {
-      const displayErrorPopup = () => {
+    const updateProductsList = (products: typeof productsList) => {
+      setProductsList(products)
+      setIsLoading(false)
+    }
+
+    const getProductsList = (userUid: string) => {
+      const openErrorPopup = () => {
         setIsLoading(false)
         openPopup({ type: "error", message: t("products.get-error") })
       }
 
       getDocs(userProductsCollection(userUid))
         .then(querySnapshot => {
-          const updateList = () => {
-            const products = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() })) as Product[]
-            setProductsList(products)
-            setIsLoading(false)
-          }
+          const products = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() })) as typeof productsList
 
           if (querySnapshot.empty) {
             const addInitialProductsPromises = initialProducts.map(product => addDoc(userProductsCollection(userUid), product))
 
             Promise.all(addInitialProductsPromises)
-              .then(updateList)
-              .catch(displayErrorPopup)
+              .then(() => updateProductsList(products))
+              .catch(openErrorPopup)
             return
           }
-        
-          updateList()
+          updateProductsList(products)
         })
-        .catch(displayErrorPopup)
+        .catch(openErrorPopup)
     }
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        getProducts(user.uid)
-      } else {
-        setProductsList(initialProducts)
-        setIsLoading(false)
+        getProductsList(user.uid)
+        return
       }
+      updateProductsList(initialProducts)
     })
 
     return () => unsubscribe()
   }, [auth])
 
   const addProduct: ProductsContextValue["addProduct"] = (data) => {
-    const newProductId = Math.max(...productsList.map(product => product.id)) + 1
-    data.price = Number(data.price)
-    const newProduct = { id: newProductId, ...data }
-
-    if (userUid) {
-      addDoc(userProductsCollection(userUid), newProduct)
+    if (validateUserPermission()) {
+      const newProductId = Math.max(...productsList.map(product => product.id)) + 1
+      data.price = Number(data.price)
+      const newProduct = { id: newProductId, ...data }
+  
+      addDoc(userProductsCollection(userUid!), newProduct)
         .then((docRef) => {
           setProductsList(prev => [{ docId: docRef.id, ...newProduct }, ...prev])
           openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
@@ -77,24 +83,24 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   }
 
   const editProduct: ProductsContextValue["editProduct"] = (currentProduct, newData) => {
-    let hasChanges: boolean = false
-    
-    for (const key of Object.keys(newData) as (keyof typeof newData)[]) {
-      if (currentProduct[key] != newData[key]) {
-        hasChanges = true
-        break
+    if (validateUserPermission()) {
+      let hasChanges: boolean = false
+      
+      for (const key of Object.keys(newData) as (keyof typeof newData)[]) {
+        if (currentProduct[key] != newData[key]) {
+          hasChanges = true
+          break
+        }
       }
-    }
-    
-    if (!hasChanges) {
-      openPopup({ type: "warning", message: t("products.edit-no-changes", { name: currentProduct.name }) })
-      return
-    }
+      
+      if (!hasChanges) {
+        openPopup({ type: "warning", message: t("products.edit-no-changes", { name: currentProduct.name }) })
+        return
+      }
+      
+      newData.price = Number(newData.price)
 
-    newData.price = Number(newData.price)
-
-    if (userUid) {
-      updateDoc(doc(userProductsCollection(userUid), currentProduct.docId), newData)
+      updateDoc(doc(userProductsCollection(userUid!), currentProduct.docId), newData)
         .then(() => {
           openPopup({ type: "success", message: t("products.edit-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
 
@@ -112,9 +118,9 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   }
 
   const deleteProduct: ProductsContextValue["deleteProduct"] = (docId, name) => {
-    if (userUid) {
+    if (validateUserPermission()) {
       openPopup({ type: "danger", message: t("products.delete-confirmation", { name: name }), okButton: { action: () =>
-        deleteDoc(doc(userProductsCollection(userUid), docId))
+        deleteDoc(doc(userProductsCollection(userUid!), docId))
           .then(() => {
             setProductsList(productsList.filter(product => product.docId !== docId))
             openPopup({ type: "success", message: t("products.delete-success") })

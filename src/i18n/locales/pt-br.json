@@ -72,6 +72,7 @@
       "loading": "Carregando",
       "get-error": "Algo deu errado ao obter a lista de produtos. Por favor, tente novamente mais tarde.",
       "empty": "Não há produtos para mostrar.",
+      "no-permission": "Você não tem permissão para realizar esta ação. Por favor, faça login e tente novamente.",
       "product": "Produto",
       "add-success": "Produto adicionado com sucesso!",
       "add-error": "Falha ao adicionar produto. Por favor, tente novamente.",
