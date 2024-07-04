@@ -47,11 +47,11 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       .then(querySnapshot => {
         const products = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() })) as typeof productsList
 
-        if (querySnapshot.empty && isFirstAccess) {
+        if (isFirstAccess) {
           const addInitialProductsPromises = initialProducts.map(product => addDoc(userProductsCollection(), product))
 
           Promise.all(addInitialProductsPromises)
-            .then(() => updateProductsList(products))
+            .then(() => getProductsList())
             .catch(openGetErrorPopup)
           return
         }
@@ -77,7 +77,6 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
             }
 
             if (!!isFirstAccess) {
-              getProductsList(true)
               updateDoc(userDoc, setFirstAccessValue(false))
               return
             }
