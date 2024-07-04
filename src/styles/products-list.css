@@ -94,6 +94,11 @@
   display: none;
 }
 
+.reset-products-button {
+  margin-top: var(--spacing-xl);
+  margin-left: auto;
+}
+
 @media screen and (min-width: 768px) {
   .products-list {
     grid-template-columns: repeat(4, 1fr);

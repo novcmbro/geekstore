@@ -17,51 +17,58 @@ export const Home = () => {
       setProductsByCategory(Object.groupBy(productsList, ({ category }: typeof productsList[number]) => category))
     }
   }, [productsList])
-
+  
   useEffect(() => {
-    if (productsByCategory) {
+    if (productsList.length > 0 && productsByCategory) {
       const productsCategories = Object.keys(productsByCategory)
-      setBannerButtonCategory(productsCategories[productsCategories.length - 2])
+      const oneOfTheTwoLastCategories = productsCategories.includes("Consoles") ? "Consoles" : productsCategories[productsCategories.length - 1]
+      setBannerButtonCategory(oneOfTheTwoLastCategories)
     }
-  }, [productsByCategory])
+  }, [productsList, productsByCategory])
 
   return (
     isLoading ? (
       <p className="product-alert-message container">{t("products.loading")}</p>
     ) : (
-      <>
-        <div className="banner">
-          <div className="container">
-            <h2 className="typography-title-lg">{t("home-banner.title")}</h2>
-            <p>{t("home-banner.description")}</p>
-            <Link to={`#${bannerButtonCategory}`} className="button-filled">{t("home-banner.button", { name: bannerButtonCategory })}</Link>
-          </div>
-        </div>
-        <section className="container">
-          {Object.entries(productsByCategory).map(([category, products], i) =>
-            <div key={i} className="product-category-row">
-              <div className="products-list-header">
-                <h2 id="products-title" className="typography-title-md">{category}</h2>
-                {products.length > 4 ? (
-                  <Link to={`/see-all/${category.toLowerCase().replace(" ", "-")}`} className="route-link">
-                    {`${t("routes.see-all")} 🡪`}
-                  </Link>
-                ) : null}
+      productsList.length > 0 ? (
+        <>
+          {bannerButtonCategory ? (
+            <div className="banner">
+              <div className="container">
+                <h2 className="typography-title-lg">{t("home-banner.title")}</h2>
+                <p>{t("home-banner.description")}</p>
+                <a href={`#${bannerButtonCategory}`} className="button-filled">{t("home-banner.button", { name: bannerButtonCategory })}</a>
               </div>
-              <ol className="products-list" aria-labelledby="products-title">
-                {products.map((product, i) => i <= 5 ? (
-                  <li key={product.id} className="product-list-item" aria-label={product.name}>
-                    <img src={product.image} alt={product.name} className="product-image" role="img" loading="lazy" />
-                    <span className="product-name">{product.name}</span>
-                    <span className="product-price">{product.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
-                    <Link to={`/product/${product.id}`} className="route-link see-product-link">{t("routes.see-product")}</Link>
-                  </li>
-                ) : null)}
-              </ol>
             </div>
-          )}
-        </section>
-      </>
+          ) : null}
+          <div className="container">
+            {Object.entries(productsByCategory).map(([category, products], i) =>
+              <section id={category} key={i} className="product-category-row" aria-label={category}>
+                <div className="products-list-header">
+                  <h2 className="typography-title-md">{category}</h2>
+                  {products.length > 4 ? (
+                    <Link to={`/see-all/${category.toLowerCase().replace(" ", "-")}`} className="route-link">
+                      {`${t("routes.see-all")} 🡪`}
+                    </Link>
+                  ) : null}
+                </div>
+                <ol className="products-list" aria-label={category}>
+                  {products.map((product, i) => i <= 5 ? (
+                    <li key={product.id} className="product-list-item" aria-label={product.name}>
+                      <img src={product.image} alt={product.name} className="product-image" role="img" loading="lazy" />
+                      <span className="product-name">{product.name}</span>
+                      <span className="product-price">{product.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+                      <Link to={`/product/${product.id}`} className="route-link see-product-link">{t("routes.see-product")}</Link>
+                    </li>
+                  ) : null)}
+                </ol>
+              </section>
+            )}
+          </div>
+        </>
+      ) : (
+        <p className="product-alert-message container">{t("products.empty")}</p>
+      )
     )
   )
 }

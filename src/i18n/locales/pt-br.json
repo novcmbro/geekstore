@@ -84,6 +84,11 @@
       "delete-confirmation": "Você tem certeza que deseja deletar o produto '{{ name }}'? Esta ação não pode ser desfeita.",
       "delete-success": "Produto deletado com sucesso!",
       "delete-error": "Falha ao deletar produto. Por favor, tente novamente.",
+      "restore": "Restaurar",
+      "restore-products": "Restaurar produtos",
+      "restore-confirmation": "Você tem certeza que deseja restaurar a lista de produtos? Todos os produtos padrão serão adicionados de volta e aqueles que você adicionou serão excluídos. Esta ação não pode ser desfeita.",
+      "restore-success": "Produtos restaurados com sucesso!",
+      "restore-error": "Falha ao restaurar produtos. Por favor, tente novamente.",
       "form": {
         "image-url": "URL da imagem do produto",
         "category": "Categoria do produto",

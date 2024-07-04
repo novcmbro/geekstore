@@ -20,4 +20,5 @@ export type ProductsContextValue = {
   addProduct: (data: ProductFormValues) => void
   editProduct: (currentProduct: Product, newData: ProductFormValues) => void
   deleteProduct: (docId: Product["docId"], name: Product["name"]) => void
+  restoreDefaultProducts: () => void
 }

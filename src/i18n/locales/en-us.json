@@ -84,6 +84,11 @@
       "delete-confirmation": "Are you sure you want to delete '{{ name }}' product? This action cannot be undone.",
       "delete-success": "Product deleted successfully!",
       "delete-error": "Failed to delete product. Please try again.",
+      "restore": "Restore",
+      "restore-products": "Restore products",
+      "restore-confirmation": "Are you sure you want to restore products list? All the default products will be added back and the ones you added will be deleted. This action cannot be undone.",
+      "restore-success": "Products restored successfully!",
+      "restore-error": "Failed to restore products. Please try again.",
       "form": {
         "image-url": "Product image URL",
         "category": "Product category",
