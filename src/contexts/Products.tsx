@@ -2,8 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { addDoc, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
-import { initialProducts, userCollection } from "../firebase"
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
+import { firestore, initialProducts } from "../firebase"
 import { Product, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
 
@@ -18,9 +18,14 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const [isLoading, setIsLoading] = useState<ProductsContextValue["isLoading"]>(true)
   const [productsList, setProductsList] = useState<Product[]>([])
   
+  const userProductsCollection = () => {
+    const userUid = auth.currentUser?.uid
+    return collection(firestore, `users/${userUid}/products`)
+  }
+  
   const validateUserPermission = () => {
     const userUid = auth.currentUser?.uid
-    
+
     if (userUid) {
       return true
     }
@@ -39,12 +44,12 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
         openPopup({ type: "error", message: t("products.get-error") })
       }
 
-      getDocs(userCollection("products"))
+      getDocs(userProductsCollection())
         .then(querySnapshot => {
           const products = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() })) as typeof productsList
 
           if (querySnapshot.empty) {
-            const addInitialProductsPromises = initialProducts.map(product => addDoc(userCollection("products"), product))
+            const addInitialProductsPromises = initialProducts.map(product => addDoc(userProductsCollection(), product))
 
             Promise.all(addInitialProductsPromises)
               .then(() => updateProductsList(products))
@@ -73,7 +78,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       data.price = Number(data.price)
       const newProduct = { id: newProductId, ...data }
   
-      addDoc(userCollection("products"), newProduct)
+      addDoc(userProductsCollection(), newProduct)
         .then((docRef) => {
           setProductsList(prev => [{ docId: docRef.id, ...newProduct }, ...prev])
           openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
@@ -100,7 +105,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       
       newData.price = Number(newData.price)
 
-      updateDoc(doc(userCollection("products"), currentProduct.docId), newData)
+      updateDoc(doc(userProductsCollection(), currentProduct.docId), newData)
         .then(() => {
           openPopup({ type: "success", message: t("products.edit-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
 
@@ -120,7 +125,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const deleteProduct: ProductsContextValue["deleteProduct"] = (docId, name) => {
     if (validateUserPermission()) {
       openPopup({ type: "danger", message: t("products.delete-confirmation", { name: name }), okButton: { action: () =>
-        deleteDoc(doc(userCollection("products"), docId))
+        deleteDoc(doc(userProductsCollection(), docId))
           .then(() => {
             setProductsList(productsList.filter(product => product.docId !== docId))
             openPopup({ type: "success", message: t("products.delete-success") })
