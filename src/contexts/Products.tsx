@@ -13,7 +13,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const navigate = useNavigate()
   const { t } = useTranslation()
   const auth = getAuth()
-  const { openPopup, isPopupOpen } = usePopup()
+  const { openPopup } = usePopup()
   
   const [isLoading, setIsLoading] = useState<ProductsContextValue["isLoading"]>(true)
   const [productsList, setProductsList] = useState<Product[]>([])
