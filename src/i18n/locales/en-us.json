@@ -87,6 +87,7 @@
       "restore": "Restore",
       "restore-products": "Restore products",
       "restore-confirmation": "Are you sure you want to restore products list? All the default products will be added back and the ones you added will be deleted. This action cannot be undone.",
+      "restore-no-changes": "There are no changes made to products list, so nothing to restore.",
       "restore-success": "Products restored successfully!",
       "restore-error": "Failed to restore products. Please try again.",
       "form": {

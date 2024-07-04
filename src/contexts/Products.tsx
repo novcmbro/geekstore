@@ -13,7 +13,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const navigate = useNavigate()
   const { t } = useTranslation()
   const auth = getAuth()
-  const { openPopup } = usePopup()
+  const { openPopup, isPopupOpen } = usePopup()
   
   const [isLoading, setIsLoading] = useState<ProductsContextValue["isLoading"]>(true)
   const [productsList, setProductsList] = useState<Product[]>([])
@@ -158,11 +158,39 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
   const restoreDefaultProducts: ProductsContextValue["restoreDefaultProducts"] = () => {
     if (validateUserPermission()) {
-      openPopup({ type: "danger", message: t("products.restore-confirmation"), okButton: { action: () => {
-        setIsLoading(true)
+      let listHasChanges: boolean = productsList.length !== initialProducts.length
+      const shouldVerifyProductsValues = !listHasChanges
 
+      if (shouldVerifyProductsValues) {
+        for (const product of productsList) {
+          for (const [productKey, productValue] of Object.entries(product)) {
+            if (productKey === "docId") {
+              continue
+            }
+            const initialProduct = initialProducts.find(initialProduct => product.id === initialProduct.id)
+            const productAddedOrEdited = !initialProduct || initialProduct && productValue !== initialProduct[productKey as keyof typeof initialProduct]
+  
+            if (productAddedOrEdited) {
+              listHasChanges = true
+              break
+            }
+          }
+  
+          if (listHasChanges) {
+            break
+          }
+        }
+      }
+      
+      if (!listHasChanges) {
+        openPopup({ type: "warning", message: t("products.restore-no-changes") })
+        return
+      }
+
+      openPopup({ type: "danger", message: t("products.restore-confirmation"), okButton: { action: () =>
         getDocs(userProductsCollection())
           .then(querySnapshot => {
+            setIsLoading(true)
             const deleteAllProductsPromises = querySnapshot.docs.map(doc => deleteDoc(doc.ref))
             return Promise.all(deleteAllProductsPromises)
           })
@@ -171,14 +199,16 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
             return Promise.all(addInitialProductsPromises)
           })
           .then(() => {
-            getProductsList()
             openPopup({ type: "success", message: t("products.restore-success") })
+            getProductsList()
           })
           .catch(() => {
-            setIsLoading(false)
+            if (isLoading) {
+              setIsLoading(false)
+            }
             openPopup({ type: "error", message: t("products.restore-error") })
           })
-      }, text: t("products.restore")}})
+      , text: t("products.restore")}})
     }
   }
 

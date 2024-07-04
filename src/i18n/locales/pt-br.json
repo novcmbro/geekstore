@@ -87,6 +87,7 @@
       "restore": "Restaurar",
       "restore-products": "Restaurar produtos",
       "restore-confirmation": "Você tem certeza que deseja restaurar a lista de produtos? Todos os produtos padrão serão adicionados de volta e aqueles que você adicionou serão excluídos. Esta ação não pode ser desfeita.",
+      "restore-no-changes": "Não foram feitas alterações na lista de produtos, portanto, não há nada para restaurar.",
       "restore-success": "Produtos restaurados com sucesso!",
       "restore-error": "Falha ao restaurar produtos. Por favor, tente novamente.",
       "form": {
