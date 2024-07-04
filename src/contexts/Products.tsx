@@ -170,12 +170,6 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
             const addInitialProductsPromises = initialProducts.map(product => addDoc(userProductsCollection(), product))
             return Promise.all(addInitialProductsPromises)
           })
-          .then(initialProductsAdded => {
-            const getInitialProductsPromises = initialProductsAdded.map(doc => {
-              getDoc(doc).then(querySnapshot => ({ docId: querySnapshot.id, ...querySnapshot.data() }))
-            })
-            return Promise.all(getInitialProductsPromises)
-          })
           .then(() => {
             getProductsList()
             openPopup({ type: "success", message: t("products.restore-success") })
