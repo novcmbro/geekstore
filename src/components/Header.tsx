@@ -33,49 +33,37 @@ export const Header = () => {
   }, [shouldRenderSearchBarAlert])
 
   useEffect(() => {
-    const handleNavButtonRoutes = () => {
-      if (pathname === "/") {
-        setNavButtonRoute({
-          name: !isUserLogged ? t("routes.login") : t("routes.admin-menu"),
-          to: !isUserLogged ? "/login" : "/products"
-        })
-        return
-      }
-  
-      if (pathname === "/products") {
-        setNavButtonRoute({
-          name: t("logout.title"),
-          action: () => openPopup({
-            type: "warning",
-            message: t("logout.confirmation"),
-            okButton: {
-              action: () => signOut(auth)
-                .then(() => {
-                  localStorage.removeItem("novcmbro_geekstore_auth")
-                  navigate("/")
-                  openPopup({ type: "success", message: t("logout.success") })
-                })
-                .catch(() => openPopup({ type: "error", message: t("logout.error") }))
-            }
-          })
-        })
-        return
-      }
-  
-      if (pathname === "/add-product" || pathname.includes("/edit-product")) {
-        setNavButtonRoute({
-          name: t("routes.admin-menu"),
-          to: "/products"
-        })
-        return
-      }
-  
-      setNavButtonRoute(initialNavButtonRoute)
+    if (pathname === "/" && !isUserLogged) {
+      setNavButtonRoute({ name: t("routes.login"), to: "/login" })
+      return
     }
 
-    handleNavButtonRoutes()
+    if (pathname === "/products") {
+      setNavButtonRoute({
+        name: t("logout.title"),
+        action: () => openPopup({
+          type: "warning",
+          message: t("logout.confirmation"),
+          okButton: { action: () =>
+            signOut(auth)
+              .then(() => {
+                localStorage.removeItem("novcmbro_geekstore_auth")
+                navigate("/")
+                openPopup({ type: "success", message: t("logout.success") })
+              })
+              .catch(() => openPopup({ type: "error", message: t("logout.error") }))
+          }
+        })
+      })
+      return
+    }
 
-    return () => handleNavButtonRoutes()
+    if (pathname === "/" && isUserLogged || pathname === "/add-product" || pathname.includes("/edit-product")) {
+      setNavButtonRoute({ name: t("routes.admin-menu"), to: "/products" })
+      return
+    }
+
+    setNavButtonRoute(initialNavButtonRoute)
   }, [pathname])
 
   const toggleSearchBar = () => {
