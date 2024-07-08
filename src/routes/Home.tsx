@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useProducts } from "../contexts"
 import { ProductsByCategory } from "../types"
+import { ProductsList, ProductsListHeader, ProductsListItem } from "../components/Products"
 import "../styles/banner.css"
 
 export const Home = () => {
@@ -44,24 +45,18 @@ export const Home = () => {
           <div className="container home-container">
             {Object.entries(productsByCategory).map(([category, products], i) =>
               <section id={category} key={i} className="product-category-row" aria-label={category}>
-                <div className="products-list-header">
-                  <h2 className="typography-title-md">{category}</h2>
+                <ProductsListHeader title={category}>
                   {products.length > 4 ? (
                     <Link to={`/see-all/${category.toLowerCase().replace(" ", "-")}`} className="route-link">
                       {`${t("routes.see-all")} 🡪`}
                     </Link>
                   ) : null}
-                </div>
-                <ol className="products-list" aria-label={category}>
+                </ProductsListHeader>
+                <ProductsList aria-label={category}>
                   {products.map((product, i) => i <= 5 ? (
-                    <li key={product.id} className="product-list-item" aria-label={product.name}>
-                      <img src={product.image} alt={product.name} className="product-image" role="img" loading="lazy" />
-                      <span className="product-name">{product.name}</span>
-                      <span className="product-price">{product.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
-                      <Link to={`/product/${product.id}`} className="route-link see-product-link">{t("routes.see-product")}</Link>
-                    </li>
+                    <ProductsListItem key={i} product={product} />
                   ) : null)}
-                </ol>
+                </ProductsList>
               </section>
             )}
           </div>
