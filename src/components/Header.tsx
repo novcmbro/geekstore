@@ -92,7 +92,7 @@ export const Header = () => {
               {navButtonRoute.name}
             </Link>
           ) : (
-            <button onClick={navButtonRoute.action} className="button-outlined button-danger">
+            <button onClick={navButtonRoute.action} className="button-outlined button-danger" aria-haspopup="dialog" aria-controls="popup-container">
               {navButtonRoute.name}
             </button>
           )

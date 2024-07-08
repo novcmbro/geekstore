@@ -13,7 +13,7 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
   const image = watch("image")
 
   return (
-    <form onSubmit={onSubmit} className="product-form" aria-labelledby="product-form-title">
+    <form onSubmit={onSubmit} className="product-form" aria-labelledby="product-form-title" aria-haspopup="dialog" aria-controls="popup-container">
       <h2 id="product-form-title" className="typography-title-lg">{title}</h2>
       {image ? (
         <img src={watch("image")} alt={watch("name") || t("products.product")} onError={e => e.currentTarget.src = DefaultImage} className="product-image-preview" role="img" />
