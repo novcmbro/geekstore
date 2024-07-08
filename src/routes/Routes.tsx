@@ -15,28 +15,33 @@ const PrivateRoute = ({ Element }: { Element: RouteObject["element"] }) => {
   return Element
 }
 
-const routes = createBrowserRouter([
+export const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
       {
+        id: "home",
         index: true,
         element: <Home />
       },
       {
+        id: "login",
         path: "login",
         element: !localStorage.getItem("novcmbro_geekstore_auth") ? <Login /> : <Navigate to="/products" />
       },
       {
+        id: "admin-menu",
         path: "products",
         element: <PrivateRoute Element={<Products />} />
       },
       {
+        id: "add-product",
         path: "add-product",
         element: <PrivateRoute Element={<AddProduct />} />
       },
       {
+        id: "edit-product",
         path: "edit-product/:id",
         element: <PrivateRoute Element={<EditProduct />} />
       },
