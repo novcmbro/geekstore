@@ -1,6 +1,5 @@
-.login-form {
+main.container:has(.login-form) {
   max-width: 25rem;
-  margin: 0 auto;
 }
 
 .login-form .typography-title-md {

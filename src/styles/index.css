@@ -17,6 +17,7 @@
   --font-base: 1rem;
   --font-md: 1.375rem;
   --font-lg: 2rem;
+  --font-xl: 3rem;
   --font-light: 300;
   --font-regular: 400;
   --font-medium: 500;
@@ -29,6 +30,7 @@
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 2.5rem;
+  --spacing-xxl: 3rem;
   /* Shapes */
   --field-shape: 0.25rem;
   /* Transition */
@@ -61,8 +63,16 @@ main {
   flex-grow: 1;
 }
 
-main.container {
-  --spacing-y: 4rem;
+main.container,
+.container.home-container {
+  --spacing-y: var(--spacing-lg);
   padding-top: var(--spacing-y);
   padding-bottom: var(--spacing-y);
+}
+
+@media screen and (min-width: 768px) {
+  main.container,
+  .container.home-container {
+    --spacing-y: var(--spacing-xxl);
+  }
 }

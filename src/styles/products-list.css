@@ -71,7 +71,7 @@
 
 .products-list .product-name {
   font-weight: var(--font-medium);
-  line-height: 1.175rem;
+  line-height: normal;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -85,8 +85,8 @@
   font-weight: var(--font-medium);
 }
 
-.product-category-row:not(:first-child) {
-  margin-top: var(--spacing-xl);
+.product-category-row:not(:last-child) {
+  margin-bottom: var(--spacing-xxl);
 }
 
 .product-category-row .product-list-item:nth-of-type(5),
@@ -94,9 +94,8 @@
   display: none;
 }
 
-.reset-products-button {
-  margin-top: var(--spacing-xl);
-  margin-left: auto;
+.restore-products-button {
+  margin-top: var(--spacing-lg);
 }
 
 @media screen and (min-width: 768px) {

@@ -41,7 +41,7 @@ export const Home = () => {
               </div>
             </div>
           ) : null}
-          <div className="container">
+          <div className="container home-container">
             {Object.entries(productsByCategory).map(([category, products], i) =>
               <section id={category} key={i} className="product-category-row" aria-label={category}>
                 <div className="products-list-header">

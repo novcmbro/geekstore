@@ -1,9 +1,8 @@
-.product-form {
+main.container:has(.product-form) {
   max-width: 35rem;
-  margin: 0 auto;
 }
 
-.product-image-preview {
+.product-form .product-image-preview {
   aspect-ratio: 1/1;
   -o-object-fit: cover;
   object-fit: cover;

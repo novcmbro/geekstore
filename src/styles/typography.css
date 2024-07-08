@@ -21,3 +21,13 @@ p {
   font-size: var(--font-lg);
   margin-bottom: var(--spacing-md);
 }
+
+@media screen and (min-width: 768px) {
+  .typography-title-md {
+    font-size: var(--font-lg);
+  }
+
+  .typography-title-lg {
+    font-size: var(--font-xl);
+  }
+}

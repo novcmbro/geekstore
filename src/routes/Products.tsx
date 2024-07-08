@@ -42,7 +42,7 @@ export const Products = () => {
           ) : (
             <p className="product-alert-message">{t("products.empty")}</p>
           )}
-          <button onClick={restoreDefaultProducts} className="button-filled button-danger reset-products-button"  aria-haspopup="dialog" aria-controls="popup-container">
+          <button onClick={restoreDefaultProducts} className="button-filled button-danger restore-products-button"  aria-haspopup="dialog" aria-controls="popup-container">
             {t("products.restore-products")}
           </button>
         </>

@@ -87,9 +87,6 @@
 
   .footer .nav-container {
     flex-direction: column;
-  }
-
-  .footer .nav-container {
     gap: var(--spacing-lg) var(--spacing-lg);
   }
 
