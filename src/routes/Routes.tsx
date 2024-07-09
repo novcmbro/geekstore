@@ -2,11 +2,12 @@ import { Navigate, RouteObject, RouterProvider, createBrowserRouter } from "reac
 import { App } from "../components"
 import { Home } from "./Home"
 import { DetailedProduct } from "./DetailedProduct"
+import { SeeAllProductsFromCategory } from "./SeeAllProductsFromCategory"
 import { Login } from "./Login"
 import { Products } from "./Products"
-import { NotFound } from "./NotFound"
 import { AddProduct } from "./AddProduct"
 import { EditProduct } from "./EditProduct"
+import { NotFound } from "./NotFound"
 
 const PrivateRoute = ({ Element }: { Element: RouteObject["element"] }) => {
   if (!localStorage.getItem("novcmbro_geekstore_auth")) {
@@ -27,6 +28,10 @@ export const routes = createBrowserRouter([
       {
         path: "product/:id",
         element: <DetailedProduct />
+      },
+      {
+        path: "see-all/:category",
+        element: <SeeAllProductsFromCategory />
       },
       {
         path: "login",

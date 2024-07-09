@@ -3,7 +3,7 @@ import i18next from "i18next"
 export const setDocumentTitleByRouteName = (pathname: string) => {
   const initialDocumentTitle = document.title
   const setTitle = (routeNameTranslationKey: string) => {
-    document.title = `${initialDocumentTitle} | ${i18next.t(`routes.${routeNameTranslationKey}`)}`
+    document.title += ` | ${i18next.t(`routes.${routeNameTranslationKey}`)}`
   }
 
   switch (pathname) {
@@ -29,6 +29,10 @@ export const setDocumentTitleByRouteName = (pathname: string) => {
 
   if (pathname.includes("product/")) {
     setTitle("product-details")
+  }
+
+  if (pathname.includes("see-all")) {
+    setTitle("see-all")
   }
 
   if (pathname.includes("edit-product")) {
