@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import i18next from "i18next"
 import { useTranslation } from "react-i18next"
 import { getAuth, signOut } from "firebase/auth"
 import classNames from "classnames"
@@ -33,37 +34,42 @@ export const Header = () => {
   }, [shouldRenderSearchBarAlert])
 
   useEffect(() => {
-    if (pathname === "/" && !isUserLogged) {
-      setNavButtonRoute({ name: t("routes.login"), to: "/login" })
-      return
-    }
+    const setNavButton = () => {
+      if (pathname === "/" && !isUserLogged) {
+        setNavButtonRoute({ name: t("routes.login"), to: "/login" })
+        return
+      }
 
-    if (pathname === "/products") {
-      setNavButtonRoute({
-        name: t("logout.title"),
-        action: () => openPopup({
-          type: "warning",
-          message: t("logout.confirmation"),
-          okButton: { action: () =>
-            signOut(auth)
-              .then(() => {
-                localStorage.removeItem("novcmbro_geekstore_auth")
-                navigate("/")
-                openPopup({ type: "success", message: t("logout.success") })
-              })
-              .catch(() => openPopup({ type: "error", message: t("logout.error") }))
-          }
+      if (pathname === "/products") {
+        setNavButtonRoute({
+          name: t("logout.title"),
+          action: () => openPopup({
+            type: "warning",
+            message: t("logout.confirmation"),
+            okButton: { action: () =>
+              signOut(auth)
+                .then(() => {
+                  localStorage.removeItem("novcmbro_geekstore_auth")
+                  navigate("/")
+                  openPopup({ type: "success", message: t("logout.success") })
+                })
+                .catch(() => openPopup({ type: "error", message: t("logout.error") }))
+            }
+          })
         })
-      })
-      return
+        return
+      }
+
+      if (pathname === "/" && isUserLogged || pathname === "/add-product" || pathname.includes("/edit-product")) {
+        setNavButtonRoute({ name: t("routes.admin-menu"), to: "/products" })
+        return
+      }
+
+      setNavButtonRoute(initialNavButtonRoute)
     }
 
-    if (pathname === "/" && isUserLogged || pathname === "/add-product" || pathname.includes("/edit-product")) {
-      setNavButtonRoute({ name: t("routes.admin-menu"), to: "/products" })
-      return
-    }
-
-    setNavButtonRoute(initialNavButtonRoute)
+    setNavButton()
+    i18next.on("languageChanged", setNavButton)
   }, [pathname])
 
   const toggleSearchBar = () => {
