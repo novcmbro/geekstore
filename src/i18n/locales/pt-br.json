@@ -21,6 +21,7 @@
     },
     "routes": {
       "home": "Início",
+      "product-details": "Produto",
       "see-product": "Ver produto",
       "see-all": "Ver tudo",
       "login": "Entrar",

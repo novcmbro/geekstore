@@ -21,6 +21,7 @@
     },
     "routes": {
       "home": "Home",
+      "product-details": "Product",
       "see-product": "See product",
       "see-all": "See all",
       "login": "Login",

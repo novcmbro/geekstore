@@ -12,7 +12,6 @@ const PrivateRoute = ({ Element }: { Element: RouteObject["element"] }) => {
   if (!localStorage.getItem("novcmbro_geekstore_auth")) {
     return <Navigate to="/login" />
   }
-
   return Element
 }
 
@@ -22,7 +21,6 @@ export const routes = createBrowserRouter([
     element: <App />,
     children: [
       {
-        id: "home",
         index: true,
         element: <Home />
       },
@@ -31,22 +29,18 @@ export const routes = createBrowserRouter([
         element: <DetailedProduct />
       },
       {
-        id: "login",
         path: "login",
         element: !localStorage.getItem("novcmbro_geekstore_auth") ? <Login /> : <Navigate to="/products" />
       },
       {
-        id: "admin-menu",
         path: "products",
         element: <PrivateRoute Element={<Products />} />
       },
       {
-        id: "add-product",
         path: "add-product",
         element: <PrivateRoute Element={<AddProduct />} />
       },
       {
-        id: "edit-product",
         path: "edit-product/:id",
         element: <PrivateRoute Element={<EditProduct />} />
       },
