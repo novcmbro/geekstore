@@ -64,7 +64,7 @@ export const DetailedProduct = () => {
             </div>
           </section>
           {!!similarProducts.length ? (
-            <section className="similar-products" aria-label={t("products.similar-products")}>
+            <section className="products-row" aria-label={t("products.similar-products")}>
               <ProductsListHeader title={t("products.similar-products")} />
               <ProductsList aria-label={t("products.similar-products")}>
                 {similarProducts.map((product, i) =>

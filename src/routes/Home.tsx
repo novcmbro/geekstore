@@ -44,7 +44,7 @@ export const Home = () => {
           ) : null}
           <div className="container home-container">
             {Object.entries(productsByCategory).map(([category, products], i) =>
-              <section id={category} key={i} className="product-category-row" aria-label={category}>
+              <section id={category} key={i} className="products-row" aria-label={category}>
                 <ProductsListHeader title={category}>
                   {products.length > 4 ? (
                     <Link to={`/see-all/${category.toLowerCase().replace(" ", "-")}`} className="route-link">

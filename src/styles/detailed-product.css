@@ -39,10 +39,6 @@ main.container:has(.product-details) {
   font-weight: var(--font-bold);
 }
 
-.similar-products {
-  margin-top: var(--spacing-lg);
-}
-
 @media screen and (min-width: 768px) {
   .product-details-image {
     position: initial;
@@ -50,9 +46,5 @@ main.container:has(.product-details) {
 
   .product-details-info {
     margin-top: 0;
-  }
-
-  .similar-products {
-    margin-top: var(--spacing-xxl);
   }
 }
