@@ -68,7 +68,8 @@
       "error": "Something went wrong while trying to logout. Please try again."
     },
     "products": {
-      "title": "All products",
+      "similar-products": "Similar products",
+      "all-products": "All products",
       "loading": "Loading",
       "get-error": "Something went wrong while getting products list. Please try again later.",
       "empty": "There are no products to show.",

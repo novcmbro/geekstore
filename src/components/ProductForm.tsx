@@ -101,6 +101,12 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
       <Field
         control={control}
         name="description"
+        rules={{
+          maxLength: {
+            value: 430,
+            message: t("form-errors.too-long", { name: t("products.form.category"), charNumber: 430 })
+          }
+        }}
         label={t("products.form.description")}
         textarea
       />

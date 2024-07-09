@@ -9,7 +9,7 @@ export const Products = () => {
 
   return (
     <>
-      <ProductsListHeader title={t("products.title")}>
+      <ProductsListHeader title={t("products.all-products")}>
         <Link to="/add-product" className="button-filled">{t("routes.add-product")}</Link>
       </ProductsListHeader>
       {isLoading ? (
@@ -17,7 +17,7 @@ export const Products = () => {
       ) : (
         <>
           {productsList.length > 0 ? (
-            <ProductsList aria-label={t("products.title")}>
+            <ProductsList aria-label={t("products.all-products")}>
               {productsList.map((product, i) =>
                 <ProductsListItem key={i} product={product} isAdminMenu />
               )}

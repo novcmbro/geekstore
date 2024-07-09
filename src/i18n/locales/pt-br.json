@@ -68,7 +68,8 @@
       "error": "Algo deu errado ao tentar sair. Por favor, tente novamente."
     },
     "products": {
-      "title": "Todos os produtos",
+      "similar-products": "Produtos similares",
+      "all-products": "Todos os produtos",
       "loading": "Carregando",
       "get-error": "Algo deu errado ao obter a lista de produtos. Por favor, tente novamente mais tarde.",
       "empty": "Não há produtos para mostrar.",

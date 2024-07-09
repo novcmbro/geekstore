@@ -1,6 +1,7 @@
 import { Navigate, RouteObject, RouterProvider, createBrowserRouter } from "react-router-dom"
 import { App } from "../components"
 import { Home } from "./Home"
+import { DetailedProduct } from "./DetailedProduct"
 import { Login } from "./Login"
 import { Products } from "./Products"
 import { NotFound } from "./NotFound"
@@ -24,6 +25,10 @@ export const routes = createBrowserRouter([
         id: "home",
         index: true,
         element: <Home />
+      },
+      {
+        path: "product/:id",
+        element: <DetailedProduct />
       },
       {
         id: "login",
