@@ -13,18 +13,39 @@ export const DetailedProduct = () => {
   const { isLoading, productsList } = useProducts()
 
   const [detailedProduct, setDetailedProduct] = useState({} as Product)
+  const [similarProducts, setSimilarProducts] = useState([] as Product[])
   const [productNotFound, setProductNotFound] = useState<boolean>(true)
 
   useEffect(() => {
-    if (productsList.length > 0) {
+    if (id && !!productsList.length) {
+      const similarProductsArray = []
+      const maxLengthForSimilarProducts = 6
+      const isSimilarProductsNotFull = similarProductsArray.length < maxLengthForSimilarProducts
+
       for (const product of productsList) {
-        if (product.id === parseInt(id!)) {
+        if (product.id === parseInt(id)) {
           setDetailedProduct(product)
           setProductNotFound(false)
+        } else if (isSimilarProductsNotFull && product.category === detailedProduct.category) {
+          similarProductsArray.push(product)
         }
       }
+
+      if (isSimilarProductsNotFull && detailedProduct.category) {
+        for (const product of productsList) {
+          if (similarProductsArray.length >= maxLengthForSimilarProducts) {
+            break
+          } else if (product.category !== detailedProduct.category) {
+            similarProductsArray.push(product)
+          }
+        }
+      }
+
+      if (!!similarProductsArray.length) {
+        setSimilarProducts(similarProductsArray)
+      }
     }
-  }, [id, productsList])
+  }, [id, productsList, detailedProduct])
 
   return (
     isLoading ? (
@@ -42,15 +63,15 @@ export const DetailedProduct = () => {
               <p>{detailedProduct.description}</p>
             </div>
           </section>
-          {productsList.length > 0 ? (
-            <>
+          {!!similarProducts.length ? (
+            <section className="similar-products" aria-label={t("products.similar-products")}>
               <ProductsListHeader title={t("products.similar-products")} />
               <ProductsList aria-label={t("products.similar-products")}>
-                {productsList.map((product, i) => (product.id !== detailedProduct.id) ? (
+                {similarProducts.map((product, i) =>
                   <ProductsListItem key={i} product={product} />
-                ) : null)}
+                )}
               </ProductsList>
-            </>
+            </section>
           ) : null}
         </>
       )

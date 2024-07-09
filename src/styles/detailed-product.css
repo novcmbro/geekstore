@@ -7,13 +7,13 @@ main.container:has(.product-details) {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-xl);
 }
 
 .product-details-image {
   position: absolute;
   top: 0;
   left: 0;
+  -o-object-fit: cover;
   object-fit: cover;
   width: 100%;
   height: var(--image-height);
@@ -39,16 +39,20 @@ main.container:has(.product-details) {
   font-weight: var(--font-bold);
 }
 
-@media screen and (min-width: 768px) {
-  .product-details {
-    margin-bottom: var(--spacing-xxl);
-  }
+.similar-products {
+  margin-top: var(--spacing-lg);
+}
 
+@media screen and (min-width: 768px) {
   .product-details-image {
     position: initial;
   }
 
   .product-details-info {
     margin-top: 0;
+  }
+
+  .similar-products {
+    margin-top: var(--spacing-xxl);
   }
 }
