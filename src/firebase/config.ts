@@ -11,7 +11,9 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 }
 
-export const firebaseApp = () => initializeApp(firebaseConfig)
-export const firestore = initializeFirestore(firebaseApp(), {
+export const initializeFirebaseApp = () => initializeApp(firebaseConfig)
+
+const firebase = initializeFirebaseApp()
+export const firestore = initializeFirestore(firebase, {
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 })

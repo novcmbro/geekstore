@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom"
-import { firebaseApp } from "../firebase"
+import { initializeFirebaseApp } from "../firebase"
 import { Contexts } from "../contexts"
 import { setDocumentTitleByRouteName } from "../utils"
 import { Header } from "./Header"
@@ -18,7 +18,7 @@ import "../styles/popup.css"
 
 export const App = () => {
   const { pathname } = useLocation()
-  firebaseApp()
+  initializeFirebaseApp()
 
   useEffect(() => setDocumentTitleByRouteName(pathname), [pathname])
 
