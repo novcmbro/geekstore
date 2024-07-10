@@ -15,10 +15,11 @@ export type ProductsByCategory = {
 }
 
 export type ProductsContextValue = {
+  initialProductFormValues: ProductFormValues
   isLoading: boolean
   productsList: Product[]
-  addProduct: (data: ProductFormValues) => void
-  editProduct: (currentProduct: Product, newData: ProductFormValues) => void
-  deleteProduct: (docId: Product["docId"], name: Product["name"]) => void
+  addProduct: (product: ProductFormValues) => void
+  editProduct: (currentProduct: Product, newProduct: ProductFormValues) => void
+  deleteProduct: (productDocId: Product["docId"], productName: Product["name"]) => void
   restoreDefaultProducts: () => void
 }

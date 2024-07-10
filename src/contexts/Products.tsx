@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
-import { firestore, initialProducts } from "../firebase"
+import { firestore, initialProductsList } from "../firebase"
 import { Product, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
 
@@ -15,8 +15,16 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   const auth = getAuth()
   const { openPopup } = usePopup()
   
-  const [isLoading, setIsLoading] = useState<ProductsContextValue["isLoading"]>(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [productsList, setProductsList] = useState<Product[]>([])
+
+  const initialProductFormValues: ProductsContextValue["initialProductFormValues"] = {
+    image: "",
+    category: "",
+    name: "",
+    price: "0.00" as unknown as number,
+    description: ""
+  }
 
   const validateUserPermission = () => {
     const userUid = auth.currentUser?.uid
@@ -48,7 +56,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
         const products = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() })) as typeof productsList
 
         if (isFirstAccess) {
-          const addInitialProductsPromises = initialProducts.map(product => addDoc(userProductsCollection(), product))
+          const addInitialProductsPromises = initialProductsList.map(product => addDoc(userProductsCollection(), product))
 
           Promise.all(addInitialProductsPromises)
             .then(() => getProductsList())
@@ -86,33 +94,33 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
           .catch(validateUserPermission)
         return
       }
-      updateProductsList(initialProducts)
+      updateProductsList(initialProductsList)
     })
 
     return () => unsubscribe()
   }, [auth])
 
-  const addProduct: ProductsContextValue["addProduct"] = (data) => {
+  const addProduct: ProductsContextValue["addProduct"] = (product) => {
     if (validateUserPermission()) {
-      const newProductId = productsList.length > 0 ? Math.max(...productsList.map(product => product.id)) + 1 : 1
-      data.price = Number(data.price)
-      const newProduct = { id: newProductId, ...data }
+      const newProductId = !!productsList.length ? Math.max(...productsList.map(product => product.id)) + 1 : 1
+      product.price = Number(product.price)
+      const newProduct = { id: newProductId, ...product }
   
       addDoc(userProductsCollection(), newProduct)
-        .then((docRef) => {
-          setProductsList(prev => [{ docId: docRef.id, ...newProduct }, ...prev])
+        .then(doc => {
+          setProductsList(prev => [{ docId: doc.id, ...newProduct }, ...prev])
           openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
         })
         .catch(() => openPopup({ type: "error", message: t("products.add-error") }))
     }
   }
 
-  const editProduct: ProductsContextValue["editProduct"] = (currentProduct, newData) => {
+  const editProduct: ProductsContextValue["editProduct"] = (currentProduct, newProduct) => {
     if (validateUserPermission()) {
       let hasChanges: boolean = false
       
-      for (const key of Object.keys(newData) as (keyof typeof newData)[]) {
-        if (currentProduct[key] != newData[key]) {
+      for (const key of Object.keys(newProduct) as (keyof typeof newProduct)[]) {
+        if (currentProduct[key] != newProduct[key]) {
           hasChanges = true
           break
         }
@@ -123,15 +131,15 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
         return
       }
       
-      newData.price = Number(newData.price)
+      newProduct.price = Number(newProduct.price)
 
-      updateDoc(doc(userProductsCollection(), currentProduct.docId), newData)
+      updateDoc(doc(userProductsCollection(), currentProduct.docId), newProduct)
         .then(() => {
           openPopup({ type: "success", message: t("products.edit-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
 
           const listWithUpdatedProduct = productsList.map(product => {
             if (product.docId === currentProduct.docId) {
-              return { ...product, ...newData }
+              return { ...product, ...newProduct }
             }
             return product
           })
@@ -142,12 +150,12 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
     }
   }
 
-  const deleteProduct: ProductsContextValue["deleteProduct"] = (docId, name) => {
+  const deleteProduct: ProductsContextValue["deleteProduct"] = (productDocId, productName) => {
     if (validateUserPermission()) {
-      openPopup({ type: "danger", message: t("products.delete-confirmation", { name: name }), okButton: { action: () =>
-        deleteDoc(doc(userProductsCollection(), docId))
+      openPopup({ type: "danger", message: t("products.delete-confirmation", { name: productName }), okButton: { action: () =>
+        deleteDoc(doc(userProductsCollection(), productDocId))
           .then(() => {
-            setProductsList(productsList.filter(product => product.docId !== docId))
+            setProductsList(productsList.filter(product => product.docId !== productDocId))
             openPopup({ type: "success", message: t("products.delete-success") })
           })
           .catch(() => openPopup({ type: "error", message: t("products.delete-error") }))
@@ -157,7 +165,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
   const restoreDefaultProducts: ProductsContextValue["restoreDefaultProducts"] = () => {
     if (validateUserPermission()) {
-      let listHasChanges: boolean = productsList.length !== initialProducts.length
+      let listHasChanges = productsList.length !== initialProductsList.length
       const shouldVerifyProductsValues = !listHasChanges
 
       if (shouldVerifyProductsValues) {
@@ -166,8 +174,8 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
             if (productKey === "docId") {
               continue
             }
-            const initialProduct = initialProducts.find(initialProduct => product.id === initialProduct.id)
-            const productAddedOrEdited = !initialProduct || initialProduct && productValue !== initialProduct[productKey as keyof typeof initialProduct]
+            const initialProduct = initialProductsList.find(initialProduct => product.id === initialProduct.id)
+            const productAddedOrEdited = !initialProduct || productValue !== initialProduct[productKey as keyof typeof initialProduct]
   
             if (productAddedOrEdited) {
               listHasChanges = true
@@ -194,7 +202,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
             return Promise.all(deleteAllProductsPromises)
           })
           .then(() => {
-            const addInitialProductsPromises = initialProducts.map(product => addDoc(userProductsCollection(), product))
+            const addInitialProductsPromises = initialProductsList.map(product => addDoc(userProductsCollection(), product))
             return Promise.all(addInitialProductsPromises)
           })
           .then(() => {
@@ -214,7 +222,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
   productsList.sort((a, b) => b.id - a.id)
 
   return (
-    <ProductsContext.Provider value={{ isLoading, productsList, addProduct, editProduct, deleteProduct, restoreDefaultProducts }}>
+    <ProductsContext.Provider value={{ initialProductFormValues, isLoading, productsList, addProduct, editProduct, deleteProduct, restoreDefaultProducts }}>
       {children}
     </ProductsContext.Provider>
   )
