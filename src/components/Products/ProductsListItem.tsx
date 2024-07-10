@@ -1,15 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { ProductListItemProps } from "../../types"
 import { useProducts } from "../../contexts"
+import { Product } from "../../types"
+import DefaultImage from "../../img/default-image.svg"
 
-export const ProductsListItem = ({ product, isAdminMenu }: ProductListItemProps) => {
+export const ProductsListItem = ({ product }: { product: Product }) => {
+  const { pathname } = useLocation()
   const { t } = useTranslation()
   const { deleteProduct } = useProducts()
+  const isAdminMenuRoute = pathname === "/products"
 
   return (
     <li className="product-list-item" aria-label={product.name}>
-      {isAdminMenu ? (
+      {isAdminMenuRoute ? (
         <div className="button-container">
           <button type="button" onClick={() => deleteProduct(product.docId, product.name)} aria-label={`${t("products.delete")} ${product.name}`} aria-haspopup="dialog" aria-controls="popup-container">
             <svg width="18" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="button-icon" role="presentation">
@@ -23,10 +26,10 @@ export const ProductsListItem = ({ product, isAdminMenu }: ProductListItemProps)
           </Link>
         </div>
       ) : null}
-      <img src={product.image} alt={product.name} className="product-image" role="img" loading="lazy" />
+      <img src={product.image || DefaultImage} alt={product.name} className="product-image" role="img" loading="lazy" />
       <span className="product-name">{product.name}</span>
       <span className="product-price">{product.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
-      {isAdminMenu ? (
+      {isAdminMenuRoute ? (
         <span className="product-id">{`#${product.id.toLocaleString("en-US", { minimumIntegerDigits: 7, useGrouping: false })}`}</span>
       ) : (
         <Link to={`/product/${product.id}`} className="route-link see-product-link">{t("routes.see-product")}</Link>

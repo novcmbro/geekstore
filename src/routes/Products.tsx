@@ -19,7 +19,7 @@ export const Products = () => {
           {productsList.length > 0 ? (
             <ProductsList aria-label={t("products.all-products")}>
               {productsList.map((product, i) =>
-                <ProductsListItem key={i} product={product} isAdminMenu />
+                <ProductsListItem key={i} product={product} />
               )}
             </ProductsList>
           ) : (
