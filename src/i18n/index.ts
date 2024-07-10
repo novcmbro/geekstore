@@ -28,8 +28,3 @@ i18n.use(initReactI18next).init({
     translateMetadata(language)
   })
 })
-
-export const languagesNames = {
-  en: "English",
-  pt: "Português"
-}
