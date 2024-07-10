@@ -11,6 +11,7 @@ export type Popup = {
 }
 
 export type PopupContextValue = Popup & {
+  popupRef: React.RefObject<HTMLDivElement>
   isPopupOpen: boolean
   openPopup: ({ type, message, okButton, cancelButton }: Popup) => void
   closePopup: () => void

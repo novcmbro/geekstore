@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react"
 import { redirect } from "react-router-dom"
 import i18next from "i18next"
 import { getAuth, signOut } from "firebase/auth"
@@ -6,7 +5,7 @@ import { NavButton, PopupContextValue } from "../types"
 
 export const setNavButton = (
   pathname: string,
-  setNavButtonRoute: Dispatch<SetStateAction<NavButton>>,
+  setNavButtonRoute: React.Dispatch<React.SetStateAction<NavButton>>,
   openPopup: PopupContextValue["openPopup"]
 ) => {
   const auth = getAuth()
