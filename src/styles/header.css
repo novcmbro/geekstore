@@ -1,4 +1,4 @@
-.header {
+header {
   background-color: var(--white);
   box-shadow: 0 0 1rem rgb(0, 0, 0, 0.1);
   position: -webkit-sticky;
@@ -7,37 +7,37 @@
   z-index: 999;
 }
 
-.header .container {
+header .container {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs) var(--spacing-lg);
 }
 
-.header .search-form {
+header .search-form {
   position: relative;
   width: 100%;
   max-width: 35vw;
 }
 
-.header .search-field,
-.header .search-submit-button {
+header .search-field,
+header .search-submit-button {
   border-radius: 4rem;
 }
 
-.header .search-field {
+header .search-field {
   background-color: var(--light-gray);
   padding: var(--spacing-sm) var(--spacing-base);
   padding-right: calc(var(--spacing-base) * 4);
 }
 
-.header .search-field::placeholder,
-.header .search-field::-moz-placeholder,
-.header .search-field::-webkit-input-placeholder {
+header .search-field::placeholder,
+header .search-field::-moz-placeholder,
+header .search-field::-webkit-input-placeholder {
   color: var(--medium-gray);
   opacity: 1;
 }
 
-.header .search-submit-button {
+header .search-submit-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -45,64 +45,64 @@
   padding: 0 var(--spacing-sm);
 }
 
-.header .search-submit-button .magnifying-glass-icon {
+header .search-submit-button .magnifying-glass-icon {
   fill: var(--medium-gray);
   vertical-align: middle;
 }
 
-.header .search-submit-button:hover .magnifying-glass-icon,
-.header .search-submit-button:focus-visible .magnifying-glass-icon,
-.header .search-field:focus-visible:not(:placeholder-shown) + .search-submit-button .magnifying-glass-icon {
+header .search-submit-button:hover .magnifying-glass-icon,
+header .search-submit-button:focus-visible .magnifying-glass-icon,
+header .search-field:focus-visible:not(:placeholder-shown) + .search-submit-button .magnifying-glass-icon {
   fill: currentColor;
 }
 
-.header .button-outlined {
+header .button-outlined {
   margin-left: auto;
 }
 
-.header .search-bar-toggler-button {
+header .search-bar-toggler-button {
   display: none;
 }
 
 @media screen and (max-width: 768px) {
-  .header .container {
+  header .container {
     gap: var(--spacing-xs) 0;
     font-size: var(--font-sm);
     padding-top: var(--spacing-sm);
     padding-bottom: var(--spacing-sm);
   }
 
-  .header:not(.search-bar-is-open) .container {
+  header:not(.search-bar-is-open) .container {
     padding-right: 0;
   }
 
-  .header .logo {
+  header .logo {
     margin-right: var(--spacing-base);
   }
 
-  .header .search-form {
+  header .search-form {
     display: none;
   }
 
-  .header .search-bar-toggler-button {
+  header .search-bar-toggler-button {
     display: initial;
     padding: var(--spacing-xs) var(--spacing-base);
   }
 
-  .header:not(.search-bar-is-open, :has(.button-outlined)) .search-bar-toggler-button {
+  header:not(.search-bar-is-open, :has(.button-outlined)) .search-bar-toggler-button {
     margin-left: auto;
   }
 
-  .header.search-bar-is-open .container {
+  header.search-bar-is-open .container {
     flex-direction: column;
   }
 
-  .header.search-bar-is-open .search-form {
+  header.search-bar-is-open .search-form {
     display: initial;
     max-width: none;
   }
 
-  .header.search-bar-is-open .button-outlined {
+  header.search-bar-is-open .button-outlined {
     display: none;
   }
 }

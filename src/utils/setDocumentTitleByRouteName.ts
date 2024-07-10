@@ -54,6 +54,6 @@ export const setDocumentTitleByRouteName = (pathname: string) => {
 
   return () => {
     document.title = initialDocumentTitle
-    i18next.off("languageChanged", () => setDocumentTitleOnTranslationChange)
+    i18next.off("languageChanged", setDocumentTitleOnTranslationChange)
   }
 }
