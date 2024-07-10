@@ -4,21 +4,14 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { usePopup } from "../contexts"
-import { changeLanguage, languagesNames } from "../utils"
-import { ContactUs } from "../types"
+import { changeLanguage, contactUsInitialValues, languagesNames } from "../utils"
 import { Logo } from "./Logo"
 import { Field } from "./Field"
 import "../styles/footer.css"
 
 export const Footer = () => {
   const { t, i18n: { language } } = useTranslation()
-  const { handleSubmit, control, getValues } = useForm<ContactUs>({
-    defaultValues: {
-      "contact-name": "",
-      "contact-message": ""
-    },
-    mode: "onBlur"
-  })
+  const { handleSubmit, control, getValues } = useForm({ defaultValues: contactUsInitialValues, mode: "onBlur" })
   const { openPopup } = usePopup()
 
   const [languageChangeAlert, setLanguageChangeAlert] = useState(false)
