@@ -46,9 +46,23 @@
       "pattern": "{{ name }} is invalid. Please insert a valid {{ name }} format."
     },
     "home-banner": {
-      "title": "Promotional December",
+      "title": "Promotional {{ month }}",
       "description": "Selected products with 33% off",
-      "button": "See {{ name }}"
+      "button": "See {{ category }}",
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
     },
     "login": {
       "title": "Start session",

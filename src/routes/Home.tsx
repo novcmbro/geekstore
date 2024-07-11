@@ -35,11 +35,13 @@ export const Home = () => {
         {bannerButtonCategory ? (
           <div className="banner">
             <div className="container">
-              <h2 className="typography-title-lg">{t("home-banner.title")}</h2>
+              <h2 className="typography-title-lg">
+                {t("home-banner.title", { month: t(`home-banner.months.${new Date().getMonth()}`) })}
+                </h2>
               <p>{t("home-banner.description")}</p>
-              <a href={`#${bannerButtonCategory}`} className="button-filled">
-                {t("home-banner.button", { name: bannerButtonCategory })}
-              </a>
+              <Link to={`#${bannerButtonCategory}`} className="button-filled">
+                {t("home-banner.button", { category: bannerButtonCategory })}
+              </Link>
             </div>
           </div>
         ) : null}
