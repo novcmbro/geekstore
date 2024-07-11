@@ -37,14 +37,14 @@ export const Footer = () => {
             control={control}
             name="contact-name"
             rules={{
-              required: t("form-errors.required", { name: t("contact-us.name") }),
+              required: t("form-errors.required", { fieldName: t("contact-us.name") }),
               minLength: {
                 value: 3,
-                message: t("form-errors.too-short", { name: t("contact-us.name"), charNumber: 3 })
+                message: t("form-errors.too-short", { fieldName: t("contact-us.name"), charNumber: 3 })
               },
               maxLength: {
                 value: 100,
-                message: t("form-errors.too-long", { name: t("contact-us.name"), charNumber: 100 })
+                message: t("form-errors.too-long", { fieldName: t("contact-us.name"), charNumber: 100 })
               }
             }}
             label={t("contact-us.name")}
@@ -53,14 +53,14 @@ export const Footer = () => {
             control={control}
             name="contact-message"
             rules={{
-              required: t("form-errors.required", { name: t("contact-us.message") }),
+              required: t("form-errors.required", { fieldName: t("contact-us.message") }),
               minLength: {
                 value: 10,
-                message: t("form-errors.too-short", { name: t("contact-us.message"), charNumber: 10 })
+                message: t("form-errors.too-short", { fieldName: t("contact-us.message"), charNumber: 10 })
               },
               maxLength: {
                 value: 1000,
-                message: t("form-errors.too-long", { name: t("contact-us.message"), charNumber: 1000 })
+                message: t("form-errors.too-long", { fieldName: t("contact-us.message"), charNumber: 1000 })
               }
             }}
             label={t("contact-us.write-your-message")}

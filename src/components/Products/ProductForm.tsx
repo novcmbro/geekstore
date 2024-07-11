@@ -23,10 +23,10 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
         name="image"
         type="url"
         rules={{
-          required: t("form-errors.required", { name: t("products.form.image-url") }),
+          required: t("form-errors.required", { fieldName: t("products.form.image-url") }),
           pattern: {
             value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#= ]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//= ]*)/,
-            message: t("form-errors.pattern", { name: t("products.form.image-url") })
+            message: t("form-errors.pattern", { fieldName: t("products.form.image-url") })
           }
         }}
         label={t("products.form.image-url")}
@@ -35,18 +35,18 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
         control={control}
         name="category"
         rules={{
-          required: t("form-errors.required", { name: t("products.form.category") }),
+          required: t("form-errors.required", { fieldName: t("products.form.category") }),
           pattern: {
             value: /^[a-zA-ZÀ-ÿ-'\s\d]+$/,
             message: t("products.form.category-error")
           },
           minLength: {
             value: 3,
-            message: t("form-errors.too-short", { name: t("products.form.category"), charNumber: 3 })
+            message: t("form-errors.too-short", { fieldName: t("products.form.category"), charNumber: 3 })
           },
           maxLength: {
             value: 30,
-            message: t("form-errors.too-long", { name: t("products.form.category"), charNumber: 30 })
+            message: t("form-errors.too-long", { fieldName: t("products.form.category"), charNumber: 30 })
           }
         }}
         label={t("products.form.category")}
@@ -55,14 +55,14 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
         control={control}
         name="name"
         rules={{
-          required: t("form-errors.required", { name: t("products.form.name") }),
+          required: t("form-errors.required", { fieldName: t("products.form.name") }),
           minLength: {
             value: 3,
-            message: t("form-errors.too-short", { name: t("products.form.name"), charNumber: 3 })
+            message: t("form-errors.too-short", { fieldName: t("products.form.name"), charNumber: 3 })
           },
           maxLength: {
             value: 120,
-            message: t("form-errors.too-long", { name: t("products.form.name"), charNumber: 120 })
+            message: t("form-errors.too-long", { fieldName: t("products.form.name"), charNumber: 120 })
           }
         }}
         label={t("products.form.name")}
@@ -71,7 +71,7 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
         control={control}
         name="price"
         rules={{
-          required: t("form-errors.required", { name: t("products.form.price") }),
+          required: t("form-errors.required", { fieldName: t("products.form.price") }),
           validate: {
             hasPrice: (value) => parseFloat(value) != 0 || t("products.form.price-is-zero"),
             priceTooHigh: (value) => value.toString().replace(/[,.]/g, "") < 10000000 || t("products.form.price-too-high")
@@ -104,7 +104,7 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
         rules={{
           maxLength: {
             value: 430,
-            message: t("form-errors.too-long", { name: t("products.form.category"), charNumber: 430 })
+            message: t("form-errors.too-long", { fieldName: t("products.form.category"), charNumber: 430 })
           }
         }}
         label={t("products.form.description")}

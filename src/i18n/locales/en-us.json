@@ -40,10 +40,10 @@
       "advertise-here": "Advertise here"
     },
     "form-errors": {
-      "required": "{{ name }} cannot be empty.",
-      "too-short": "{{ name }} must have min of {{ charNumber }} characters.",
-      "too-long": "{{ name }} must have max of {{ charNumber }} characters.",
-      "pattern": "{{ name }} is invalid. Please insert a valid {{ name }} format."
+      "required": "{{ fieldName }} cannot be empty.",
+      "too-short": "{{ fieldName }} must have min of {{ charNumber }} characters.",
+      "too-long": "{{ fieldName }} must have max of {{ charNumber }} characters.",
+      "pattern": "{{ fieldName }} is invalid. Please insert a valid format."
     },
     "home-banner": {
       "title": "Promotional {{ month }}",

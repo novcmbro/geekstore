@@ -17,16 +17,16 @@ export const Login = () => {
         control={control}
         name="email"
         rules={{
-          required: t("form-errors.required", { name: "Email" }),
+          required: t("form-errors.required", { fieldName: "Email" }),
           pattern: {
             value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: t("form-errors.pattern", { name: "Email" })
+            message: t("form-errors.pattern", { fieldName: "Email" })
               .replace(/./g, (char) => char.toLowerCase())
               .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase())
           },
           maxLength: {
             value: 120,
-            message: t("form-errors.too-long", { name: "Email", charNumber: 120 })
+            message: t("form-errors.too-long", { fieldName: "Email", charNumber: 120 })
           }
         }}
         label={t("login.write-your-email")}
@@ -36,14 +36,14 @@ export const Login = () => {
         name="password"
         type="password"
         rules={{
-          required: t("form-errors.required", { name: t("login.password") }),
+          required: t("form-errors.required", { fieldName: t("login.password") }),
           minLength: {
             value: 6,
-            message: t("form-errors.too-short", { name: t("login.password"), charNumber: 6 })
+            message: t("form-errors.too-short", { fieldName: t("login.password"), charNumber: 6 })
           },
           maxLength: {
             value: 15,
-            message: t("form-errors.too-long", { name: t("login.password"), charNumber: 15 })
+            message: t("form-errors.too-long", { fieldName: t("login.password"), charNumber: 15 })
           }
         }}
         label={t("login.write-your-password")}

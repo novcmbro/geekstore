@@ -40,10 +40,10 @@
       "advertise-here": "Anuncie aqui"
     },
     "form-errors": {
-      "required": "{{ name }} não pode estar vazio.",
-      "too-short": "{{ name }} deve ter no mínimo {{ charNumber }} caracteres.",
-      "too-long": "{{ name }} deve ter no máximo {{ charNumber }} caracteres.",
-      "pattern": "{{ name }} inválido. Por favor, insira um formato válido de {{ name }}."
+      "required": "{{ fieldName }} não pode estar vazio.",
+      "too-short": "{{ fieldName }} deve ter no mínimo {{ charNumber }} caracteres.",
+      "too-long": "{{ fieldName }} deve ter no máximo {{ charNumber }} caracteres.",
+      "pattern": "{{ fieldName }} inválido. Por favor, insira um formato válido."
     },
     "home-banner": {
       "title": "{{ month }} Promocional",
