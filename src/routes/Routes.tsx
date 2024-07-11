@@ -4,6 +4,7 @@ import { App } from "../components"
 import { Home } from "./Home"
 import { DetailedProduct } from "./DetailedProduct"
 import { SeeAllProductsFromCategory } from "./SeeAllProductsFromCategory"
+import { SearchedProducts } from "./SearchedProducts"
 import { Login } from "./Login"
 import { Products } from "./Products"
 import { AddProduct } from "./AddProduct"
@@ -33,6 +34,10 @@ export const routes = createBrowserRouter([
       {
         path: "see-all/:category",
         element: <SeeAllProductsFromCategory />
+      },
+      {
+        path: "search-products/:search",
+        element: <SearchedProducts />
       },
       {
         path: "login",

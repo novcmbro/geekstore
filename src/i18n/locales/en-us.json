@@ -17,13 +17,16 @@
         "action": "Close search bar",
         "alert": "Search bar is closed",
         "icon": "X icon"
-      }
+      },
+      "empty": "There is no search value. Please insert any information of the product(s) you wish to find.",
+      "results": "Search results for '{{ search }}'"
     },
     "routes": {
       "home": "Home",
       "product-details": "Product",
       "see-product": "See product",
       "see-all": "See all",
+      "search-product": "Search product",
       "login": "Login",
       "admin-menu": "Admin menu",
       "add-product": "Add product",
@@ -49,20 +52,7 @@
       "title": "Promotional {{ month }}",
       "description": "Selected products with 33% off",
       "button": "See {{ category }}",
-      "months": [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ]
+      "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     },
     "login": {
       "title": "Start session",

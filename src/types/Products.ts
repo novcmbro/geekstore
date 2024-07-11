@@ -47,3 +47,7 @@ export type ProductFormProps = {
 }
 
 export type ProductFormValues = Omit<Product, "docId" | "id">
+
+export type ProductSearchValue = {
+  search: string
+}

@@ -17,13 +17,16 @@
         "action": "Fechar barra de busca",
         "alert": "Barra de busca está fechada",
         "icon": "Ícone de X"
-      }
+      },
+      "empty": "Não há valor de pesquisa. Por favor, insira qualquer informação do(s) produto(s) que deseja encontrar.",
+      "results": "Resultados da pesquisa para '{{ search }}'"
     },
     "routes": {
       "home": "Início",
       "product-details": "Produto",
       "see-product": "Ver produto",
       "see-all": "Ver tudo",
+      "search-product": "Pesquisar produto",
       "login": "Entrar",
       "admin-menu": "Menu administrador",
       "add-product": "Adicionar produto",
@@ -49,20 +52,7 @@
       "title": "{{ month }} Promocional",
       "description": "Produtos selecionados com 33% de desconto",
       "button": "Ver {{ category }}",
-      "months": [
-        "Janeiro",
-        "Fevereiro",
-        "Março",
-        "Abril",
-        "Maio",
-        "Junho",
-        "Julho",
-        "Agosto",
-        "Setembro",
-        "Outubro",
-        "Novembro",
-        "Dezembro"
-      ]
+      "months": ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
     },
     "login": {
       "title": "Iniciar sessão",

@@ -33,6 +33,10 @@ export const setDocumentTitleByRouteName = (pathname: string) => {
     routeNameTranslationKey = "see-all"
   }
 
+  if (pathname.includes("search-product")) {
+    routeNameTranslationKey = "search-product"
+  }
+
   if (pathname.includes("edit-product")) {
     routeNameTranslationKey = "edit-product"
   }
