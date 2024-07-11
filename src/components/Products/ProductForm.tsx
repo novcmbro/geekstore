@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { ProductFormProps } from "../types"
-import { Field } from "./Field"
-import DefaultImage from "../img/default-image.svg"
-import "../styles/product-form.css"
+import { ProductFormProps } from "../../types"
+import { Field } from "../Field"
+import DefaultImage from "../../img/default-image.svg"
+import "../../styles/product-form.css"
 
 export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormProps) => {
   const { pathname } = useLocation()

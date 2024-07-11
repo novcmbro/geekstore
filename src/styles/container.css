@@ -4,3 +4,17 @@
   margin: 0 auto;
   padding: var(--spacing-md) var(--spacing-base);
 }
+
+main.container,
+.container.home-container {
+  --spacing-y: var(--spacing-lg);
+  padding-top: var(--spacing-y);
+  padding-bottom: var(--spacing-y);
+}
+
+@media screen and (min-width: 768px) {
+  main.container,
+  .container.home-container {
+    --spacing-y: var(--spacing-xxl);
+  }
+}

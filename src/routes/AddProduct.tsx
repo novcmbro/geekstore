@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useProducts } from "../contexts"
-import { ProductForm } from "../components"
+import { ProductForm } from "../components/Products"
 
 export const AddProduct = () => {
   const { initialProductFormValues, addProduct } = useProducts()

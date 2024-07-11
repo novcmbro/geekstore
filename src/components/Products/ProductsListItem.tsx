@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useProducts } from "../../contexts"
-import { Product } from "../../types"
+import { ProductsListItemProps } from "../../types"
 import DefaultImage from "../../img/default-image.svg"
 
-export const ProductsListItem = ({ product }: { product: Product }) => {
+export const ProductsListItem = ({ product }: ProductsListItemProps) => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
   const { deleteProduct } = useProducts()

@@ -1,4 +1,4 @@
-import { ProductFormValues } from "./ProductForm"
+import { UseFormSetValue, UseFormWatch } from "react-hook-form"
 
 export interface Product {
   docId?: string
@@ -23,3 +23,27 @@ export type ProductsContextValue = {
   deleteProduct: (productDocId: Product["docId"], productName: Product["name"]) => void
   restoreDefaultProducts: () => void
 }
+
+export type ProductsListStateProps = {
+  isProductNotFound?: boolean
+  areProductsNotFound?: boolean
+  children: React.ReactElement
+}
+
+export type ProductsListProps = React.OlHTMLAttributes<HTMLOListElement>
+
+export type ProductsListHeaderProps = {
+  title: string
+  children?: React.ReactElement | null
+}
+
+export type ProductsListItemProps = { product: Product }
+
+export type ProductFormProps = {
+  onSubmit: React.FormEventHandler
+  control: any
+  watch: UseFormWatch<ProductFormValues>
+  setValue: UseFormSetValue<ProductFormValues>
+}
+
+export type ProductFormValues = Omit<Product, "docId" | "id">

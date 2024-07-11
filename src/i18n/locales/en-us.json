@@ -74,6 +74,7 @@
       "loading": "Loading",
       "get-error": "Something went wrong while getting products list. Please try again later.",
       "empty": "There are no products to show.",
+      "not-found": "Product not found.",
       "no-permission": "You have no permission to do this action. Please, login and try again.",
       "product": "Product",
       "add-success": "Product added successfully!",
