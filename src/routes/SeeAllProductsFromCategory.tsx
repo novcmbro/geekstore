@@ -12,10 +12,16 @@ export const SeeAllProductsFromCategory = () => {
 
   useEffect(() => {
     if (category && !!productsList.length) {
+      const productsFromCategoryArray = [] as typeof productsFromCategory
+
       for (const product of productsList) {
-        if (product.category === category && !productsFromCategory.includes(product)) {
-          setProductsFromCategory(prev => [product, ...prev])
+        if (product.category === category) {
+          productsFromCategoryArray.push(product)
         }
+      }
+      
+      if (!!productsFromCategoryArray.length) {
+        setProductsFromCategory(productsFromCategoryArray)
       }
     }
   }, [category, productsList])
