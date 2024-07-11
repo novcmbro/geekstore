@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { usePopup } from "../contexts"
-import { setNavButton, unmountSrOnlyAlert } from "../utils"
+import { localStorageAuthKey, logout, unmountSrOnlyAlert } from "../utils"
 import { NavButton } from "../types"
 import { Logo } from "./Logo"
 import "../styles/header.css"
 
 export const Header = () => {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   const { openPopup } = usePopup()
 
@@ -17,10 +18,38 @@ export const Header = () => {
   const [searchBarToggleAlert, setSearchBarToggleAlert] = useState(false)
 
   useEffect(() => {
-    setNavButton(pathname, setNavButtonRoute, openPopup)
-    i18n.on("languageChanged", () => setNavButton(pathname, setNavButtonRoute, openPopup))
+    const setNavButton = () => {
+      const isUserLogged = !!localStorage.getItem(localStorageAuthKey)
+  
+      if (pathname === "/" && !isUserLogged) {
+        setNavButtonRoute({ name: t("routes.login"), to: "/login" })
+        return
+      }
 
-    return () => i18n.off("languageChanged", () => setNavButton(pathname, setNavButtonRoute, openPopup))
+      if (pathname === "/products") {
+        setNavButtonRoute({
+          name: t("logout.title"),
+          action: () => openPopup({
+            type: "warning",
+            message: t("logout.confirmation"),
+            okButton: { action: () => logout(navigate, openPopup)}
+          })
+        })
+        return
+      }
+
+      if (pathname === "/" && isUserLogged || pathname === "/add-product" || pathname.includes("edit-product")) {
+        setNavButtonRoute({ name: t("routes.admin-menu"), to: "/products" })
+        return
+      }
+
+      setNavButtonRoute({})
+    }
+
+    setNavButton()
+    i18n.on("languageChanged", setNavButton)
+
+    return () => i18n.off("languageChanged", () => setNavButton)
   }, [pathname])
 
   useEffect(() => {

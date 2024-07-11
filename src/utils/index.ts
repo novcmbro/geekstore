@@ -1,5 +1,5 @@
 export * from "./setDocumentTitleByRouteName"
-export * from "./setNavButton"
 export * from "./unmountSrOnlyAlert"
 export * from "./changeLanguage"
+export * from "./auth"
 export * from "./contactUs"

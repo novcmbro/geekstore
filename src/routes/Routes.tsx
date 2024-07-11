@@ -1,4 +1,5 @@
 import { Navigate, RouteObject, RouterProvider, createBrowserRouter } from "react-router-dom"
+import { localStorageAuthKey } from "../utils"
 import { App } from "../components"
 import { Home } from "./Home"
 import { DetailedProduct } from "./DetailedProduct"
@@ -10,7 +11,7 @@ import { EditProduct } from "./EditProduct"
 import { NotFound } from "./NotFound"
 
 const PrivateRoute = ({ Element }: { Element: RouteObject["element"] }) => {
-  if (!localStorage.getItem("novcmbro_geekstore_auth")) {
+  if (!localStorage.getItem(localStorageAuthKey)) {
     return <Navigate to="/login" />
   }
   return Element
@@ -35,7 +36,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "login",
-        element: !localStorage.getItem("novcmbro_geekstore_auth") ? <Login /> : <Navigate to="/products" />
+        element: !localStorage.getItem(localStorageAuthKey) ? <Login /> : <Navigate to="/products" />
       },
       {
         path: "products",
