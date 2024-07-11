@@ -1,8 +1,9 @@
 import { useEffect } from "react"
-import { Outlet, ScrollRestoration, useLocation } from "react-router-dom"
+import { Outlet, ScrollRestoration, useLocation, useNavigate } from "react-router-dom"
 import { initializeFirebaseApp } from "../firebase"
+import { getAuth } from "firebase/auth"
 import { Contexts } from "../contexts"
-import { setDocumentTitleByRouteName } from "../utils"
+import { persistLocalStorageAuthKeyIfLogged, setDocumentTitleByRouteName } from "../utils"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
 import { Popup } from "./Popup"
@@ -18,9 +19,12 @@ import "../styles/popup.css"
 
 export const App = () => {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const auth = getAuth()
   initializeFirebaseApp()
 
   useEffect(() => setDocumentTitleByRouteName(pathname), [pathname])
+  useEffect(() => persistLocalStorageAuthKeyIfLogged(auth, pathname, navigate), [auth, pathname])
 
   return (
     <Contexts>

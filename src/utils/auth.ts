@@ -1,6 +1,6 @@
 import { NavigateFunction } from "react-router-dom"
 import { UseFormSetError } from "react-hook-form"
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
 import { Auth, PopupContextValue } from "../types"
 import { t } from "i18next"
 
@@ -44,4 +44,19 @@ export const logout = (navigate: NavigateFunction, openPopup: PopupContextValue[
       openPopup({ type: "success", message: t("logout.success") })
     })
     .catch(() => openPopup({ type: "error", message: t("logout.error") }))
+}
+
+export const persistLocalStorageAuthKeyIfLogged = (auth: ReturnType<typeof getAuth>, pathname: string, navigate: NavigateFunction) => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user && !localStorage.getItem(localStorageAuthKey)) {
+      localStorage.setItem(localStorageAuthKey, "true")
+
+      if (localStorage.getItem(localStorageAuthKey)) {
+        pathname === "/login" ? navigate("/products") : window.location.reload()
+      }
+      return
+    }
+  })
+
+  return () => unsubscribe()
 }
