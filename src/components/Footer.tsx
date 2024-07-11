@@ -72,7 +72,7 @@ export const Footer = () => {
       <ul className="container language-list">
         {Object.entries(languagesNames).map(([languageCode, languageName], i) =>
           <li key={i} className="language-list-item">
-            <button type="button" onClick={() => changeLanguage(languageCode, setLanguageChangeAlert)} className={classNames("language-button", { "current-language-button": language === languageCode })} aria-label={t("language.change", { name: languageName })}>
+            <button type="button" onClick={() => changeLanguage(languageCode, setLanguageChangeAlert)} className={classNames("language-button", { "current-language-button": language === languageCode })} aria-label={t("language.change", { languageName: languageName })}>
               {languageName}
             </button>
           </li>
@@ -80,7 +80,7 @@ export const Footer = () => {
       </ul>
       {languageChangeAlert ? (
         <p className="sr-only" role="alert">
-          {t("language.change-success", { name: languagesNames[language as keyof typeof languagesNames] })}
+          {t("language.change-success", { languageName: languagesNames[language as keyof typeof languagesNames] })}
         </p>
       ) : null}
       <div className="credits">

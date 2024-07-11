@@ -127,7 +127,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       }
       
       if (!hasChanges) {
-        openPopup({ type: "warning", message: t("products.edit-no-changes", { name: currentProduct.name }) })
+        openPopup({ type: "warning", message: t("products.edit-no-changes", { productName: currentProduct.name }) })
         return
       }
       
@@ -152,7 +152,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
   const deleteProduct: ProductsContextValue["deleteProduct"] = (productDocId, productName) => {
     if (validateUserPermission()) {
-      openPopup({ type: "danger", message: t("products.delete-confirmation", { name: productName }), okButton: { action: () =>
+      openPopup({ type: "danger", message: t("products.delete-confirmation", { productName: productName }), okButton: { action: () =>
         deleteDoc(doc(userProductsCollection(), productDocId))
           .then(() => {
             setProductsList(productsList.filter(product => product.docId !== productDocId))

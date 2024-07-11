@@ -94,11 +94,11 @@
       "add-success": "Product added successfully!",
       "add-error": "Failed to add product. Please try again.",
       "edit": "Edit",
-      "edit-no-changes": "There are no changes made to '{{ name }}' product, so nothing to edit.",
+      "edit-no-changes": "There are no changes made to '{{ productName }}' product, so nothing to edit.",
       "edit-success": "Product edited successfully!",
       "edit-error": "Failed to edit product. Please try again.",
       "delete": "Delete",
-      "delete-confirmation": "Are you sure you want to delete '{{ name }}' product? This action cannot be undone.",
+      "delete-confirmation": "Are you sure you want to delete '{{ productName }}' product? This action cannot be undone.",
       "delete-success": "Product deleted successfully!",
       "delete-error": "Failed to delete product. Please try again.",
       "restore": "Restore",
@@ -119,8 +119,8 @@
       }
     },
     "language": {
-      "change": "Change language to {{ name }}",
-      "change-success": "Language changed to {{ name }}"
+      "change": "Change language to {{ languageName }}",
+      "change-success": "Language changed to {{ languageName }}"
     },
     "contact-us": {
       "title": "Contact us",
