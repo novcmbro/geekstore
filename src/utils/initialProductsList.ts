@@ -15,7 +15,7 @@ export const initialProductsList: Product[] = [
     category: "Miscellaneous",
     name: "VR Glasses",
     price: 490.99,
-    description: "Eu culpa et in adipisicing ut enim officia minim aute ex mollit cillum. Voluptate minim ipsum laborum culpa qui ipsum officia consectetur sit exercitation amet ad exercitation tempor. Ea tempor labore labore ea cupidatat proident eiusmod sunt nostrud deserunt aute officia Lorem enim. Laboris laborum sunt ex fugiat elit nisi sunt anim. Sint aute pariatur esse veniam. Dolore reprehenderit voluptate culpa do ea duis. Sunt enim laborum irure dolor non tempor pariatur."
+    description: "Excepteur adipisicing ipsum consectetur incididunt velit in amet. Reprehenderit anim do consequat consectetur. Lorem commodo ullamco et enim dolore laboris nisi cillum. Pariatur mollit officia incididunt et est esse occaecat fugiat nostrud sint ipsum. Voluptate veniam ullamco nulla anim. Est dolor commodo commodo do cupidatat velit deserunt. Est sint labore reprehenderit tempor labore sit ad magna deserunt."
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ export const initialProductsList: Product[] = [
     category: "Consoles",
     name: "GameBoy Color",
     price: 168.99,
-    description: "Amet amet dolor fugiat et culpa exercitation elit voluptate sunt sunt sint proident sit magna. Esse cillum aliqua id incididunt anim ex quis proident cupidatat duis tempor. Velit est nostrud laborum in in adipisicing nulla deserunt. Minim ex eiusmod do eu voluptate eu. Excepteur aliquip cupidatat consectetur nisi excepteur eiusmod reprehenderit. Non non dolor consectetur exercitation nulla dolor enim ullamco consequat velit consequat."
+    description: "Velit incididunt incididunt ut tempor ad magna veniam. Proident culpa est et quis qui laborum laborum. Quis duis do cupidatat veniam nulla elit adipisicing qui occaecat pariatur magna ullamco veniam irure."
   },
   {
     id: 8,
@@ -87,7 +87,7 @@ export const initialProductsList: Product[] = [
     category: "Consoles",
     name: "PlayStation 5",
     price: 987.99,
-    description: "Irure incididunt incididunt sit esse est est ut laboris esse. Aliqua sunt minim reprehenderit laborum id nostrud ex. Labore commodo dolor officia eiusmod aliquip ipsum consectetur irure est commodo adipisicing magna non culpa. Dolore amet culpa commodo in irure eiusmod nisi. Velit anim cillum ad ut ea Lorem Lorem consequat. Laboris exercitation et nisi officia in eu dolore sint irure culpa nostrud eiusmod ea. Deserunt nisi proident ullamco minim veniam laboris enim in velit cillum."
+    description: "Do est nulla Lorem adipisicing ipsum dolor voluptate ex eiusmod. Tempor officia enim duis proident ullamco. Laboris non minim ut aute ut ea culpa eu. Dolor consequat deserunt consectetur duis eiusmod excepteur magna ullamco adipisicing."
   },
   {
     id: 12,
@@ -95,7 +95,7 @@ export const initialProductsList: Product[] = [
     category: "Consoles",
     name: "Xbox Controller",
     price: 69.99,
-    description: "Irure incididunt incididunt sit esse est est ut laboris esse. Aliqua sunt minim reprehenderit laborum id nostrud ex. Labore commodo dolor officia eiusmod aliquip ipsum consectetur irure est commodo adipisicing magna non culpa. Dolore amet culpa commodo in irure eiusmod nisi. Velit anim cillum ad ut ea Lorem Lorem consequat. Laboris exercitation et nisi officia in eu dolore sint irure culpa nostrud eiusmod ea. Deserunt nisi proident ullamco minim veniam laboris enim in velit cillum."
+    description: "Cillum Lorem occaecat eu dolore cupidatat deserunt reprehenderit voluptate. Nulla tempor pariatur commodo incididunt est dolor minim minim occaecat quis occaecat eiusmod mollit. Voluptate consequat officia aliquip dolor sint tempor consequat velit do pariatur amet ut aliqua."
   },
   {
     id: 13,
@@ -103,7 +103,7 @@ export const initialProductsList: Product[] = [
     category: "Star Wars",
     name: "Kylo Ren Figure",
     price: 29.99,
-    description: "Ad cupidatat adipisicing sint irure et proident minim dolore fugiat tempor nostrud est enim est. Laborum labore consectetur elit in aute adipisicing reprehenderit. Culpa consectetur ea ut cupidatat ad ut nisi sit minim cillum commodo. Duis nisi non et in ut consequat deserunt officia nulla do aute exercitation. Adipisicing sunt quis consequat Lorem enim culpa. Excepteur veniam anim minim ut duis consectetur in pariatur ullamco."
+    description: "Ex do est ullamco duis amet. In ullamco in velit eiusmod duis adipisicing adipisicing duis ad ullamco tempor. Esse ut incididunt fugiat elit non magna. Non anim nulla mollit laborum tempor in fugiat ad commodo. Do occaecat qui in fugiat ea consequat dolor."
   },
   {
     id: 14,
@@ -127,7 +127,7 @@ export const initialProductsList: Product[] = [
     category: "Star Wars",
     name: "Yoda Figure",
     price: 29.99,
-    description: "Ullamco non Lorem ex nisi voluptate nostrud. Tempor eu culpa Lorem laboris anim veniam dolore eiusmod deserunt enim pariatur velit do consectetur. Eu esse laborum enim dolore eu consectetur excepteur quis do quis sit do ipsum id. Veniam pariatur aute duis irure reprehenderit consectetur duis reprehenderit elit. Fugiat do culpa tempor irure dolore duis aliqua pariatur exercitation tempor. Magna in magna excepteur labore consectetur ad occaecat elit. Laboris magna nulla excepteur aliquip labore aliquip id culpa veniam."
+    description: "Ad dolore consequat in enim cupidatat ex Lorem in voluptate laborum est sunt. Consequat fugiat aliqua nulla elit quis. Sint amet sit ut adipisicing. Eu quis veniam consequat cupidatat officia ea ea id ipsum. Elit proident velit consequat minim Lorem exercitation deserunt labore."
   },
   {
     id: 17,
