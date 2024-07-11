@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useProducts } from "../../contexts"
 import { ProductsListItemProps } from "../../types"
-import DefaultImage from "../../img/default-image.svg"
+import { DefaultImage } from "../../img"
 
 export const ProductsListItem = ({ product }: ProductsListItemProps) => {
   const { pathname } = useLocation()
@@ -26,7 +26,7 @@ export const ProductsListItem = ({ product }: ProductsListItemProps) => {
           </Link>
         </div>
       ) : null}
-      <img src={product.image || DefaultImage} alt={product.name} className="product-image" role="img" loading="lazy" />
+      <img src={product.image} onError={e => e.currentTarget.src = DefaultImage} alt={product.name} className="product-image" role="img" loading="lazy" />
       <span className="product-name">{product.name}</span>
       <span className="product-price">{product.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
       {isAdminMenuRoute ? (

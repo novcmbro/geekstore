@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { ProductFormProps } from "../../types"
 import { Field } from "../Field"
-import DefaultImage from "../../img/default-image.svg"
+import { DefaultImage } from "../../img"
 import "../../styles/product-form.css"
 
 export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormProps) => {
@@ -16,7 +16,7 @@ export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormP
     <form onSubmit={onSubmit} className="product-form" aria-labelledby="product-form-title" aria-haspopup="dialog" aria-controls="popup-container">
       <h2 id="product-form-title" className="typography-title-md">{title}</h2>
       {image ? (
-        <img src={image} alt={watch("name") || t("products.product")} onError={e => e.currentTarget.src = DefaultImage} className="product-image-preview" role="img" />
+        <img src={image} onError={e => e.currentTarget.src = DefaultImage} alt={watch("name") || t("products.product")} className="product-image-preview" role="img" />
       ) : null}
       <Field
         control={control}

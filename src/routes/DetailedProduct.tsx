@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useProducts } from "../contexts"
 import { Product } from "../types"
 import { ProductsList, ProductsListHeader, ProductsListItem, ProductsListState } from "../components/Products"
+import { DefaultImage } from "../img"
 import "../styles/detailed-product.css"
 
 export const DetailedProduct = () => {
@@ -18,7 +19,7 @@ export const DetailedProduct = () => {
     if (id && !!productsList.length) {
       const similarProductsArray = []
       const maxLengthForSimilarProducts = 6
-      const isSimilarProductsNotFull = similarProductsArray.length < maxLengthForSimilarProducts
+      const isSimilarProductsNotFull = productsList.length > 1 && similarProductsArray.length < maxLengthForSimilarProducts
 
       for (const product of productsList) {
         if (product.id === parseInt(id)) {
@@ -48,7 +49,7 @@ export const DetailedProduct = () => {
     <>
       <ProductsListState isProductNotFound={!Object.keys(detailedProduct).length}>
         <section className="product-details" aria-label={detailedProduct.name}>
-          <img src={detailedProduct.image} alt={detailedProduct.name} className="product-details-image" role="img" loading="lazy" />
+          <img src={detailedProduct.image} onError={e => e.currentTarget.src = DefaultImage} alt={detailedProduct.name} className="product-details-image" role="img" loading="lazy" />
           <div className="product-details-info">
             <h2 className="typography-title-lg">{detailedProduct.name}</h2>
             <span className="product-price">{detailedProduct.price?.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
