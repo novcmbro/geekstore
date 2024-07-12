@@ -49,9 +49,7 @@ export const Home = () => {
           {Object.entries(productsByCategory).map(([category, products], i) =>
             <section key={i} id={category} className="products-row" aria-label={category}>
               <ProductsListHeader title={category}>
-                {products.length > 4 ? (
-                  <Link to={`/see-all/${category}`} className="route-link">{`${t("routes.see-all")} 🡪`}</Link>
-                ) : null}
+                <Link to={`/see-all/${category}`} className="route-link">{`${t("routes.see-all")} 🡪`}</Link>
               </ProductsListHeader>
               <ProductsList aria-label={category}>
                 {products.map((product, i) => i <= 5 ? (
