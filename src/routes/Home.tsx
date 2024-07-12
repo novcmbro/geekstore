@@ -15,7 +15,13 @@ export const Home = () => {
 
   useEffect(() => {
     if (!!productsList.length) {
-      setProductsByCategory(Object.groupBy(productsList, ({ category }: typeof productsList[number]) => category))
+      setProductsByCategory(
+        productsList.reduce<{ [key: string]: typeof productsList }>((acc, product) => {
+          const { category } = product
+          acc[category] = [...(acc[category] || []), product]
+          return acc
+        }, {})
+      )
     }
   }, [productsList])
   
