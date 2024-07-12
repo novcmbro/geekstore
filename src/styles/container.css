@@ -12,6 +12,11 @@ main.container,
   padding-bottom: var(--spacing-y);
 }
 
+main.container:has(.home-container) {
+  max-width: none;
+  padding: 0;
+}
+
 @media screen and (min-width: 768px) {
   main.container,
   .container.home-container {

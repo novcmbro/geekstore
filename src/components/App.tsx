@@ -1,8 +1,9 @@
 import { useEffect } from "react"
-import { Outlet, ScrollRestoration, useLocation, useNavigate } from "react-router-dom"
+import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom"
 import { initializeFirebaseApp } from "../firebase"
 import { getAuth } from "firebase/auth"
 import { Contexts } from "../contexts"
+import { useRoute } from "../hooks"
 import { persistLocalStorageAuthKeyIfLogged, setDocumentTitleByRouteName } from "../utils"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
@@ -18,19 +19,20 @@ import "../styles/button.css"
 import "../styles/popup.css"
 
 export const App = () => {
-  const { pathname } = useLocation()
   const navigate = useNavigate()
   const auth = getAuth()
+  const route = useRoute()
+  
   initializeFirebaseApp()
 
-  useEffect(() => setDocumentTitleByRouteName(pathname), [pathname])
-  useEffect(() => persistLocalStorageAuthKeyIfLogged(auth, pathname, navigate), [auth, pathname])
+  useEffect(() => setDocumentTitleByRouteName(route), [route])
+  useEffect(() => persistLocalStorageAuthKeyIfLogged(auth, route.isLoginRoute, navigate), [auth, route])
 
   return (
     <Contexts>
       <>
         <Header />
-        <main {...pathname !== "/" ? { className: "container" } : null}>
+        <main className="container">
           <Outlet />
         </main>
         <Footer />

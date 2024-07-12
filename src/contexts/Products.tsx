@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 import { firestore } from "../firebase"
-import { initialProductsList } from "../utils"
+import { initialProductsList, routesBasePath } from "../utils"
 import { Product, ProductsContextValue } from "../types"
 import { usePopup } from "./Popup"
 
@@ -110,7 +110,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
       addDoc(userProductsCollection(), newProduct)
         .then(doc => {
           setProductsList(prev => [{ docId: doc.id, ...newProduct }, ...prev])
-          openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
+          openPopup({ type: "success", message: t("products.add-success"), okButton: { action: () => navigate(`${routesBasePath}/admin-menu`) }, cancelButton: false })
         })
         .catch(() => openPopup({ type: "error", message: t("products.add-error") }))
     }
@@ -136,7 +136,7 @@ export const ProductsProvider = ({ children }: { children: React.ReactElement })
 
       updateDoc(doc(userProductsCollection(), currentProduct.docId), newProduct)
         .then(() => {
-          openPopup({ type: "success", message: t("products.edit-success"), okButton: { action: () => navigate("/products") }, cancelButton: false })
+          openPopup({ type: "success", message: t("products.edit-success"), okButton: { action: () => navigate(`${routesBasePath}/admin-menu`) }, cancelButton: false })
 
           const listWithUpdatedProduct = productsList.map(product => {
             if (product.docId === currentProduct.docId) {

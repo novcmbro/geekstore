@@ -1,15 +1,15 @@
-import { useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useRoute } from "../../hooks"
 import { ProductFormProps } from "../../types"
 import { Field } from "../Field"
 import { DefaultImage } from "../../img"
 import "../../styles/product-form.css"
 
 export const ProductForm = ({ onSubmit, control, watch, setValue }: ProductFormProps) => {
-  const { pathname } = useLocation()
+  const { isAddProductRoute } = useRoute()
   const { t } = useTranslation()
 
-  const title = t(`routes.${pathname.includes("add") ? "add" : "edit"}-product`)
+  const title = t(`routes.${isAddProductRoute ? "add" : "edit"}-product`)
   const image = watch("image")
 
   return (

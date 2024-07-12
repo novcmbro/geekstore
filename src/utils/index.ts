@@ -1,3 +1,4 @@
+export * from "./routesBasePath"
 export * from "./setDocumentTitleByRouteName"
 export * from "./unmountSrOnlyAlert"
 export * from "./changeLanguage"

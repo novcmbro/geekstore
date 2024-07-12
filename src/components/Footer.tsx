@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import classNames from "classnames"
 import { usePopup } from "../contexts"
-import { changeLanguage, contactUsInitialValues, languagesNames } from "../utils"
+import { changeLanguage, contactUsInitialValues, languagesNames, routesBasePath } from "../utils"
 import { Logo } from "./Logo"
 import { Field } from "./Field"
 import "../styles/footer.css"
@@ -26,7 +26,7 @@ export const Footer = () => {
           <ul className="nav-links-list">
             {navRoutes.map((route, i) =>
               <li key={i} className="nav-links-list-item">
-                <Link to={`/${route}`} className="nav-links-link">{t(`routes.${route}`)}</Link>
+                <Link to={`${routesBasePath}/${route}`} className="nav-links-link">{t(`routes.${route}`)}</Link>
               </li>
             )}
           </ul>

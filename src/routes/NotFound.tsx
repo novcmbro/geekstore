@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { routesBasePath } from "../utils"
 import "../styles/route-not-found.css"
 
 export const NotFound = () => {
@@ -52,7 +53,7 @@ export const NotFound = () => {
       </svg>
       <h2 className="typography-title-lg">{t("routes.not-found")}</h2>
       <p>{t("routes.not-found-description")}</p>
-      <Link to="/" className="button-filled">{t("routes.back-home")}</Link>
+      <Link to={routesBasePath} className="button-filled">{t("routes.back-home")}</Link>
     </div>
   )
 }

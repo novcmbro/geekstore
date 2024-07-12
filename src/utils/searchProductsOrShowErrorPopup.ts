@@ -2,6 +2,7 @@ import { NavigateFunction } from "react-router-dom"
 import { UseFormSetValue } from "react-hook-form"
 import { t } from "i18next"
 import { PopupContextValue, ProductSearchValue } from "../types"
+import { routesBasePath } from "./routesBasePath"
 
 export const searchProductsOrShowErrorPopup = (
   data: ProductSearchValue,
@@ -16,6 +17,6 @@ export const searchProductsOrShowErrorPopup = (
     return
   }
 
-  navigate(`/search-products/${data.search}`)
+  navigate(`${routesBasePath}/search-products/${data.search}`)
   setValue("search", "")
 }

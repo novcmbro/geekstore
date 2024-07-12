@@ -3,6 +3,7 @@ import { UseFormSetError } from "react-hook-form"
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
 import { Auth, PopupContextValue } from "../types"
 import { t } from "i18next"
+import { routesBasePath } from "./routesBasePath"
 
 export const initialLoginValues: Auth = {
   email: "",
@@ -13,11 +14,11 @@ export const localStorageAuthKey = "novcmbro_geekstore_auth"
 
 export const login = (data: Auth, navigate: NavigateFunction, setError: UseFormSetError<Auth>) => {
   const auth = getAuth()
-    
+
   signInWithEmailAndPassword(auth, data.email, data.password)
     .then(() => {
       localStorage.setItem(localStorageAuthKey, "true")
-      navigate("/products")
+      navigate(`${routesBasePath}/admin-menu`)
     })
     .catch((error) => {
       const errorCodes = ["invalid-credential", "user-not-found", "user-disabled", "too-many-requests", "network-request-failed"]
@@ -40,19 +41,19 @@ export const logout = (navigate: NavigateFunction, openPopup: PopupContextValue[
   signOut(auth)
     .then(() => {
       localStorage.removeItem(localStorageAuthKey)
-      navigate("/")
+      navigate(routesBasePath)
       openPopup({ type: "success", message: t("logout.success") })
     })
     .catch(() => openPopup({ type: "error", message: t("logout.error") }))
 }
 
-export const persistLocalStorageAuthKeyIfLogged = (auth: ReturnType<typeof getAuth>, pathname: string, navigate: NavigateFunction) => {
+export const persistLocalStorageAuthKeyIfLogged = (auth: ReturnType<typeof getAuth>, isLoginRoute: boolean, navigate: NavigateFunction) => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user && !localStorage.getItem(localStorageAuthKey)) {
       localStorage.setItem(localStorageAuthKey, "true")
 
-      if (localStorage.getItem(localStorageAuthKey)) {
-        pathname === "/login" ? navigate("/products") : window.location.reload()
+      if (!!localStorage.getItem(localStorageAuthKey)) {
+        isLoginRoute ? navigate(`${routesBasePath}/admin-menu`) : window.location.reload()
       }
       return
     }

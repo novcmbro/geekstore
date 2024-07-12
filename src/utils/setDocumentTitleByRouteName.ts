@@ -1,44 +1,18 @@
 import i18next from "i18next"
+import { UseRoute } from "../types"
 
-export const setDocumentTitleByRouteName = (pathname: string) => {
+export const setDocumentTitleByRouteName = (isRoute: UseRoute) => {
   const initialDocumentTitle = "GeekStore"
   let routeNameTranslationKey = ""
 
-  switch (pathname) {
-    case "/":
-      routeNameTranslationKey = "home"
+  for (const [routeKey, isCurrentRoute] of Object.entries(isRoute)) {
+    if (isCurrentRoute) {
+      routeNameTranslationKey = routeKey
+        .replace("is", "")
+        .replace("Route", "")
+        .replace(/[A-Z]/g, match => "-" + match.toLowerCase()).replace(/^[-]/, "").toLowerCase()
       break
-    
-    case "/login":
-      routeNameTranslationKey = "login"
-      break
-    
-    case "/products":
-      routeNameTranslationKey = "admin-menu"
-      break
-    
-    case "/add-product":
-      routeNameTranslationKey = "add-product"
-      break
-    
-    default:
-      break
-  }
-
-  if (pathname.includes("product/")) {
-    routeNameTranslationKey = "product-details"
-  }
-
-  if (pathname.includes("see-all")) {
-    routeNameTranslationKey = "see-all"
-  }
-
-  if (pathname.includes("search-product")) {
-    routeNameTranslationKey = "search-product"
-  }
-
-  if (pathname.includes("edit-product")) {
-    routeNameTranslationKey = "edit-product"
+    }
   }
 
   if (!!!routeNameTranslationKey) {
@@ -51,7 +25,7 @@ export const setDocumentTitleByRouteName = (pathname: string) => {
     if (document.title !== initialDocumentTitle) {
       document.title = initialDocumentTitle
     }
-    setDocumentTitleByRouteName(pathname)
+    setDocumentTitleByRouteName(isRoute)
   }
 
   i18next.on("languageChanged", setDocumentTitleOnTranslationChange)

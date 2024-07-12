@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { usePopup } from "../contexts"
-import { localStorageAuthKey, logout, searchProductsOrShowErrorPopup, unmountSrOnlyAlert } from "../utils"
+import { useRoute } from "../hooks"
+import { localStorageAuthKey, logout, routesBasePath, searchProductsOrShowErrorPopup, unmountSrOnlyAlert } from "../utils"
 import { NavButton, ProductSearchValue } from "../types"
 import { Logo } from "./Logo"
 import "../styles/header.css"
 
 export const Header = () => {
-  const { pathname } = useLocation()
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   const { handleSubmit, register, setValue } = useForm<ProductSearchValue>()
   const { openPopup } = usePopup()
+  const route = useRoute()
 
   const [navButtonRoute, setNavButtonRoute] = useState({} as NavButton)
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
@@ -21,14 +22,12 @@ export const Header = () => {
 
   useEffect(() => {
     const setNavButton = () => {
-      const isUserLogged = !!localStorage.getItem(localStorageAuthKey)
-  
-      if (pathname === "/" && !isUserLogged) {
-        setNavButtonRoute({ name: t("routes.login"), to: "/login" })
+      if (route.isHomeRoute && !localStorage.getItem(localStorageAuthKey)) {
+        setNavButtonRoute({ name: t("routes.login"), to: `${routesBasePath}/login` })
         return
       }
 
-      if (pathname === "/products") {
+      if (route.isAdminMenuRoute) {
         setNavButtonRoute({
           name: t("logout.title"),
           action: () => openPopup({
@@ -40,8 +39,8 @@ export const Header = () => {
         return
       }
 
-      if (pathname === "/" && isUserLogged || pathname === "/add-product" || pathname.includes("edit-product")) {
-        setNavButtonRoute({ name: t("routes.admin-menu"), to: "/products" })
+      if (route.isHomeRoute && !!localStorage.getItem(localStorageAuthKey) || route.isAddProductRoute || route.isEditProductRoute) {
+        setNavButtonRoute({ name: t("routes.admin-menu"), to: `${routesBasePath}/admin-menu` })
         return
       }
 
@@ -52,7 +51,7 @@ export const Header = () => {
     i18n.on("languageChanged", setNavButton)
 
     return () => i18n.off("languageChanged", () => setNavButton)
-  }, [pathname])
+  }, [route])
 
   useEffect(() => {
     if (searchBarToggleAlert) {
@@ -80,7 +79,7 @@ export const Header = () => {
             </svg>
           </button>
         </form>
-        {navButtonRoute.name ? (
+        {!!Object.keys(navButtonRoute).length ? (
           navButtonRoute.to ? (
             <Link to={navButtonRoute.to} className="button-outlined" role="button">
               {navButtonRoute.name}

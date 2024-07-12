@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useProducts } from "../contexts"
+import { routesBasePath } from "../utils"
 import { ProductsByCategory } from "../types"
 import { ProductsList, ProductsListHeader, ProductsListItem, ProductsListState } from "../components/Products"
 import "../styles/banner.css"
@@ -55,7 +56,7 @@ export const Home = () => {
           {Object.entries(productsByCategory).map(([category, products], i) =>
             <section key={i} id={category} className="products-row" aria-label={category}>
               <ProductsListHeader title={category}>
-                <Link to={`/see-all/${category}`} className="route-link">{`${t("routes.see-all")} 🡪`}</Link>
+                <Link to={`${routesBasePath}/see-all/${category}`} className="route-link">{`${t("routes.see-all")} 🡪`}</Link>
               </ProductsListHeader>
               <ProductsList aria-label={category}>
                 {products.map((product, i) => i <= 5 ? (
