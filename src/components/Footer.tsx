@@ -11,12 +11,18 @@ import "../styles/footer.css"
 
 export const Footer = () => {
   const { t, i18n: { language } } = useTranslation()
-  const { handleSubmit, control, getValues } = useForm({ defaultValues: contactUsInitialValues, mode: "onBlur" })
+  const { handleSubmit, control, getValues, setValue } = useForm({ defaultValues: contactUsInitialValues, mode: "onBlur" })
   const { openPopup } = usePopup()
 
   const [languageChangeAlert, setLanguageChangeAlert] = useState(false)
 
   const navRoutes = ["about-us", "privacy-policy", "loyalty-program", "our-stores", "franchise-opportunities", "advertise-here"]
+
+  const sendContactMessage = () => {
+    openPopup({ type: "success", message: t("contact-us.success", { name: getValues("contact-name") }) })
+    setValue("contact-name", "")
+    setValue("contact-message", "")
+  }
 
   return (
     <footer>
@@ -31,7 +37,7 @@ export const Footer = () => {
             )}
           </ul>
         </nav>
-        <form onSubmit={handleSubmit(() => openPopup({ type: "success", message: t("contact-us.success", { name: getValues("contact-name") }) }))} className="contact-us-form" aria-labelledby="contact-us-title" aria-haspopup="dialog" aria-controls="popup-container">
+        <form onSubmit={handleSubmit(sendContactMessage)} className="contact-us-form" aria-labelledby="contact-us-title" aria-haspopup="dialog" aria-controls="popup-container">
           <h2 id="contact-us-title" className="typography-title">{t("contact-us.title")}</h2>
           <Field
             control={control}
