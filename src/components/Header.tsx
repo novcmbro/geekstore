@@ -68,7 +68,7 @@ export const Header = () => {
     <header {...isSearchBarOpen ? { className: "search-bar-is-open" } : null}>
       <nav className="container">
         <Logo />
-        <form onSubmit={handleSubmit((data) => searchProductsOrShowErrorPopup(data, openPopup, navigate, setValue))} className="search-form" aria-labelledby="search-field-label">
+        <form onSubmit={handleSubmit((data) => searchProductsOrShowErrorPopup(data, openPopup, navigate, setValue, isSearchBarOpen, setIsSearchBarOpen))} className="search-form" aria-labelledby="search-field-label">
           <label id="search-field-label" htmlFor="search-field" className="sr-only">
             {t("search.form.label")}
           </label>

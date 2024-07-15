@@ -8,13 +8,19 @@ export const searchProductsOrShowErrorPopup = (
   data: ProductSearchValue,
   openPopup: PopupContextValue["openPopup"],
   navigate: NavigateFunction,
-  setValue: UseFormSetValue<ProductSearchValue>
+  setValue: UseFormSetValue<ProductSearchValue>,
+  isSearchBarOpen: boolean,
+  setIsSearchBarOpen: React.Dispatch<React.SetStateAction<typeof isSearchBarOpen>>
 ) => {
   const isSearchEmpty = !data.search.trim()
 
   if (isSearchEmpty) {
     openPopup({ type: "warning", message: t("search.empty") })
     return
+  }
+
+  if (isSearchBarOpen) {
+    setIsSearchBarOpen(false)
   }
 
   navigate(`${routesBasePath}/search-products/${data.search}`)
