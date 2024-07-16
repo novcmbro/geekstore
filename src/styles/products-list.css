@@ -28,6 +28,23 @@
   margin-bottom: 0;
 }
 
+.products-list-header .see-all-link::after {
+  --arrow-size: 1rem;
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.11959e-07 9L12.17 9L6.58 14.59L8 16L16 8L8 -6.99382e-07L6.59 1.41L12.17 7L7.86805e-07 7L6.11959e-07 9Z' fill='%232A7AE4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  vertical-align: text-top;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  margin-left: var(--spacing-xs);
+}
+
+.products-list-header .see-all-link:hover:after {
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.11959e-07 9L12.17 9L6.58 14.59L8 16L16 8L8 -6.99382e-07L6.59 1.41L12.17 7L7.86805e-07 7L6.11959e-07 9Z' fill='%235595E9'/%3E%3C/svg%3E");
+}
+
 .products-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

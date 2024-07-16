@@ -56,7 +56,7 @@ export const Home = () => {
           {Object.entries(productsByCategory).map(([category, products], i) =>
             <section key={i} id={category} className="products-row" aria-label={category}>
               <ProductsListHeader title={category}>
-                <Link to={`${routesBasePath}/see-all/${category}`} className="route-link">{`${t("routes.see-all")} 🡪`}</Link>
+                <Link to={`${routesBasePath}/see-all/${category}`} className="route-link see-all-link">{`${t("routes.see-all")}`}</Link>
               </ProductsListHeader>
               <ProductsList aria-label={category}>
                 {products.map((product, i) => i <= 5 ? (
